@@ -1,8 +1,10 @@
-class Api {
-  constructor(app, url = '/') {
-    this.app = app;
-    this.url = url;
-  }
-}
+const Api = require('./lib/api');
+const utils = require('./lib/utils'),
+  and = utils.and,
+  or = utils.or,
+  cond = utils.cond;
 
-export default Api;
+exports.Api = Api;
+exports.and = and;
+exports.or = or;
+exports.cond = cond;
