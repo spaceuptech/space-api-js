@@ -1,10 +1,7 @@
 const Api = require('./lib/api');
-const utils = require('./lib/utils'),
-  and = utils.and,
-  or = utils.or,
-  cond = utils.cond;
+const utils = require('./lib/utils')
 
-exports.Api = Api;
-exports.and = and;
-exports.or = or;
-exports.cond = cond;
+exports.API = Api;
+exports.and = utils.and;
+exports.or = utils.or;
+exports.cond = utils.cond;
