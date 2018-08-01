@@ -1,9 +1,90 @@
-# Client API for javascript
+# Client API for Space Cloud
 
 ## Installation
 
 ```bash
 $ npm install space-api --save
+```
+## Quick Start
+
+### Create Client Instance
+
+```js
+import { API, and, or, cond } from 'space-api';
+
+const api = new API('demo-project');
+
+// For MongoDB
+const db = api.Mongo();
+
+// For PostgresQL
+const db = api.Postgres();
+
+// For MySQL
+const db = api.MySQL();
+```
+**Note: Multiple databases may be used simultaneously.**
+
+### Insert a document into the database
+```js
+const doc = {_id: 1, title: "Title 1", content: "My first record"};
+db.insert('COLLECTION_NAME').one(doc).then(res => {
+  if (res.status === 200) {
+    // Document inserted successfully
+    return;
+  }
+}).catch(ex => {
+  // Exception occured while processing request
+});
+```
+**Note: Always insert documents with a id in order to use the realtime feature.**
+
+### Query documents in database
+```js
+const find = and(cond('title', '==', 'Title1'), cond('author', '==', 'Jon'));
+db.get('COLLECTION_NAME').where(find)
+  .skip(10).limit(10)
+  .all()
+  .then(res => {
+    if (res.status === 200) {
+      // res.data contains the documents returned by the database
+      console.log('Response:', res.data);
+      return;
+    }
+  }).catch(ex => {
+    // Exception occured while processing request
+  });
+```
+
+### Update documents in database
+```js
+const find = and(cond('author', '==', 'Jon'));
+db.update('COLLECTION_NAME').where(find)
+  .set({ author: 'John' })
+  .all()
+  .then(res => {
+    if (res.status === 200) {
+      // Document updated successfully
+      return;
+    }
+  }).catch(ex => {
+    // Exception occured while processing request
+  });
+```
+
+### Delete documents in database
+```js
+const find = and(cond('author', '==', 'John'));
+db.delete('COLLECTION_NAME').where(find)
+  .many()
+  .then(res => {
+    if (res.status === 200) {
+      // Document deleted successfully
+      return;
+    }
+  }).catch(ex => {
+    // Exception occured while processing request
+  });
 ```
 
 ## License
