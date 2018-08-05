@@ -57,6 +57,13 @@ Create an instance of the MongoDB Client Interface.
 | url | <code>string</code> | 
 | options | <code>Object</code> | 
 
+**Example**  
+```js
+import { API } from 'space-api';
+
+const api = new API('my-project');
+const db = api.Mongo();
+```
 <a name="Mongo+get"></a>
 
 ### mongo.get(collection) ⇒ [<code>Get</code>](#Get)
@@ -241,6 +248,23 @@ Create an instance of the MongoDB Get Interface.
 | url | <code>string</code> | 
 | options | <code>Object</code> | 
 
+**Example**  
+```js
+import { API, cond, or, and } from 'space-api';
+
+const api = new API('my-project');
+const db = api.Mongo();
+
+db.get('posts').where(and(cond('title', '==', 'Title1'))).all().then(res => {
+  if (res.status === 200) {
+    // res.data contains the documents returned by the database
+    console.log('Response:', res.data);
+    return;
+  }
+}).catch(ex => {
+  // Exception occured while processing request
+});
+```
 <a name="Get+where"></a>
 
 ### get.where(...conditions)
@@ -375,6 +399,22 @@ Create an instance of the MongoDB Delete Interface.
 | url | <code>string</code> | 
 | options | <code>Object</code> | 
 
+**Example**  
+```js
+import { API, cond, or, and } from 'space-api';
+
+const api = new API('my-project');
+const db = api.Mongo();
+
+db.delete('posts').where(and(cond('title', '==', 'Title1'))).many().then(res => {
+  if (res.status === 200) {
+    // The documents were deleted successfully
+    return;
+  }
+}).catch(ex => {
+  // Exception occured while processing request
+});
+```
 <a name="Delete+where"></a>
 
 ### delete.where(...conditions)
@@ -443,6 +483,22 @@ Create an instance of the MongoDB Update Interface.
 | url | <code>string</code> | 
 | options | <code>Object</code> | 
 
+**Example**  
+```js
+import { API, cond, or, and } from 'space-api';
+
+const api = new API('my-project');
+const db = api.Mongo();
+
+db.update('posts').where(and(cond('title', '==', 'Title1'))).set({ title: 'Title2' }).all().then(res => {
+  if (res.status === 200) {
+    // The documents were updated successfully
+    return;
+  }
+}).catch(ex => {
+  // Exception occured while processing request
+});
+```
 <a name="Update+where"></a>
 
 ### update.where(...conditions)
@@ -649,6 +705,23 @@ Create an instance of the MongoDB Insert Interface.
 | url | <code>string</code> | 
 | options | <code>Object</code> | 
 
+**Example**  
+```js
+import { API, cond, or, and } from 'space-api';
+
+const api = new API('my-project');
+const db = api.Mongo();
+
+const doc = { author: 'John', title: 'Title1', _id: 1 };
+db.insert('posts').one(doc).then(res => {
+  if (res.status === 200) {
+    // Document was inserted successfully
+    return;
+  }
+}).catch(ex => {
+  // Exception occured while processing request
+});
+```
 <a name="Insert+one"></a>
 
 ### insert.one(doc)

@@ -5,6 +5,14 @@
 ```bash
 $ npm install space-api --save
 ```
+
+## Documentation
+The complete documentation can be found [here](https://github.com/spaceuptech/space-api-js/wiki).
+
+Documentation for specific databases is given below:
+- [MongoDB](https://github.com/spaceuptech/space-api-js/wiki/Mongo)
+- [SQL Databases](https://github.com/spaceuptech/space-api-js/wiki/SQL)
+
 ## Quick Start
 
 ### Create Client Instance
