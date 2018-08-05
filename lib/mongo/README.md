@@ -40,8 +40,8 @@ Class representing the MongoDB Client Interface.
     * [.insert(collection)](#Mongo+insert) ⇒ [<code>Insert</code>](#Insert)
     * [.update(collection)](#Mongo+update) ⇒ [<code>Update</code>](#Update)
     * [.delete(collection)](#Mongo+delete) ⇒ [<code>Delete</code>](#Delete)
-    * [.profile(id)](#Mongo+profile) ⇒ <code>Promise.&lt;{user: User}&gt;</code>
-    * [.profiles()](#Mongo+profiles) ⇒ <code>Promise.&lt;{users: Array.&lt;User&gt;}&gt;</code>
+    * [.profile(id)](#Mongo+profile) ⇒ <code>Promise</code>
+    * [.profiles()](#Mongo+profiles) ⇒ <code>Promise</code>
     * [.signIn(email, pass)](#Mongo+signIn) ⇒ [<code>Promise.&lt;AuthResponse&gt;</code>](#AuthResponse)
     * [.signUp(email, name, pass, role)](#Mongo+signUp) ⇒ [<code>Promise.&lt;AuthResponse&gt;</code>](#AuthResponse)
 
@@ -114,11 +114,11 @@ Returns a MongoDb Delete Object
 
 <a name="Mongo+profile"></a>
 
-### mongo.profile(id) ⇒ <code>Promise.&lt;{user: User}&gt;</code>
+### mongo.profile(id) ⇒ <code>Promise</code>
 Fetches the user profile
 
 **Kind**: instance method of [<code>Mongo</code>](#Mongo)  
-**Returns**: <code>Promise.&lt;{user: User}&gt;</code> - Return a promise containing response from server  
+**Returns**: <code>Promise</code> - Returns a promise containing response from server  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -139,11 +139,11 @@ db.profile(id).then(res => {
 ```
 <a name="Mongo+profiles"></a>
 
-### mongo.profiles() ⇒ <code>Promise.&lt;{users: Array.&lt;User&gt;}&gt;</code>
+### mongo.profiles() ⇒ <code>Promise</code>
 Fetches all the user profiles
 
 **Kind**: instance method of [<code>Mongo</code>](#Mongo)  
-**Returns**: <code>Promise.&lt;{users: Array.&lt;User&gt;}&gt;</code> - Return a promise containing response from server  
+**Returns**: <code>Promise</code> - Returns a promise containing response from server  
 **Example**  
 ```js
 db.profiles().then(res => {
@@ -163,7 +163,7 @@ db.profiles().then(res => {
 Sends a sign in query to the server
 
 **Kind**: instance method of [<code>Mongo</code>](#Mongo)  
-**Returns**: [<code>Promise.&lt;AuthResponse&gt;</code>](#AuthResponse) - Return a promise containing response from server  
+**Returns**: [<code>Promise.&lt;AuthResponse&gt;</code>](#AuthResponse) - Returns a promise containing response from server  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -192,7 +192,7 @@ db.signIn('demo@example.com', '1234').then(res => {
 Sends a sign up query to the server
 
 **Kind**: instance method of [<code>Mongo</code>](#Mongo)  
-**Returns**: [<code>Promise.&lt;AuthResponse&gt;</code>](#AuthResponse) - Return a promise containing response from server  
+**Returns**: [<code>Promise.&lt;AuthResponse&gt;</code>](#AuthResponse) - Returns a promise containing response from server  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -231,8 +231,8 @@ Class representing the MongoDB Get Interface.
     * [.sort(...array)](#Get+sort)
     * [.skip(num)](#Get+skip)
     * [.limit(num)](#Get+limit)
-    * [.one()](#Get+one)
-    * [.all()](#Get+all)
+    * [.one()](#Get+one) ⇒ <code>Promise</code>
+    * [.all()](#Get+all) ⇒ <code>Promise</code>
     * [.count()](#Get+count)
 
 <a name="new_Get_new"></a>
@@ -290,7 +290,7 @@ Sets the fields to be selected
 **Example**  
 ```js
 // Given query will only select author and title fields
-const select = {author: 1, title: 1}
+const select = { author: 1, title: 1 }
 db.get('posts').select(select).all().then(res => ...)
 ```
 <a name="Get+sort"></a>
@@ -307,8 +307,7 @@ Sets the fields to order result by.
 **Example**  
 ```js
 // Given query will order results first by age (asc) then by age (desc)
-const array = ['title', '-age']
-db.get('posts').sort(array).all().then(res => ...)
+db.get('posts').sort('title', '-age').all().then(res => ...)
 ```
 <a name="Get+skip"></a>
 
@@ -344,20 +343,22 @@ db.get('posts').limit(10).all().then(res => ...)
 ```
 <a name="Get+one"></a>
 
-### get.one()
-Makes the query to return a single document as an object. If not documents are returned, the status code is 400.
+### get.one() ⇒ <code>Promise</code>
+Makes the query to return a single document as an object. If no documents are returned, the status code is 400.
 
 **Kind**: instance method of [<code>Get</code>](#Get)  
+**Returns**: <code>Promise</code> - Returns a promise containing response from server.  
 **Example**  
 ```js
 db.get('posts').one().then(res => ...)
 ```
 <a name="Get+all"></a>
 
-### get.all()
+### get.all() ⇒ <code>Promise</code>
 Makes the query to return a multiple documents as an array. It is possible for an empty array to be returned.
 
 **Kind**: instance method of [<code>Get</code>](#Get)  
+**Returns**: <code>Promise</code> - Returns a promise containing response from server.  
 **Example**  
 ```js
 db.get('posts').all().then(res => ...)
@@ -383,8 +384,8 @@ Class representing the MongoDB Delete Interface.
 * [Delete](#Delete)
     * [new Delete(appId, collection, url, options)](#new_Delete_new)
     * [.where(...conditions)](#Delete+where)
-    * [.one()](#Delete+one)
-    * [.many()](#Delete+many)
+    * [.one()](#Delete+one) ⇒ <code>Promise</code>
+    * [.many()](#Delete+many) ⇒ <code>Promise</code>
 
 <a name="new_Delete_new"></a>
 
@@ -428,20 +429,22 @@ Prepares the find query
 
 <a name="Delete+one"></a>
 
-### delete.one()
+### delete.one() ⇒ <code>Promise</code>
 Makes the query to delete a single document which matches first.
 
 **Kind**: instance method of [<code>Delete</code>](#Delete)  
+**Returns**: <code>Promise</code> - Returns a promise containing response from server.  
 **Example**  
 ```js
 db.delete('posts').one().then(res => ...)
 ```
 <a name="Delete+many"></a>
 
-### delete.many()
+### delete.many() ⇒ <code>Promise</code>
 Makes the query to delete all the documents which match.
 
 **Kind**: instance method of [<code>Delete</code>](#Delete)  
+**Returns**: <code>Promise</code> - Returns a promise containing response from server.  
 **Example**  
 ```js
 db.delete('posts').many().then(res => ...)
@@ -466,8 +469,8 @@ Class representing the MongoDB Update Interface.
     * [.min(obj)](#Update+min)
     * [.currentTimestamp(obj)](#Update+currentTimestamp)
     * [.currentDate(obj)](#Update+currentDate)
-    * [.one()](#Update+one)
-    * [.all()](#Update+all)
+    * [.one()](#Update+one) ⇒ <code>Promise</code>
+    * [.all()](#Update+all) ⇒ <code>Promise</code>
     * [.upsert()](#Update+upsert)
 
 <a name="new_Update_new"></a>
@@ -664,16 +667,18 @@ db.update('posts').currentDate('lastModified').all().then(res => ...)
 ```
 <a name="Update+one"></a>
 
-### update.one()
+### update.one() ⇒ <code>Promise</code>
 Makes the query to update a single document which matches first.
 
 **Kind**: instance method of [<code>Update</code>](#Update)  
+**Returns**: <code>Promise</code> - Returns a promise containing response from server  
 <a name="Update+all"></a>
 
-### update.all()
+### update.all() ⇒ <code>Promise</code>
 Makes the query to update all documents which matches.
 
 **Kind**: instance method of [<code>Update</code>](#Update)  
+**Returns**: <code>Promise</code> - Returns a promise containing response from server  
 <a name="Update+upsert"></a>
 
 ### update.upsert()
@@ -689,8 +694,8 @@ Class representing the MongoDB Insert Interface.
 
 * [Insert](#Insert)
     * [new Insert(appId, collection, url, options)](#new_Insert_new)
-    * [.one(doc)](#Insert+one)
-    * [.many(doc)](#Insert+many)
+    * [.one(doc)](#Insert+one) ⇒ <code>Promise</code>
+    * [.many(docs)](#Insert+many) ⇒ <code>Promise</code>
 
 <a name="new_Insert_new"></a>
 
@@ -724,10 +729,11 @@ db.insert('posts').one(doc).then(res => {
 ```
 <a name="Insert+one"></a>
 
-### insert.one(doc)
-Makes the query to delete a single document which matches first.
+### insert.one(doc) ⇒ <code>Promise</code>
+Makes the query to insert a single document.
 
 **Kind**: instance method of [<code>Insert</code>](#Insert)  
+**Returns**: <code>Promise</code> - Returns a promise containing response from server.  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -740,14 +746,15 @@ db.insert('posts').one(doc).then(res => ...)
 ```
 <a name="Insert+many"></a>
 
-### insert.many(doc)
-Makes the query to delete a single document which matches first.
+### insert.many(docs) ⇒ <code>Promise</code>
+Makes the query to insert multiple documents.
 
 **Kind**: instance method of [<code>Insert</code>](#Insert)  
+**Returns**: <code>Promise</code> - Returns a promise containing response from server.  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| doc | <code>Array.&lt;Object&gt;</code> | The documents to be inserted. |
+| docs | <code>Array.&lt;Object&gt;</code> | The documents to be inserted. |
 
 **Example**  
 ```js
