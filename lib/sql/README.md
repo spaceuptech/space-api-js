@@ -4,17 +4,17 @@
 <dt><a href="#SQL">SQL</a></dt>
 <dd><p>Class representing the SQL Client Interface.</p>
 </dd>
+<dt><a href="#Insert">Insert</a></dt>
+<dd><p>Class representing the SQL Insert Interface.</p>
+</dd>
 <dt><a href="#Get">Get</a></dt>
 <dd><p>Class representing the SQL Get Interface.</p>
-</dd>
-<dt><a href="#Delete">Delete</a></dt>
-<dd><p>Class representing the SQL Delete Interface.</p>
 </dd>
 <dt><a href="#Update">Update</a></dt>
 <dd><p>Class representing the SQL Update Interface.</p>
 </dd>
-<dt><a href="#Insert">Insert</a></dt>
-<dd><p>Class representing the SQL Insert Interface.</p>
+<dt><a href="#Delete">Delete</a></dt>
+<dd><p>Class representing the SQL Delete Interface.</p>
 </dd>
 </dl>
 
@@ -41,6 +41,7 @@ Class representing the SQL Client Interface.
     * [.update(table)](#SQL+update) ⇒ [<code>Update</code>](#Update)
     * [.delete(table)](#SQL+delete) ⇒ [<code>Delete</code>](#Delete)
     * [.profile(id)](#SQL+profile) ⇒ <code>Promise</code>
+    * [.editProfile(id, email, name, pass)](#SQL+editProfile) ⇒ <code>Promise</code>
     * [.profiles()](#SQL+profiles) ⇒ <code>Promise</code>
     * [.signIn(email, pass)](#SQL+signIn) ⇒ [<code>Promise.&lt;AuthResponse&gt;</code>](#AuthResponse)
     * [.signUp(email, name, pass, role)](#SQL+signUp) ⇒ [<code>Promise.&lt;AuthResponse&gt;</code>](#AuthResponse)
@@ -144,6 +145,33 @@ db.profile(id).then(res => {
   // Exception occured while processing request
 });
 ```
+<a name="SQL+editProfile"></a>
+
+### sqL.editProfile(id, email, name, pass) ⇒ <code>Promise</code>
+Updates the user profile
+
+**Kind**: instance method of [<code>SQL</code>](#SQL)  
+**Returns**: <code>Promise</code> - Return a promise containing response from server  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| id | <code>string</code> | The unique user id |
+| email | <code>string</code> | The new email id |
+| name | <code>string</code> | The new name |
+| pass | <code>string</code> | The new password |
+
+**Example**  
+```js
+db.editProfile(id, email, name, pass).then(res => {
+  if (res.status === 200) {
+    // User account has been updates successfully
+    return;
+  }
+  // Request failed
+}).catch(ex => {
+  // Exception occured while processing request
+});
+```
 <a name="SQL+profiles"></a>
 
 ### sqL.profiles() ⇒ <code>Promise</code>
@@ -223,6 +251,88 @@ db.signUp('demo@example.com', 'UserName', '1234', 'default').then(res => {
 }).catch(ex => {
   // Exception occured while processing request
 });
+```
+<a name="Insert"></a>
+
+## Insert
+Class representing the SQL Insert Interface.
+
+**Kind**: global class  
+
+* [Insert](#Insert)
+    * [new Insert(appId, table, url, options, db)](#new_Insert_new)
+    * [.one(record)](#Insert+one) ⇒ <code>Promise</code>
+    * [.many(...records)](#Insert+many) ⇒ <code>Promise</code>
+
+<a name="new_Insert_new"></a>
+
+### new Insert(appId, table, url, options, db)
+Create an instance of the MongoDB Insert Interface.
+
+
+| Param | Type |
+| --- | --- |
+| appId | <code>string</code> | 
+| table | <code>string</code> | 
+| url | <code>string</code> | 
+| options | <code>Object</code> | 
+| db | <code>string</code> | 
+
+**Example**  
+```js
+import { API, cond, or, and } from 'space-api';
+
+const api = new API('my-project');
+
+// For MySQL Database
+const db = api.MySQL();
+
+// For Postgres Database
+const db = api.Postgres();
+
+const record = { author: 'John', title: 'Title1', _id: 1 };
+db.insert('posts').one(record).then(res => {
+  if (res.status === 200) {
+    // Record was inserted successfully
+    return;
+  }
+}).catch(ex => {
+  // Exception occured while processing request
+});
+```
+<a name="Insert+one"></a>
+
+### insert.one(record) ⇒ <code>Promise</code>
+Makes the query to insert a single record.
+
+**Kind**: instance method of [<code>Insert</code>](#Insert)  
+**Returns**: <code>Promise</code> - Returns a promise containing response from server.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| record | <code>Object</code> | The record to be inserted. |
+
+**Example**  
+```js
+const record = { author: 'John', title: 'Title1', id: 1 };
+db.insert('posts').one(record).then(res => ...)
+```
+<a name="Insert+many"></a>
+
+### insert.many(...records) ⇒ <code>Promise</code>
+Makes the query to insert multiple records.
+
+**Kind**: instance method of [<code>Insert</code>](#Insert)  
+**Returns**: <code>Promise</code> - Returns a promise containing response from server.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ...records | <code>Array.&lt;Object&gt;</code> | The records to be inserted. |
+
+**Example**  
+```js
+const records = [{ author: 'John', title: 'Title1', id: 1 }];
+db.insert('posts').many(records).then(res => ...)
 ```
 <a name="Get"></a>
 
@@ -375,75 +485,6 @@ Makes the query to return a multiple records as an array. It is possible for an 
 ```js
 db.get('posts').all().then(res => ...)
 ```
-<a name="Delete"></a>
-
-## Delete
-Class representing the SQL Delete Interface.
-
-**Kind**: global class  
-
-* [Delete](#Delete)
-    * [new Delete(appId, table, url, options, db)](#new_Delete_new)
-    * [.where(...conditions)](#Delete+where)
-    * [.all()](#Delete+all) ⇒ <code>Promise</code>
-
-<a name="new_Delete_new"></a>
-
-### new Delete(appId, table, url, options, db)
-Create an instance of the SQL Delete Interface.
-
-
-| Param | Type |
-| --- | --- |
-| appId | <code>string</code> | 
-| table | <code>string</code> | 
-| url | <code>string</code> | 
-| options | <code>Object</code> | 
-| db | <code>string</code> | 
-
-**Example**  
-```js
-import { API, cond, or, and } from 'space-api';
-
-const api = new API('my-project');
-
-// For MySQL Database
-const db = api.MySQL();
-
-// For PostgresQL Database
-const db = api.Postgres();
-
-db.delete('posts').where(and(cond('title', '==', 'Title1'))).all().then(res => {
-  if (res.status === 200) {
-    // The records were deleted successfully
-    return;
-  }
-}).catch(ex => {
-  // Exception occured while processing request
-});
-```
-<a name="Delete+where"></a>
-
-### delete.where(...conditions)
-Prepares the find query
-
-**Kind**: instance method of [<code>Delete</code>](#Delete)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| ...conditions | <code>Object</code> | The condition logic. |
-
-<a name="Delete+all"></a>
-
-### delete.all() ⇒ <code>Promise</code>
-Makes the query to delete all the records which match.
-
-**Kind**: instance method of [<code>Delete</code>](#Delete)  
-**Returns**: <code>Promise</code> - Returns a promise containing response from server.  
-**Example**  
-```js
-db.delete('posts').all().then(res => ...)
-```
 <a name="Update"></a>
 
 ## Update
@@ -514,22 +555,22 @@ Makes the query to update all records which matches.
 | --- | --- | --- |
 | record | <code>Object</code> | Object containing fields and values to set. |
 
-<a name="Insert"></a>
+<a name="Delete"></a>
 
-## Insert
-Class representing the SQL Insert Interface.
+## Delete
+Class representing the SQL Delete Interface.
 
 **Kind**: global class  
 
-* [Insert](#Insert)
-    * [new Insert(appId, table, url, options, db)](#new_Insert_new)
-    * [.one(record)](#Insert+one) ⇒ <code>Promise</code>
-    * [.many(...records)](#Insert+many) ⇒ <code>Promise</code>
+* [Delete](#Delete)
+    * [new Delete(appId, table, url, options, db)](#new_Delete_new)
+    * [.where(...conditions)](#Delete+where)
+    * [.all()](#Delete+all) ⇒ <code>Promise</code>
 
-<a name="new_Insert_new"></a>
+<a name="new_Delete_new"></a>
 
-### new Insert(appId, table, url, options, db)
-Create an instance of the MongoDB Insert Interface.
+### new Delete(appId, table, url, options, db)
+Create an instance of the SQL Delete Interface.
 
 
 | Param | Type |
@@ -549,52 +590,39 @@ const api = new API('my-project');
 // For MySQL Database
 const db = api.MySQL();
 
-// For Postgres Database
+// For PostgresQL Database
 const db = api.Postgres();
 
-const record = { author: 'John', title: 'Title1', _id: 1 };
-db.insert('posts').one(record).then(res => {
+db.delete('posts').where(and(cond('title', '==', 'Title1'))).all().then(res => {
   if (res.status === 200) {
-    // Record was inserted successfully
+    // The records were deleted successfully
     return;
   }
 }).catch(ex => {
   // Exception occured while processing request
 });
 ```
-<a name="Insert+one"></a>
+<a name="Delete+where"></a>
 
-### insert.one(record) ⇒ <code>Promise</code>
-Makes the query to insert a single record.
+### delete.where(...conditions)
+Prepares the find query
 
-**Kind**: instance method of [<code>Insert</code>](#Insert)  
-**Returns**: <code>Promise</code> - Returns a promise containing response from server.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| record | <code>Object</code> | The record to be inserted. |
-
-**Example**  
-```js
-const record = { author: 'John', title: 'Title1', id: 1 };
-db.insert('posts').one(record).then(res => ...)
-```
-<a name="Insert+many"></a>
-
-### insert.many(...records) ⇒ <code>Promise</code>
-Makes the query to insert multiple records.
-
-**Kind**: instance method of [<code>Insert</code>](#Insert)  
-**Returns**: <code>Promise</code> - Returns a promise containing response from server.  
+**Kind**: instance method of [<code>Delete</code>](#Delete)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| ...records | <code>Array.&lt;Object&gt;</code> | The records to be inserted. |
+| ...conditions | <code>Object</code> | The condition logic. |
 
+<a name="Delete+all"></a>
+
+### delete.all() ⇒ <code>Promise</code>
+Makes the query to delete all the records which match.
+
+**Kind**: instance method of [<code>Delete</code>](#Delete)  
+**Returns**: <code>Promise</code> - Returns a promise containing response from server.  
 **Example**  
 ```js
-const records = [{ author: 'John', title: 'Title1', id: 1 }];
-db.insert('posts').many(records).then(res => ...)
+db.delete('posts').all().then(res => ...)
 ```
 <a name="User"></a>
 

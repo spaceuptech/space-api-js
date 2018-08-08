@@ -4,17 +4,17 @@
 <dt><a href="#Mongo">Mongo</a></dt>
 <dd><p>Class representing the MongoDB Client Interface.</p>
 </dd>
+<dt><a href="#Insert">Insert</a></dt>
+<dd><p>Class representing the MongoDB Insert Interface.</p>
+</dd>
 <dt><a href="#Get">Get</a></dt>
 <dd><p>Class representing the MongoDB Get Interface.</p>
-</dd>
-<dt><a href="#Delete">Delete</a></dt>
-<dd><p>Class representing the MongoDB Delete Interface.</p>
 </dd>
 <dt><a href="#Update">Update</a></dt>
 <dd><p>Class representing the MongoDB Update Interface.</p>
 </dd>
-<dt><a href="#Insert">Insert</a></dt>
-<dd><p>Class representing the MongoDB Insert Interface.</p>
+<dt><a href="#Delete">Delete</a></dt>
+<dd><p>Class representing the MongoDB Delete Interface.</p>
 </dd>
 </dl>
 
@@ -41,6 +41,7 @@ Class representing the MongoDB Client Interface.
     * [.update(collection)](#Mongo+update) ⇒ [<code>Update</code>](#Update)
     * [.delete(collection)](#Mongo+delete) ⇒ [<code>Delete</code>](#Delete)
     * [.profile(id)](#Mongo+profile) ⇒ <code>Promise</code>
+    * [.editProfile(id, email, name, pass)](#Mongo+editProfile) ⇒ <code>Promise</code>
     * [.profiles()](#Mongo+profiles) ⇒ <code>Promise</code>
     * [.signIn(email, pass)](#Mongo+signIn) ⇒ [<code>Promise.&lt;AuthResponse&gt;</code>](#AuthResponse)
     * [.signUp(email, name, pass, role)](#Mongo+signUp) ⇒ [<code>Promise.&lt;AuthResponse&gt;</code>](#AuthResponse)
@@ -137,6 +138,33 @@ db.profile(id).then(res => {
   // Exception occured while processing request
 });
 ```
+<a name="Mongo+editProfile"></a>
+
+### mongo.editProfile(id, email, name, pass) ⇒ <code>Promise</code>
+Updates the user profile
+
+**Kind**: instance method of [<code>Mongo</code>](#Mongo)  
+**Returns**: <code>Promise</code> - Return a promise containing response from server  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| id | <code>string</code> | The unique user id |
+| email | <code>string</code> | The new email id |
+| name | <code>string</code> | The new name |
+| pass | <code>string</code> | The new password |
+
+**Example**  
+```js
+db.editProfile(id, email, name, pass).then(res => {
+  if (res.status === 200) {
+    // User account has been updates successfully
+    return;
+  }
+  // Request failed
+}).catch(ex => {
+  // Exception occured while processing request
+});
+```
 <a name="Mongo+profiles"></a>
 
 ### mongo.profiles() ⇒ <code>Promise</code>
@@ -216,6 +244,82 @@ db.signUp('demo@example.com', 'UserName', '1234', 'default').then(res => {
 }).catch(ex => {
   // Exception occured while processing request
 });
+```
+<a name="Insert"></a>
+
+## Insert
+Class representing the MongoDB Insert Interface.
+
+**Kind**: global class  
+
+* [Insert](#Insert)
+    * [new Insert(appId, collection, url, options)](#new_Insert_new)
+    * [.one(doc)](#Insert+one) ⇒ <code>Promise</code>
+    * [.many(docs)](#Insert+many) ⇒ <code>Promise</code>
+
+<a name="new_Insert_new"></a>
+
+### new Insert(appId, collection, url, options)
+Create an instance of the MongoDB Insert Interface.
+
+
+| Param | Type |
+| --- | --- |
+| appId | <code>string</code> | 
+| collection | <code>string</code> | 
+| url | <code>string</code> | 
+| options | <code>Object</code> | 
+
+**Example**  
+```js
+import { API, cond, or, and } from 'space-api';
+
+const api = new API('my-project');
+const db = api.Mongo();
+
+const doc = { author: 'John', title: 'Title1', _id: 1 };
+db.insert('posts').one(doc).then(res => {
+  if (res.status === 200) {
+    // Document was inserted successfully
+    return;
+  }
+}).catch(ex => {
+  // Exception occured while processing request
+});
+```
+<a name="Insert+one"></a>
+
+### insert.one(doc) ⇒ <code>Promise</code>
+Makes the query to insert a single document.
+
+**Kind**: instance method of [<code>Insert</code>](#Insert)  
+**Returns**: <code>Promise</code> - Returns a promise containing response from server.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| doc | <code>Object</code> | The document to be inserted. |
+
+**Example**  
+```js
+const doc = { author: 'John', title: 'Title1', _id: 1 };
+db.insert('posts').one(doc).then(res => ...)
+```
+<a name="Insert+many"></a>
+
+### insert.many(docs) ⇒ <code>Promise</code>
+Makes the query to insert multiple documents.
+
+**Kind**: instance method of [<code>Insert</code>](#Insert)  
+**Returns**: <code>Promise</code> - Returns a promise containing response from server.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| docs | <code>Array.&lt;Object&gt;</code> | The documents to be inserted. |
+
+**Example**  
+```js
+const docs = [{ author: 'John', title: 'Title1', _id: 1 }];
+db.insert('posts').many(docs).then(res => ...)
 ```
 <a name="Get"></a>
 
@@ -373,81 +477,6 @@ Makes the query to return the count of total number of documents that were queri
 ```js
 // Given query counts the total number of posts in the 'posts' collection
 db.get('posts').count().then(res => ...)
-```
-<a name="Delete"></a>
-
-## Delete
-Class representing the MongoDB Delete Interface.
-
-**Kind**: global class  
-
-* [Delete](#Delete)
-    * [new Delete(appId, collection, url, options)](#new_Delete_new)
-    * [.where(...conditions)](#Delete+where)
-    * [.one()](#Delete+one) ⇒ <code>Promise</code>
-    * [.many()](#Delete+many) ⇒ <code>Promise</code>
-
-<a name="new_Delete_new"></a>
-
-### new Delete(appId, collection, url, options)
-Create an instance of the MongoDB Delete Interface.
-
-
-| Param | Type |
-| --- | --- |
-| appId | <code>string</code> | 
-| collection | <code>string</code> | 
-| url | <code>string</code> | 
-| options | <code>Object</code> | 
-
-**Example**  
-```js
-import { API, cond, or, and } from 'space-api';
-
-const api = new API('my-project');
-const db = api.Mongo();
-
-db.delete('posts').where(and(cond('title', '==', 'Title1'))).many().then(res => {
-  if (res.status === 200) {
-    // The documents were deleted successfully
-    return;
-  }
-}).catch(ex => {
-  // Exception occured while processing request
-});
-```
-<a name="Delete+where"></a>
-
-### delete.where(...conditions)
-Prepares the find query
-
-**Kind**: instance method of [<code>Delete</code>](#Delete)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| ...conditions | <code>Object</code> | The condition logic. |
-
-<a name="Delete+one"></a>
-
-### delete.one() ⇒ <code>Promise</code>
-Makes the query to delete a single document which matches first.
-
-**Kind**: instance method of [<code>Delete</code>](#Delete)  
-**Returns**: <code>Promise</code> - Returns a promise containing response from server.  
-**Example**  
-```js
-db.delete('posts').one().then(res => ...)
-```
-<a name="Delete+many"></a>
-
-### delete.many() ⇒ <code>Promise</code>
-Makes the query to delete all the documents which match.
-
-**Kind**: instance method of [<code>Delete</code>](#Delete)  
-**Returns**: <code>Promise</code> - Returns a promise containing response from server.  
-**Example**  
-```js
-db.delete('posts').many().then(res => ...)
 ```
 <a name="Update"></a>
 
@@ -685,22 +714,23 @@ Makes the query to update all documents which matches.
 Makes the query to update all, else insert a document.
 
 **Kind**: instance method of [<code>Update</code>](#Update)  
-<a name="Insert"></a>
+<a name="Delete"></a>
 
-## Insert
-Class representing the MongoDB Insert Interface.
+## Delete
+Class representing the MongoDB Delete Interface.
 
 **Kind**: global class  
 
-* [Insert](#Insert)
-    * [new Insert(appId, collection, url, options)](#new_Insert_new)
-    * [.one(doc)](#Insert+one) ⇒ <code>Promise</code>
-    * [.many(docs)](#Insert+many) ⇒ <code>Promise</code>
+* [Delete](#Delete)
+    * [new Delete(appId, collection, url, options)](#new_Delete_new)
+    * [.where(...conditions)](#Delete+where)
+    * [.one()](#Delete+one) ⇒ <code>Promise</code>
+    * [.many()](#Delete+many) ⇒ <code>Promise</code>
 
-<a name="new_Insert_new"></a>
+<a name="new_Delete_new"></a>
 
-### new Insert(appId, collection, url, options)
-Create an instance of the MongoDB Insert Interface.
+### new Delete(appId, collection, url, options)
+Create an instance of the MongoDB Delete Interface.
 
 
 | Param | Type |
@@ -717,49 +747,47 @@ import { API, cond, or, and } from 'space-api';
 const api = new API('my-project');
 const db = api.Mongo();
 
-const doc = { author: 'John', title: 'Title1', _id: 1 };
-db.insert('posts').one(doc).then(res => {
+db.delete('posts').where(and(cond('title', '==', 'Title1'))).many().then(res => {
   if (res.status === 200) {
-    // Document was inserted successfully
+    // The documents were deleted successfully
     return;
   }
 }).catch(ex => {
   // Exception occured while processing request
 });
 ```
-<a name="Insert+one"></a>
+<a name="Delete+where"></a>
 
-### insert.one(doc) ⇒ <code>Promise</code>
-Makes the query to insert a single document.
+### delete.where(...conditions)
+Prepares the find query
 
-**Kind**: instance method of [<code>Insert</code>](#Insert)  
-**Returns**: <code>Promise</code> - Returns a promise containing response from server.  
+**Kind**: instance method of [<code>Delete</code>](#Delete)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| doc | <code>Object</code> | The document to be inserted. |
+| ...conditions | <code>Object</code> | The condition logic. |
 
+<a name="Delete+one"></a>
+
+### delete.one() ⇒ <code>Promise</code>
+Makes the query to delete a single document which matches first.
+
+**Kind**: instance method of [<code>Delete</code>](#Delete)  
+**Returns**: <code>Promise</code> - Returns a promise containing response from server.  
 **Example**  
 ```js
-const doc = { author: 'John', title: 'Title1', _id: 1 };
-db.insert('posts').one(doc).then(res => ...)
+db.delete('posts').one().then(res => ...)
 ```
-<a name="Insert+many"></a>
+<a name="Delete+many"></a>
 
-### insert.many(docs) ⇒ <code>Promise</code>
-Makes the query to insert multiple documents.
+### delete.many() ⇒ <code>Promise</code>
+Makes the query to delete all the documents which match.
 
-**Kind**: instance method of [<code>Insert</code>](#Insert)  
+**Kind**: instance method of [<code>Delete</code>](#Delete)  
 **Returns**: <code>Promise</code> - Returns a promise containing response from server.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| docs | <code>Array.&lt;Object&gt;</code> | The documents to be inserted. |
-
 **Example**  
 ```js
-const docs = [{ author: 'John', title: 'Title1', _id: 1 }];
-db.insert('posts').many(docs).then(res => ...)
+db.delete('posts').many().then(res => ...)
 ```
 <a name="User"></a>
 
