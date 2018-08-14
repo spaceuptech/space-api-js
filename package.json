@@ -1,6 +1,6 @@
 {
   "name": "space-api",
-  "version": "0.3.16",
+  "version": "0.3.18",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
@@ -12,7 +12,7 @@
     "prebuild": "npm run clean && npm run init",
     "build": "babel ./index.js -d ./dist --ignore test.js --presets es2015 && babel ./lib -d ./dist/lib --ignore test.js --presets es2015",
     "pretest": "npm run build",
-    "publish": "npm run build && npm publish"
+    "pub": "npm run build && npm publish"
   },
   "author": "Noorain Panjwani",
   "license": "Apache-2.0",
