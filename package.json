@@ -10,7 +10,7 @@
     "init": "mkdir dist",
     "clean": "rm -rf dist",
     "prebuild": "npm run clean && npm run init",
-    "build": "babel ./lib -d ./dist --ignore test.js",
+    "build": "babel ./index.js -d ./dist --ignore test.js --presets es2015 && babel ./lib -d ./dist/lib --ignore test.js --presets es2015",
     "pretest": "npm run build"
   },
   "author": "Noorain Panjwani",
