@@ -11,7 +11,8 @@
     "clean": "rm -rf dist",
     "prebuild": "npm run clean && npm run init",
     "build": "babel ./index.js -d ./dist --ignore test.js --presets es2015 && babel ./lib -d ./dist/lib --ignore test.js --presets es2015",
-    "pretest": "npm run build"
+    "pretest": "npm run build",
+    "publish": "npm run build && npm publish"
   },
   "author": "Noorain Panjwani",
   "license": "Apache-2.0",
