@@ -70,7 +70,7 @@ Create an instance of the MongoDB Client Interface.
 
 **Example**  
 ```js
-import { API } from 'space-api-node';
+import { API } from 'space-api';
 
 const api = new API('my-project');
 const db = api.Mongo();
@@ -312,7 +312,7 @@ Create an instance of the MongoDB Insert Interface.
 
 **Example**  
 ```js
-import { API, cond, or, and } from 'space-api-node';
+import { API, cond, or, and } from 'space-api';
 
 const api = new API('my-project');
 const db = api.Mongo();
@@ -394,7 +394,7 @@ Create an instance of the MongoDB Get Interface.
 
 **Example**  
 ```js
-import { API, cond, or, and } from 'space-api-node';
+import { API, cond, or, and } from 'space-api';
 
 const api = new API('my-project');
 const db = api.Mongo();
@@ -557,7 +557,7 @@ Create an instance of the MongoDB Update Interface.
 
 **Example**  
 ```js
-import { API, cond, or, and } from 'space-api-node';
+import { API, cond, or, and } from 'space-api';
 
 const api = new API('my-project');
 const db = api.Mongo();
@@ -782,7 +782,7 @@ Create an instance of the MongoDB Delete Interface.
 
 **Example**  
 ```js
-import { API, cond, or, and } from 'space-api-node';
+import { API, cond, or, and } from 'space-api';
 
 const api = new API('my-project');
 const db = api.Mongo();
@@ -861,4 +861,4 @@ db.delete('posts').many().then(res => ...)
 The Monitor Interface.
 
 **Kind**: global external  
-**See**: [https://github.com/spaceuptech/space-api-node/wiki/Realtime](https://github.com/spaceuptech/space-api-node/wiki/Realtime)  
+**See**: [https://github.com/spaceuptech/space-api-js/wiki/Realtime](https://github.com/spaceuptech/space-api-js/wiki/Realtime)  

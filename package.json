@@ -1,6 +1,6 @@
 {
-  "name": "space-api-node",
-  "version": "0.3.19",
+  "name": "space-api",
+  "version": "0.3.20",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
@@ -28,9 +28,7 @@
     "dist"
   ],
   "dependencies": {
-    "node-fetch": "^2.2.0",
     "time-uuid": "^1.0.0",
-    "underscore": "^1.9.1",
-    "ws": "^6.0.0"
+    "underscore": "^1.9.1"
   }
 }

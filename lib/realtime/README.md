@@ -49,7 +49,7 @@ Create an instance of the Monitor Interface.
 
 **Example**  
 ```js
-import { API, cond, or, and } from 'space-api-node';
+import { API, cond, or, and } from 'space-api';
 const api = new API('my-project');
 
 // For MongoDb Database
