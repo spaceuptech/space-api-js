@@ -62,3 +62,6 @@ typings/
 
 # build files
 dist
+
+# misc test files
+test/misc

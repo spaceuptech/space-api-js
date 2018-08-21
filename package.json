@@ -17,14 +17,19 @@
   "author": "Noorain Panjwani",
   "license": "Apache-2.0",
   "devDependencies": {
-    "chai": "^4.1.2",
-    "mocha": "^5.1.1",
-    "nyc": "^11.7.3",
     "babel-cli": "^6.16.0",
     "babel-core": "^6.17.0",
-    "babel-preset-es2015": "^6.16.0"
+    "babel-preset-es2015": "^6.16.0",
+    "chai": "^4.1.2",
+    "mocha": "^5.1.1",
+    "nyc": "^11.7.3"
   },
   "files": [
     "dist"
-  ]
+  ],
+  "dependencies": {
+    "node-fetch": "^2.2.0",
+    "underscore": "^1.9.1",
+    "ws": "^6.0.0"
+  }
 }

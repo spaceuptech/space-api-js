@@ -40,6 +40,7 @@ Class representing the SQL Client Interface.
     * [.insert(table)](#SQL+insert) ⇒ [<code>Insert</code>](#Insert)
     * [.update(table)](#SQL+update) ⇒ [<code>Update</code>](#Update)
     * [.delete(table)](#SQL+delete) ⇒ [<code>Delete</code>](#Delete)
+    * [.monitor(table, uniqueKeys)](#SQL+monitor) ⇒ <code>Monitor</code>
     * [.profile(id)](#SQL+profile) ⇒ <code>Promise</code>
     * [.editProfile(id, email, name, pass)](#SQL+editProfile) ⇒ <code>Promise</code>
     * [.profiles()](#SQL+profiles) ⇒ <code>Promise</code>
@@ -61,6 +62,9 @@ Create an instance of the SQL Client Interface.
 
 **Example**  
 ```js
+// Create table if you are using any user management module 
+CREATE TABLE users (id VARCHAR(50), account VARCHAR(50), email VARCHAR(100), name VARCHAR(100), pass VARCHAR(50), role VARCHAR(50));
+
 import { API } from 'space-api';
 
 const api = new API('my-project');
@@ -120,6 +124,37 @@ Returns a SQL Delete Object
 | --- | --- | --- |
 | table | <code>string</code> | The table to delete records. |
 
+<a name="SQL+monitor"></a>
+
+### sqL.monitor(table, uniqueKeys) ⇒ <code>Monitor</code>
+Returns a Monitor Object
+
+**Kind**: instance method of [<code>SQL</code>](#SQL)  
+**Returns**: <code>Monitor</code> - Monitor Object  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| table | <code>string</code> | The table to monitor. |
+| uniqueKeys | <code>Array</code> | Array of columns in table forming primary key |
+
+**Example**  
+```js
+const onSnapshot  = (snapshot, type, docs) => {
+  if (type === 'monitor') {
+     console.log('Monitored successfully ', snapshot)
+     return
+   }
+   console.log(type, snapshot, docs)
+ }
+
+ const onError = (err) => {
+   console.log('Monitor error', err)
+ }
+
+ let unsubscribe = db.monitor('posts', [author, title]).where().subscribe(onSnapshot, onError) 
+
+ unsubscribe()
+```
 <a name="SQL+profile"></a>
 
 ### sqL.profile(id) ⇒ <code>Promise</code>
@@ -262,7 +297,7 @@ Class representing the SQL Insert Interface.
 * [Insert](#Insert)
     * [new Insert(appId, table, url, options, db)](#new_Insert_new)
     * [.one(record)](#Insert+one) ⇒ <code>Promise</code>
-    * [.many(...records)](#Insert+many) ⇒ <code>Promise</code>
+    * [.many(records)](#Insert+many) ⇒ <code>Promise</code>
 
 <a name="new_Insert_new"></a>
 
@@ -319,7 +354,7 @@ db.insert('posts').one(record).then(res => ...)
 ```
 <a name="Insert+many"></a>
 
-### insert.many(...records) ⇒ <code>Promise</code>
+### insert.many(records) ⇒ <code>Promise</code>
 Makes the query to insert multiple records.
 
 **Kind**: instance method of [<code>Insert</code>](#Insert)  
@@ -327,7 +362,7 @@ Makes the query to insert multiple records.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| ...records | <code>Array.&lt;Object&gt;</code> | The records to be inserted. |
+| records | <code>Array.&lt;Object&gt;</code> | The records to be inserted. |
 
 **Example**  
 ```js

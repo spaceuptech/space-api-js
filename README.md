@@ -95,6 +95,25 @@ db.delete('COLLECTION_NAME').where(find)
   });
 ```
 
+### Get real time updates
+```js
+const onSnapshot  = (snapshot, type, docs) => {
+  if (type === 'monitor') {
+    console.log('Monitored successfully ', snapshot)
+      return
+    }
+    console.log(type, snapshot, docs)
+   }
+ 
+const onError = (err) => {
+  console.log('Monitor error', err)
+}
+ 
+let unsubscribe = db.monitor('posts').where().subscribe(onSnapshot, onError) 
+ 
+unsubscribe()
+```
+
 ## License
 
 Copyright 2018 Noorain Panjwani

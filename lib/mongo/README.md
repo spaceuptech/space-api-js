@@ -35,11 +35,12 @@ Class representing the MongoDB Client Interface.
 **Kind**: global class  
 
 * [Mongo](#Mongo)
-    * [new Mongo(appId, url, options)](#new_Mongo_new)
+    * [new Mongo(appId, url, options, realTime)](#new_Mongo_new)
     * [.get(collection)](#Mongo+get) ⇒ [<code>Get</code>](#Get)
     * [.insert(collection)](#Mongo+insert) ⇒ [<code>Insert</code>](#Insert)
     * [.update(collection)](#Mongo+update) ⇒ [<code>Update</code>](#Update)
     * [.delete(collection)](#Mongo+delete) ⇒ [<code>Delete</code>](#Delete)
+    * [.monitor(collection)](#Mongo+monitor) ⇒ <code>Monitor</code>
     * [.profile(id)](#Mongo+profile) ⇒ <code>Promise</code>
     * [.editProfile(id, email, name, pass)](#Mongo+editProfile) ⇒ <code>Promise</code>
     * [.profiles()](#Mongo+profiles) ⇒ <code>Promise</code>
@@ -48,7 +49,7 @@ Class representing the MongoDB Client Interface.
 
 <a name="new_Mongo_new"></a>
 
-### new Mongo(appId, url, options)
+### new Mongo(appId, url, options, realTime)
 Create an instance of the MongoDB Client Interface.
 
 
@@ -57,6 +58,7 @@ Create an instance of the MongoDB Client Interface.
 | appId | <code>string</code> | 
 | url | <code>string</code> | 
 | options | <code>Object</code> | 
+| realTime | <code>Object</code> | 
 
 **Example**  
 ```js
@@ -113,6 +115,36 @@ Returns a MongoDb Delete Object
 | --- | --- | --- |
 | collection | <code>string</code> | The collection to delete documents in. |
 
+<a name="Mongo+monitor"></a>
+
+### mongo.monitor(collection) ⇒ <code>Monitor</code>
+Returns a Monitor Object
+
+**Kind**: instance method of [<code>Mongo</code>](#Mongo)  
+**Returns**: <code>Monitor</code> - Monitor Object  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| collection | <code>string</code> | The collection to monitor. |
+
+**Example**  
+```js
+const onSnapshot  = (snapshot, type, docs) => {
+  if (type === 'monitor') {
+     console.log('Monitored successfully ', snapshot)
+     return
+   }
+   console.log(type, snapshot, docs)
+ }
+
+ const onError = (err) => {
+   console.log('Monitor error', err)
+ }
+
+ let unsubscribe = db.monitor('posts').where().subscribe(onSnapshot, onError) 
+
+ unsubscribe()
+```
 <a name="Mongo+profile"></a>
 
 ### mongo.profile(id) ⇒ <code>Promise</code>
