@@ -21,7 +21,7 @@ Documentation for real time feature is given below:
 ### Create Client Instance
 
 ```js
-import { API, and, or, cond } from 'space-api-node';
+const { API, cond, or, and } = require('space-api-node');
 
 const api = new API('demo-project');
 

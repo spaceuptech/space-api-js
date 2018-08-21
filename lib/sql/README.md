@@ -73,7 +73,7 @@ Create an instance of the SQL Client Interface.
 // Create table if you are using any user management module 
 CREATE TABLE users (id VARCHAR(50), account VARCHAR(50), email VARCHAR(100), name VARCHAR(100), pass VARCHAR(50), role VARCHAR(50));
 
-import { API } from 'space-api-node';
+const { API } = require('space-api-node');
 
 const api = new API('my-project');
 
@@ -323,7 +323,7 @@ Create an instance of the MongoDB Insert Interface.
 
 **Example**  
 ```js
-import { API, cond, or, and } from 'space-api-node';
+const { API, cond, or, and } = require('space-api-node')
 
 const api = new API('my-project');
 
@@ -410,7 +410,7 @@ Create an instance of the SQL Get Interface.
 
 **Example**  
 ```js
-import { API, cond, or, and } from 'space-api-node';
+const { API, cond, or, and } = require('space-api-node');
 
 const api = new API('my-project');
 
@@ -556,7 +556,7 @@ Create an instance of the MongoDB Update Interface.
 
 **Example**  
 ```js
-import { API, cond, or, and } from 'space-api-node';
+const { API, cond, or, and } = require('space-api-node');
 
 const api = new API('my-project');
 
@@ -626,7 +626,7 @@ Create an instance of the SQL Delete Interface.
 
 **Example**  
 ```js
-import { API, cond, or, and } from 'space-api-node';
+const { API, cond, or, and } = require('space-api-node')
 
 const api = new API('my-project');
 

@@ -45,7 +45,7 @@ Create an instance of the Client API.
 
 **Example**  
 ```js
-import { API } from 'space-api-node';
+const { API } = require('space-api-node');
 
 const api = new API('my-project');
 ```
