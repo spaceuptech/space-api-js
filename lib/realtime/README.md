@@ -10,13 +10,13 @@
 
 <dl>
 <dt><a href="#OnSnapshot">OnSnapshot(snapshot, type, docs)</a></dt>
-<dd><p>Description of the function</p>
+<dd><p>Callback for realtime updates to the subscribed data</p>
 </dd>
 <dt><a href="#OnError">OnError(err)</a></dt>
-<dd><p>Description of the function</p>
+<dd><p>Callback for error while subscribing</p>
 </dd>
 <dt><a href="#Unsubscribe">Unsubscribe()</a></dt>
-<dd><p>Description of the function</p>
+<dd><p>The function to unsubscribe the subscription</p>
 </dd>
 </dl>
 
@@ -49,7 +49,7 @@ Create an instance of the Monitor Interface.
 
 **Example**  
 ```js
-import { API, cond, or, and } from 'space-api';
+import { API, cond, or, and } from 'space-api-node';
 const api = new API('my-project');
 
 // For MongoDb Database
@@ -85,7 +85,7 @@ Prepares the find query
 <a name="Monitor+subscribe"></a>
 
 ### monitor.subscribe(onSnapshot, onError) ⇒ [<code>Unsubscribe</code>](#Unsubscribe)
-Prepares the find query
+Subcribes for real time updates
 
 **Kind**: instance method of [<code>Monitor</code>](#Monitor)  
 **Returns**: [<code>Unsubscribe</code>](#Unsubscribe) - Returns a unsubscribe function  
@@ -98,7 +98,7 @@ Prepares the find query
 <a name="OnSnapshot"></a>
 
 ## OnSnapshot(snapshot, type, docs)
-Description of the function
+Callback for realtime updates to the subscribed data
 
 **Kind**: global function  
 
@@ -111,7 +111,7 @@ Description of the function
 <a name="OnError"></a>
 
 ## OnError(err)
-Description of the function
+Callback for error while subscribing
 
 **Kind**: global function  
 
@@ -122,6 +122,6 @@ Description of the function
 <a name="Unsubscribe"></a>
 
 ## Unsubscribe()
-Description of the function
+The function to unsubscribe the subscription
 
 **Kind**: global function  

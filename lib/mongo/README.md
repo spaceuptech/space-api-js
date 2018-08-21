@@ -27,6 +27,14 @@
 <dd></dd>
 </dl>
 
+## External
+
+<dl>
+<dt><a href="#external_Monitor">Monitor</a></dt>
+<dd><p>The Monitor Interface.</p>
+</dd>
+</dl>
+
 <a name="Mongo"></a>
 
 ## Mongo
@@ -40,7 +48,7 @@ Class representing the MongoDB Client Interface.
     * [.insert(collection)](#Mongo+insert) ⇒ [<code>Insert</code>](#Insert)
     * [.update(collection)](#Mongo+update) ⇒ [<code>Update</code>](#Update)
     * [.delete(collection)](#Mongo+delete) ⇒ [<code>Delete</code>](#Delete)
-    * [.monitor(collection)](#Mongo+monitor) ⇒ <code>Monitor</code>
+    * [.monitor(collection)](#Mongo+monitor) ⇒ [<code>Monitor</code>](#external_Monitor)
     * [.profile(id)](#Mongo+profile) ⇒ <code>Promise</code>
     * [.editProfile(id, email, name, pass)](#Mongo+editProfile) ⇒ <code>Promise</code>
     * [.profiles()](#Mongo+profiles) ⇒ <code>Promise</code>
@@ -62,7 +70,7 @@ Create an instance of the MongoDB Client Interface.
 
 **Example**  
 ```js
-import { API } from 'space-api';
+import { API } from 'space-api-node';
 
 const api = new API('my-project');
 const db = api.Mongo();
@@ -117,11 +125,11 @@ Returns a MongoDb Delete Object
 
 <a name="Mongo+monitor"></a>
 
-### mongo.monitor(collection) ⇒ <code>Monitor</code>
+### mongo.monitor(collection) ⇒ [<code>Monitor</code>](#external_Monitor)
 Returns a Monitor Object
 
 **Kind**: instance method of [<code>Mongo</code>](#Mongo)  
-**Returns**: <code>Monitor</code> - Monitor Object  
+**Returns**: [<code>Monitor</code>](#external_Monitor) - Monitor Object  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -304,7 +312,7 @@ Create an instance of the MongoDB Insert Interface.
 
 **Example**  
 ```js
-import { API, cond, or, and } from 'space-api';
+import { API, cond, or, and } from 'space-api-node';
 
 const api = new API('my-project');
 const db = api.Mongo();
@@ -386,7 +394,7 @@ Create an instance of the MongoDB Get Interface.
 
 **Example**  
 ```js
-import { API, cond, or, and } from 'space-api';
+import { API, cond, or, and } from 'space-api-node';
 
 const api = new API('my-project');
 const db = api.Mongo();
@@ -549,7 +557,7 @@ Create an instance of the MongoDB Update Interface.
 
 **Example**  
 ```js
-import { API, cond, or, and } from 'space-api';
+import { API, cond, or, and } from 'space-api-node';
 
 const api = new API('my-project');
 const db = api.Mongo();
@@ -774,7 +782,7 @@ Create an instance of the MongoDB Delete Interface.
 
 **Example**  
 ```js
-import { API, cond, or, and } from 'space-api';
+import { API, cond, or, and } from 'space-api-node';
 
 const api = new API('my-project');
 const db = api.Mongo();
@@ -847,3 +855,10 @@ db.delete('posts').many().then(res => ...)
 | data.token | <code>string</code> | The signed token generated for the user. |
 | data.user | [<code>User</code>](#User) | Information of the user. |
 
+<a name="external_Monitor"></a>
+
+## Monitor
+The Monitor Interface.
+
+**Kind**: global external  
+**See**: [https://github.com/spaceuptech/space-api-node/wiki/Monitor](https://github.com/spaceuptech/space-api-node/wiki/Monitor)  

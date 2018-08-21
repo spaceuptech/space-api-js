@@ -45,7 +45,7 @@ Create an instance of the Client API.
 
 **Example**  
 ```js
-import { API } from 'space-api';
+import { API } from 'space-api-node';
 
 const api = new API('my-project');
 ```
@@ -98,11 +98,11 @@ Returns a SQL client instance
 The MongoDB Client Interface.
 
 **Kind**: global external  
-**See**: [https://github.com/spaceuptech/space-api-js/wiki/Mongo](https://github.com/spaceuptech/space-api-js/wiki/Mongo)  
+**See**: [https://github.com/spaceuptech/space-api-node/wiki/Mongo](https://github.com/spaceuptech/space-api-node/wiki/Mongo)  
 <a name="external_SQL"></a>
 
 ## SQL
 The SQL Client Interface.
 
 **Kind**: global external  
-**See**: [https://github.com/spaceuptech/space-api-js/wiki/SQL](https://github.com/spaceuptech/space-api-js/wiki/SQL)  
+**See**: [https://github.com/spaceuptech/space-api-node/wiki/SQL](https://github.com/spaceuptech/space-api-node/wiki/SQL)  

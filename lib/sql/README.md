@@ -27,6 +27,14 @@
 <dd></dd>
 </dl>
 
+## External
+
+<dl>
+<dt><a href="#external_Monitor">Monitor</a></dt>
+<dd><p>The Monitor Interface.</p>
+</dd>
+</dl>
+
 <a name="SQL"></a>
 
 ## SQL
@@ -40,7 +48,7 @@ Class representing the SQL Client Interface.
     * [.insert(table)](#SQL+insert) ⇒ [<code>Insert</code>](#Insert)
     * [.update(table)](#SQL+update) ⇒ [<code>Update</code>](#Update)
     * [.delete(table)](#SQL+delete) ⇒ [<code>Delete</code>](#Delete)
-    * [.monitor(table, uniqueKeys)](#SQL+monitor) ⇒ <code>Monitor</code>
+    * [.monitor(table, uniqueKeys)](#SQL+monitor) ⇒ [<code>Monitor</code>](#external_Monitor)
     * [.profile(id)](#SQL+profile) ⇒ <code>Promise</code>
     * [.editProfile(id, email, name, pass)](#SQL+editProfile) ⇒ <code>Promise</code>
     * [.profiles()](#SQL+profiles) ⇒ <code>Promise</code>
@@ -65,7 +73,7 @@ Create an instance of the SQL Client Interface.
 // Create table if you are using any user management module 
 CREATE TABLE users (id VARCHAR(50), account VARCHAR(50), email VARCHAR(100), name VARCHAR(100), pass VARCHAR(50), role VARCHAR(50));
 
-import { API } from 'space-api';
+import { API } from 'space-api-node';
 
 const api = new API('my-project');
 
@@ -126,11 +134,11 @@ Returns a SQL Delete Object
 
 <a name="SQL+monitor"></a>
 
-### sqL.monitor(table, uniqueKeys) ⇒ <code>Monitor</code>
+### sqL.monitor(table, uniqueKeys) ⇒ [<code>Monitor</code>](#external_Monitor)
 Returns a Monitor Object
 
 **Kind**: instance method of [<code>SQL</code>](#SQL)  
-**Returns**: <code>Monitor</code> - Monitor Object  
+**Returns**: [<code>Monitor</code>](#external_Monitor) - Monitor Object  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -315,7 +323,7 @@ Create an instance of the MongoDB Insert Interface.
 
 **Example**  
 ```js
-import { API, cond, or, and } from 'space-api';
+import { API, cond, or, and } from 'space-api-node';
 
 const api = new API('my-project');
 
@@ -402,7 +410,7 @@ Create an instance of the SQL Get Interface.
 
 **Example**  
 ```js
-import { API, cond, or, and } from 'space-api';
+import { API, cond, or, and } from 'space-api-node';
 
 const api = new API('my-project');
 
@@ -548,7 +556,7 @@ Create an instance of the MongoDB Update Interface.
 
 **Example**  
 ```js
-import { API, cond, or, and } from 'space-api';
+import { API, cond, or, and } from 'space-api-node';
 
 const api = new API('my-project');
 
@@ -618,7 +626,7 @@ Create an instance of the SQL Delete Interface.
 
 **Example**  
 ```js
-import { API, cond, or, and } from 'space-api';
+import { API, cond, or, and } from 'space-api-node';
 
 const api = new API('my-project');
 
@@ -685,3 +693,10 @@ db.delete('posts').all().then(res => ...)
 | data.token | <code>string</code> | The signed token generated for the user. |
 | data.user | [<code>User</code>](#User) | Information of the user. |
 
+<a name="external_Monitor"></a>
+
+## Monitor
+The Monitor Interface.
+
+**Kind**: global external  
+**See**: [https://github.com/spaceuptech/space-api-node/wiki/Monitor](https://github.com/spaceuptech/space-api-node/wiki/Monitor)  
