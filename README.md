@@ -7,12 +7,14 @@ $ npm install space-api-node --save
 ```
 
 ## Documentation
-The complete documentation can be found [here](https://github.com/spaceuptech/space-api-js/wiki).
+The complete documentation can be found [here](https://github.com/spaceuptech/space-api-node/wiki).
 
 Documentation for specific databases is given below:
-- [MongoDB](https://github.com/spaceuptech/space-api-js/wiki/Mongo)
-- [SQL Databases](https://github.com/spaceuptech/space-api-js/wiki/SQL)
-- [Realtime Feature](https://github.com/spaceuptech/space-api-js/wiki/Realtime)
+- [MongoDB](https://github.com/spaceuptech/space-api-node/wiki/Mongo)
+- [SQL Databases](https://github.com/spaceuptech/space-api-node/wiki/SQL)
+
+Documentation for real time feature is given below:
+- [Realtime Feature](https://github.com/spaceuptech/space-api-node/wiki/Realtime)
 
 ## Quick Start
 
