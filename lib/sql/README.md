@@ -699,4 +699,4 @@ db.delete('posts').all().then(res => ...)
 The Monitor Interface.
 
 **Kind**: global external  
-**See**: [https://github.com/spaceuptech/space-api-node/wiki/Monitor](https://github.com/spaceuptech/space-api-node/wiki/Monitor)  
+**See**: [https://github.com/spaceuptech/space-api-node/wiki/Realtime](https://github.com/spaceuptech/space-api-node/wiki/Realtime)  
