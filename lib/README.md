@@ -31,6 +31,7 @@ Class representing the client api.
     * [.Mongo()](#Api+Mongo) ⇒ [<code>Mongo</code>](#external_Mongo)
     * [.Postgres()](#Api+Postgres) ⇒ [<code>SQL</code>](#external_SQL)
     * [.MySQL()](#Api+MySQL) ⇒ [<code>SQL</code>](#external_SQL)
+    * [.call(engineName, funcName, params, [timeout])](#Api+call) ⇒ <code>Promise</code>
 
 <a name="new_Api_new"></a>
 
@@ -92,6 +93,34 @@ Returns a SQL client instance
 
 **Kind**: instance method of [<code>Api</code>](#Api)  
 **Returns**: [<code>SQL</code>](#external_SQL) - SQL client instance  
+<a name="Api+call"></a>
+
+### api.call(engineName, funcName, params, [timeout]) ⇒ <code>Promise</code>
+Calls a function from Function as a Service Engine
+
+**Kind**: instance method of [<code>Api</code>](#Api)  
+**Returns**: <code>Promise</code> - Returns a promise  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| engineName | <code>string</code> |  | The name of engine with which the function is registered |
+| funcName | <code>string</code> |  | The name of function to be called |
+| params | <code>Object</code> |  | The params for the function |
+| [timeout] | <code>string</code> | <code>5000</code> | Timeout in milliseconds |
+
+**Example**  
+```js
+api.call('my-engine', 'my-func', { msg: 'Function as a Service is awesome!' }, 1000)
+.then(res => {
+  if (res.status === 200) {
+    // res.data contains the response given by the function
+    console.log('Response:', res.data);
+    return;
+  }
+}).catch(ex => {
+  // Exception occured while processing request
+});
+```
 <a name="external_Mongo"></a>
 
 ## Mongo

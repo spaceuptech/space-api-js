@@ -117,6 +117,18 @@ let unsubscribe = db.monitor('posts').where().subscribe(onSnapshot, onError)
 unsubscribe()
 ```
 
+### Call functions directly (Function as a Service) 
+```js
+api.call('my-engine', 'my-func', { msg: 'Function as a Service is awesome!' }, 1000)
+  .then(res => {
+    if (res.status === 200) {
+      console.log('Response: ', res.data)
+    }
+  }).catch(ex => {
+    // Exception occured while processing request
+  })
+```
+
 ## License
 
 Copyright 2018 Noorain Panjwani
