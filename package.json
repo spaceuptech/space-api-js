@@ -10,7 +10,7 @@
     "init": "mkdir dist",
     "clean": "rm -rf dist",
     "prebuild": "npm run clean && npm run init",
-    "build": "babel ./index.js -d ./dist --ignore test.js --presets es2015 && babel ./lib -d ./dist/lib --ignore test.js --presets es2015",
+    "build": "babel ./index.js -d ./dist --ignore test.js --presets es2015 && browserify ./index.js -s Space -o ./bundle/bundle.js && babel ./bundle -d ./bundle --ignore test.js --presets es2015 && uglifyjs bundle/bundle.js -o bundle/space_api.js && rm ./bundle/bundle.js && babel ./lib -d ./dist/lib --ignore test.js --presets es2015",
     "pretest": "npm run build",
     "pub": "npm run build && npm publish"
   },

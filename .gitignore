@@ -63,5 +63,8 @@ typings/
 # build files
 dist
 
+# standalone file for browser
+bundle
+
 # misc test files
 test/misc
