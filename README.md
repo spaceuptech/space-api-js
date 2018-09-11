@@ -1,9 +1,13 @@
 # Client API for Space Cloud
 
 ## Installation
-
+Install via. npm
 ```bash
 $ npm install space-api --save
+```
+or import as a stand alone library
+```html
+<script src="https://spaceuptech.com/downloads/libraries/space-api.js"></script>
 ```
 
 ## Documentation
