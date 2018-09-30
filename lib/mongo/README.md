@@ -16,6 +16,9 @@
 <dt><a href="#Delete">Delete</a></dt>
 <dd><p>Class representing the MongoDB Delete Interface.</p>
 </dd>
+<dt><a href="#Aggregate">Aggregate</a></dt>
+<dd><p>Class representing the MongoDB Delete Interface.</p>
+</dd>
 </dl>
 
 ## Typedefs
@@ -48,6 +51,7 @@ Class representing the MongoDB Client Interface.
     * [.insert(collection)](#Mongo+insert) ⇒ [<code>Insert</code>](#Insert)
     * [.update(collection)](#Mongo+update) ⇒ [<code>Update</code>](#Update)
     * [.delete(collection)](#Mongo+delete) ⇒ [<code>Delete</code>](#Delete)
+    * [.aggr(collection)](#Mongo+aggr) ⇒ [<code>Delete</code>](#Delete)
     * [.monitor(collection)](#Mongo+monitor) ⇒ [<code>Monitor</code>](#external_Monitor)
     * [.profile(id)](#Mongo+profile) ⇒ <code>Promise</code>
     * [.editProfile(id, email, name, pass)](#Mongo+editProfile) ⇒ <code>Promise</code>
@@ -115,6 +119,18 @@ Returns a MongoDb Update Object
 
 ### mongo.delete(collection) ⇒ [<code>Delete</code>](#Delete)
 Returns a MongoDb Delete Object
+
+**Kind**: instance method of [<code>Mongo</code>](#Mongo)  
+**Returns**: [<code>Delete</code>](#Delete) - MongoDB Insert Object  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| collection | <code>string</code> | The collection to delete documents in. |
+
+<a name="Mongo+aggr"></a>
+
+### mongo.aggr(collection) ⇒ [<code>Delete</code>](#Delete)
+Returns a MongoDb Aggregate Object
 
 **Kind**: instance method of [<code>Mongo</code>](#Mongo)  
 **Returns**: [<code>Delete</code>](#Delete) - MongoDB Insert Object  
@@ -828,6 +844,87 @@ Makes the query to delete all the documents which match.
 **Example**  
 ```js
 db.delete('posts').many().then(res => ...)
+```
+<a name="Aggregate"></a>
+
+## Aggregate
+Class representing the MongoDB Delete Interface.
+
+**Kind**: global class  
+
+* [Aggregate](#Aggregate)
+    * [new Aggregate(appId, collection, url, options)](#new_Aggregate_new)
+    * [.pipe(pipeObj)](#Aggregate+pipe)
+    * [.one()](#Aggregate+one) ⇒ <code>Promise</code>
+    * [.all()](#Aggregate+all) ⇒ <code>Promise</code>
+
+<a name="new_Aggregate_new"></a>
+
+### new Aggregate(appId, collection, url, options)
+Create an instance of the MongoDB Delete Interface.
+
+
+| Param | Type |
+| --- | --- |
+| appId | <code>string</code> | 
+| collection | <code>string</code> | 
+| url | <code>string</code> | 
+| options | <code>Object</code> | 
+
+**Example**  
+```js
+const { API, cond, or, and } = require('space-api-node')
+
+const api = new API('my-project');
+const db = api.Mongo();
+
+const pipe = [
+  { $match: { status: 'A' } },
+  { $group: { _id: '$cust_id', total: { $sum: '$amount' } } }
+]
+
+db.aggr('posts').pipe(pipe).many().then(res => {
+  if (res.status === 200) {
+    // res.data contains the documents returned by the database
+    console.log('Response:', res.data);
+    return
+  }
+}).catch(ex => {
+  // Exception occured while processing request
+});
+```
+<a name="Aggregate+pipe"></a>
+
+### aggregate.pipe(pipeObj)
+Prepares the Pipe query
+
+**Kind**: instance method of [<code>Aggregate</code>](#Aggregate)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| pipeObj | <code>Array.&lt;Object&gt;</code> | The pipeline object. |
+
+<a name="Aggregate+one"></a>
+
+### aggregate.one() ⇒ <code>Promise</code>
+Makes the query to return single object.
+
+**Kind**: instance method of [<code>Aggregate</code>](#Aggregate)  
+**Returns**: <code>Promise</code> - Returns a promise containing response from server.  
+**Example**  
+```js
+db.aggr('posts').pipe([...]).one().then(res => ...)
+```
+<a name="Aggregate+all"></a>
+
+### aggregate.all() ⇒ <code>Promise</code>
+Makes the query to return all objects.
+
+**Kind**: instance method of [<code>Aggregate</code>](#Aggregate)  
+**Returns**: <code>Promise</code> - Returns a promise containing response from server.  
+**Example**  
+```js
+db.aggr('posts').pipe([...]).all().then(res => ...)
 ```
 <a name="User"></a>
 
