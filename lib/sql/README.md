@@ -305,7 +305,7 @@ Class representing the SQL Insert Interface.
 * [Insert](#Insert)
     * [new Insert(appId, table, url, options, db)](#new_Insert_new)
     * [.one(record)](#Insert+one) ⇒ <code>Promise</code>
-    * [.many(records)](#Insert+many) ⇒ <code>Promise</code>
+    * [.all(records)](#Insert+all) ⇒ <code>Promise</code>
 
 <a name="new_Insert_new"></a>
 
@@ -360,9 +360,9 @@ Makes the query to insert a single record.
 const record = { author: 'John', title: 'Title1', id: 1 };
 db.insert('posts').one(record).then(res => ...)
 ```
-<a name="Insert+many"></a>
+<a name="Insert+all"></a>
 
-### insert.many(records) ⇒ <code>Promise</code>
+### insert.all(records) ⇒ <code>Promise</code>
 Makes the query to insert multiple records.
 
 **Kind**: instance method of [<code>Insert</code>](#Insert)  
@@ -375,7 +375,7 @@ Makes the query to insert multiple records.
 **Example**  
 ```js
 const records = [{ author: 'John', title: 'Title1', id: 1 }];
-db.insert('posts').many(records).then(res => ...)
+db.insert('posts').all(records).then(res => ...)
 ```
 <a name="Get"></a>
 

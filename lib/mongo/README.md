@@ -311,7 +311,7 @@ Class representing the MongoDB Insert Interface.
 * [Insert](#Insert)
     * [new Insert(appId, collection, url, options)](#new_Insert_new)
     * [.one(doc)](#Insert+one) ⇒ <code>Promise</code>
-    * [.many(docs)](#Insert+many) ⇒ <code>Promise</code>
+    * [.all(docs)](#Insert+all) ⇒ <code>Promise</code>
 
 <a name="new_Insert_new"></a>
 
@@ -360,9 +360,9 @@ Makes the query to insert a single document.
 const doc = { author: 'John', title: 'Title1', _id: 1 };
 db.insert('posts').one(doc).then(res => ...)
 ```
-<a name="Insert+many"></a>
+<a name="Insert+all"></a>
 
-### insert.many(docs) ⇒ <code>Promise</code>
+### insert.all(docs) ⇒ <code>Promise</code>
 Makes the query to insert multiple documents.
 
 **Kind**: instance method of [<code>Insert</code>](#Insert)  
@@ -375,7 +375,7 @@ Makes the query to insert multiple documents.
 **Example**  
 ```js
 const docs = [{ author: 'John', title: 'Title1', _id: 1 }];
-db.insert('posts').many(docs).then(res => ...)
+db.insert('posts').all(docs).then(res => ...)
 ```
 <a name="Get"></a>
 
@@ -393,6 +393,7 @@ Class representing the MongoDB Get Interface.
     * [.limit(num)](#Get+limit)
     * [.one()](#Get+one) ⇒ <code>Promise</code>
     * [.all()](#Get+all) ⇒ <code>Promise</code>
+    * [.distinct()](#Get+distinct) ⇒ <code>Promise</code>
     * [.count()](#Get+count)
 
 <a name="new_Get_new"></a>
@@ -522,6 +523,17 @@ Makes the query to return a multiple documents as an array. It is possible for a
 **Example**  
 ```js
 db.get('posts').all().then(res => ...)
+```
+<a name="Get+distinct"></a>
+
+### get.distinct() ⇒ <code>Promise</code>
+Makes the query to return an array of all the distinct values for the given field. It is possible for an empty array to be returned.
+
+**Kind**: instance method of [<code>Get</code>](#Get)  
+**Returns**: <code>Promise</code> - Returns a promise containing response from server.  
+**Example**  
+```js
+db.get('posts').distinct('category').then(res => ...)
 ```
 <a name="Get+count"></a>
 
@@ -781,7 +793,7 @@ Class representing the MongoDB Delete Interface.
     * [new Delete(appId, collection, url, options)](#new_Delete_new)
     * [.where(...conditions)](#Delete+where)
     * [.one()](#Delete+one) ⇒ <code>Promise</code>
-    * [.many()](#Delete+many) ⇒ <code>Promise</code>
+    * [.all()](#Delete+all) ⇒ <code>Promise</code>
 
 <a name="new_Delete_new"></a>
 
@@ -803,7 +815,7 @@ import { API, cond, or, and } from 'space-api';
 const api = new API('my-project');
 const db = api.Mongo();
 
-db.delete('posts').where(and(cond('title', '==', 'Title1'))).many().then(res => {
+db.delete('posts').where(and(cond('title', '==', 'Title1'))).all().then(res => {
   if (res.status === 200) {
     // The documents were deleted successfully
     return;
@@ -834,16 +846,16 @@ Makes the query to delete a single document which matches first.
 ```js
 db.delete('posts').one().then(res => ...)
 ```
-<a name="Delete+many"></a>
+<a name="Delete+all"></a>
 
-### delete.many() ⇒ <code>Promise</code>
+### delete.all() ⇒ <code>Promise</code>
 Makes the query to delete all the documents which match.
 
 **Kind**: instance method of [<code>Delete</code>](#Delete)  
 **Returns**: <code>Promise</code> - Returns a promise containing response from server.  
 **Example**  
 ```js
-db.delete('posts').many().then(res => ...)
+db.delete('posts').all().then(res => ...)
 ```
 <a name="Aggregate"></a>
 
