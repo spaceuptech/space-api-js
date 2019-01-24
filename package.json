@@ -1,6 +1,6 @@
 {
   "name": "space-api-node",
-  "version": "0.3.25",
+  "version": "0.3.26",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
