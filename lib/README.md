@@ -42,7 +42,7 @@ Create an instance of the Client API.
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | projectId | <code>string</code> |  | The Project Id. |
-| url | <code>string</code> | <code>&quot;/&quot;</code> | Base url of space-exec server. |
+| url | <code>string</code> | <code>&quot;/&quot;</code> | Base url of space-cloud server. |
 
 **Example**  
 ```js
