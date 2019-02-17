@@ -75,7 +75,7 @@ CREATE TABLE users (id VARCHAR(50), account VARCHAR(50), email VARCHAR(100), nam
 
 import { API } from 'space-api';
 
-const api = new API('my-project');
+const api = new API('my-project', 'http://localhost:8080');
 
 // For MySQL Database
 const db = api.MySQL();
@@ -325,7 +325,7 @@ Create an instance of the MongoDB Insert Interface.
 ```js
 import { API, cond, or, and } from 'space-api';
 
-const api = new API('my-project');
+const api = new API('my-project', 'http://localhost:8080');
 
 // For MySQL Database
 const db = api.MySQL();
@@ -388,8 +388,8 @@ Class representing the SQL Get Interface.
     * [new Get(appId, table, url, options, db)](#new_Get_new)
     * [.where(...conditions)](#Get+where)
     * [.select(select)](#Get+select)
-    * [.order(...array)](#Get+order)
-    * [.offset(offset)](#Get+offset)
+    * [.sort(...array)](#Get+sort)
+    * [.skip(offset)](#Get+skip)
     * [.limit(num)](#Get+limit)
     * [.one()](#Get+one) ⇒ <code>Promise</code>
     * [.all()](#Get+all) ⇒ <code>Promise</code>
@@ -412,7 +412,7 @@ Create an instance of the SQL Get Interface.
 ```js
 import { API, cond, or, and } from 'space-api';
 
-const api = new API('my-project');
+const api = new API('my-project', 'http://localhost:8080');
 
 // For MySQL Database
 const db = api.MySQL();
@@ -458,25 +458,25 @@ Sets the fields to be selected
 const select = { author: 1, title: 1 }
 db.get('posts').select(select).all().then(res => ...)
 ```
-<a name="Get+order"></a>
+<a name="Get+sort"></a>
 
-### get.order(...array)
-Sets the fields to order result by.
+### get.sort(...array)
+Sets the fields to sort result by.
 
 **Kind**: instance method of [<code>Get</code>](#Get)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| ...array | <code>string</code> | The fields to order result by. |
+| ...array | <code>string</code> | The fields to sort result by. |
 
 **Example**  
 ```js
-// Given query will order results first by age (asc) then by age (desc)
-db.get('posts').order('title', '-age').all().then(res => ...)
+// Given query will sort results first by age (asc) then by age (desc)
+db.get('posts').sort('title', '-age').all().then(res => ...)
 ```
-<a name="Get+offset"></a>
+<a name="Get+skip"></a>
 
-### get.offset(offset)
+### get.skip(offset)
 Sets the number of records to skip in the array.
 
 **Kind**: instance method of [<code>Get</code>](#Get)  
@@ -488,7 +488,7 @@ Sets the number of records to skip in the array.
 **Example**  
 ```js
 // Given query will skip the first 10 records
-db.get('posts').offset(10).all().then(res => ...)
+db.get('posts').skip(10).all().then(res => ...)
 ```
 <a name="Get+limit"></a>
 
@@ -538,7 +538,8 @@ Class representing the SQL Update Interface.
 * [Update](#Update)
     * [new Update(appId, table, url, options, db)](#new_Update_new)
     * [.where(...conditions)](#Update+where)
-    * [.all(record)](#Update+all) ⇒ <code>Promise</code>
+    * [.set(obj)](#Update+set)
+    * [.all()](#Update+all) ⇒ <code>Promise</code>
 
 <a name="new_Update_new"></a>
 
@@ -558,7 +559,7 @@ Create an instance of the MongoDB Update Interface.
 ```js
 import { API, cond, or, and } from 'space-api';
 
-const api = new API('my-project');
+const api = new API('my-project', 'http://localhost:8080');
 
 // For MySQL Database
 const db = api.MySQL();
@@ -566,7 +567,7 @@ const db = api.MySQL();
 // For PostgresQL Database
 const db = api.Postgres();
 
-db.update('posts').where(and(cond('title', '==', 'Title1'))).all({ title: 'Title2' }).then(res => {
+db.update('posts').where(and(cond('title', '==', 'Title1'))).set({ title: 'Title2' }).all().then(res => {
   if (res.status === 200) {
     // The records were updated successfully
     return;
@@ -586,18 +587,28 @@ Prepares the find query
 | --- | --- | --- |
 | ...conditions | <code>Object</code> | The condition logic. |
 
-<a name="Update+all"></a>
+<a name="Update+set"></a>
 
-### update.all(record) ⇒ <code>Promise</code>
-Makes the query to update all records which matches.
+### update.set(obj)
+Sets the value of a field in a document.
 
 **Kind**: instance method of [<code>Update</code>](#Update)  
-**Returns**: <code>Promise</code> - Returns a promise containing response from server.  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| record | <code>Object</code> | Object containing fields and values to set. |
+| obj | <code>Object</code> | The Object containing fields to set. |
 
+**Example**  
+```js
+db.update('posts').set({ author: 'Drake' }).all().then(res => ...)
+```
+<a name="Update+all"></a>
+
+### update.all() ⇒ <code>Promise</code>
+Makes the query to update all records which matches.
+
+**Kind**: instance method of [<code>Update</code>](#Update)  
+**Returns**: <code>Promise</code> - Returns a promise containing response from server  
 <a name="Delete"></a>
 
 ## Delete
@@ -628,7 +639,7 @@ Create an instance of the SQL Delete Interface.
 ```js
 import { API, cond, or, and } from 'space-api';
 
-const api = new API('my-project');
+const api = new API('my-project', 'http://localhost:8080');
 
 // For MySQL Database
 const db = api.MySQL();

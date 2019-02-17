@@ -76,7 +76,7 @@ Create an instance of the MongoDB Client Interface.
 ```js
 import { API } from 'space-api';
 
-const api = new API('my-project');
+const api = new API('my-project', 'http://localhost:8080');
 const db = api.Mongo();
 ```
 <a name="Mongo+get"></a>
@@ -330,7 +330,7 @@ Create an instance of the MongoDB Insert Interface.
 ```js
 import { API, cond, or, and } from 'space-api';
 
-const api = new API('my-project');
+const api = new API('my-project', 'http://localhost:8080');
 const db = api.Mongo();
 
 const doc = { author: 'John', title: 'Title1', _id: 1 };
@@ -413,7 +413,7 @@ Create an instance of the MongoDB Get Interface.
 ```js
 import { API, cond, or, and } from 'space-api';
 
-const api = new API('my-project');
+const api = new API('my-project', 'http://localhost:8080');
 const db = api.Mongo();
 
 db.get('posts').where(and(cond('title', '==', 'Title1'))).all().then(res => {
@@ -457,17 +457,17 @@ db.get('posts').select(select).all().then(res => ...)
 <a name="Get+sort"></a>
 
 ### get.sort(...array)
-Sets the fields to order result by.
+Sets the fields to sort result by.
 
 **Kind**: instance method of [<code>Get</code>](#Get)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| ...array | <code>string</code> | The fields to order result by. |
+| ...array | <code>string</code> | The fields to sort result by. |
 
 **Example**  
 ```js
-// Given query will order results first by age (asc) then by age (desc)
+// Given query will sort results first by age (asc) then by age (desc)
 db.get('posts').sort('title', '-age').all().then(res => ...)
 ```
 <a name="Get+skip"></a>
@@ -587,7 +587,7 @@ Create an instance of the MongoDB Update Interface.
 ```js
 import { API, cond, or, and } from 'space-api';
 
-const api = new API('my-project');
+const api = new API('my-project', 'http://localhost:8080');
 const db = api.Mongo();
 
 db.update('posts').where(and(cond('title', '==', 'Title1'))).set({ title: 'Title2' }).all().then(res => {
@@ -812,7 +812,7 @@ Create an instance of the MongoDB Delete Interface.
 ```js
 import { API, cond, or, and } from 'space-api';
 
-const api = new API('my-project');
+const api = new API('my-project', 'localhost:8080');
 const db = api.Mongo();
 
 db.delete('posts').where(and(cond('title', '==', 'Title1'))).all().then(res => {
@@ -885,9 +885,9 @@ Create an instance of the MongoDB Delete Interface.
 
 **Example**  
 ```js
-const { API, cond, or, and } = require('space-api-node')
+import { API, cond, or, and } from 'space-api';
 
-const api = new API('my-project');
+const api = new API('my-project', 'http://localhost:8080');
 const db = api.Mongo();
 
 const pipe = [

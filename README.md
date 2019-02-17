@@ -27,7 +27,7 @@ Documentation for real time feature is given below:
 ```js
 import { API, and, or, cond } from 'space-api';
 
-const api = new API('demo-project');
+const api = new API('demo-project', 'http://localhost:8080');
 
 // For MongoDB
 const db = api.Mongo();

@@ -48,7 +48,7 @@ Create an instance of the Client API.
 ```js
 import { API } from 'space-api';
 
-const api = new API('my-project');
+const api = new API('my-project', 'http://localhost:8080');
 ```
 <a name="Api+setToken"></a>
 
