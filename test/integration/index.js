@@ -22,8 +22,32 @@ const formatError = (section, desc, params) => {
 }
 
 startTest(MONGO, "test", "http://localhost:8080")
-startTest(SQL_MYSQL, "realtime-mysql", "http://localhost:8081")
-startTest(SQL_POSTGRES, "realtime-postgres", "http://localhost:8082")
+startTest(SQL_MYSQL, "test", "http://localhost:8081")
+startTest(SQL_POSTGRES, "test", "http://localhost:8082")
+
+async function cleanUp(db) {
+  let res = await db.delete("posts").all()
+  if (res.status !== 200) {
+    throw formatError("CleanUp", "", res)
+  }
+
+  res = await db.get("posts").all()
+  if (res.status !== 200 || !(res.data.result === null || res.data.result.length === 0)) {
+    throw formatError("CleanUp", "Posts not cleaned", res)
+  }
+
+  res = await db.delete("users").all()
+  if (res.status !== 200) {
+    throw formatError("CleanUp", "Users not cleaned", res)
+  }
+
+  res = await db.get("users").all()
+  if (res.status !== 200 || !(res.data.result === null || res.data.result.length === 0)) {
+    throw formatError("CleanUp", "", res)
+  }
+}
+
+
 
 async function startTest(dbType, projectId, url) {
   let api = new API(projectId, url)
@@ -42,6 +66,10 @@ async function startTest(dbType, projectId, url) {
     default:
       throw formatError("Initialization", "Unsupported Database")
   }
+
+
+  // Clean any data before starting tests
+  await cleanUp(db)
 
   try {
     let res = {}
@@ -339,21 +367,6 @@ async function startTest(dbType, projectId, url) {
       throw formatError("Get Profiles", "Profile not matching", res)
     }
 
-    /******************** Edit Profile ********************/
-    res = await db.editProfile(userId, "user2@gmail.com", "User 2", "123")
-    if (res.status !== 200) {
-      throw formatError("Edit Profile", "Status not matching", res)
-    }
-
-    res = await db.profile(userId)
-    if (res.status !== 200) {
-      throw formatError("Edit Profile", "Cannot fetch edited profile", res)
-    }
-
-    if (res.data.user.name !== "User 2" || res.data.user.email !== "user2@gmail.com" || res.data.user.role !== "user") {
-      throw formatError("Edit Profile", "Edited profile not matching", res)
-    }
-
     /******************** FaaS ********************/
     res = await api.call('echo-engine', 'echo', 'Function as a Service is awesome!', 1000)
     if (res.status !== 200) {
@@ -364,26 +377,9 @@ async function startTest(dbType, projectId, url) {
       throw formatError("FaaS", "Result not matching", res)
     }
 
-    /******************** Clean Up ********************/
-    res = await db.delete("posts").all()
-    if (res.status !== 200) {
-      throw formatError("CleanUp", "", res)
-    }
-
-    res = await db.get("posts").all()
-    if (res.status !== 200 || !(res.data.result === null || res.data.result.length === 0)) {
-      throw formatError("CleanUp", "Posts not cleaned", res)
-    }
-
-    res = await db.delete("users").all()
-    if (res.status !== 200) {
-      throw formatError("CleanUp", "Users not cleaned", res)
-    }
-
-    res = await db.get("users").all()
-    if (res.status !== 200 || !(res.data.result === null || res.data.result.length === 0)) {
-      throw formatError("CleanUp", "", res)
-    }
+    // Clean up data
+    await cleanUp(db)
+    
 
     console.log("\x1b[32m%s\x1b[0m", "All tests for " + dbType + " have passed!!");
   } catch (errorObj) {
@@ -391,5 +387,8 @@ async function startTest(dbType, projectId, url) {
     console.log("\x1b[31m%s\x1b[0m", "Error in " + dbType.toUpperCase() + " (" + errorObj.section + ")")
     console.log("\x1b[31m%s\x1b[0m", "Description - " + errorObj.desc)
     console.log("\x1b[31m%s\x1b[0m", "Response - " + JSON.stringify(errorObj.params))
+    
+     // Clean up data
+     await cleanUp(db)
   }
 }
