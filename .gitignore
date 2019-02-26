@@ -68,3 +68,5 @@ bundle
 
 # misc test files
 test/misc
+
+publish.sh
