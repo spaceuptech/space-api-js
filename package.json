@@ -1,6 +1,6 @@
 {
   "name": "space-api",
-  "version": "0.3.28",
+  "version": "0.3.29",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
@@ -10,29 +10,31 @@
     "init": "mkdir dist",
     "clean": "rm -rf dist",
     "prebuild": "npm run clean && npm run init",
-    "build": "babel ./index.js -d ./dist --ignore test.js --presets es2015 && browserify ./index.js -s Space -o ./bundle/bundle.js && babel ./bundle -d ./bundle --ignore test.js --presets es2015 && uglifyjs bundle/bundle.js -o bundle/space-api.js && rm ./bundle/bundle.js && babel ./lib -d ./dist/lib --ignore test.js --presets es2015",
+    "build": "babel ./index.js -d ./dist --ignore test.js  && browserify ./index.js -s Space -o ./bundle/bundle.js && babel ./bundle -d ./bundle --ignore test.js  && uglifyjs bundle/bundle.js -o bundle/space-api.js && rm ./bundle/bundle.js && babel ./lib -d ./dist/lib --ignore test.js ",
     "pretest": "npm run build",
     "pub": "npm run build && npm publish"
   },
   "author": "Noorain Panjwani",
   "license": "Apache-2.0",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-preset-es2015": "^6.16.0",
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
     "browserify": "^16.2.3",
     "chai": "^4.1.2",
     "mocha": "^5.1.1",
     "nyc": "^13.3.0",
-    "uglify": "^0.1.5"
+    "uglify-js": "^3.4.9"
   },
   "files": [
     "dist"
   ],
   "dependencies": {
+    "@babel/polyfill": "^7.2.5",
     "isomorphic-ws": "^4.0.1",
     "node-fetch": "^2.3.0",
-    "underscore": "^1.9.1",
     "url": "^0.11.0",
     "websocket": "^1.0.28",
     "ws": "^6.1.4"
