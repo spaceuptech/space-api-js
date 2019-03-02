@@ -30,8 +30,8 @@
 ## External
 
 <dl>
-<dt><a href="#external_Monitor">Monitor</a></dt>
-<dd><p>The Monitor Interface.</p>
+<dt><a href="#external_LiveQuery">LiveQuery</a></dt>
+<dd><p>The LiveQuery Interface.</p>
 </dd>
 </dl>
 
@@ -48,7 +48,7 @@ Class representing the SQL Client Interface.
     * [.insert(table)](#SQL+insert) ⇒ [<code>Insert</code>](#Insert)
     * [.update(table)](#SQL+update) ⇒ [<code>Update</code>](#Update)
     * [.delete(table)](#SQL+delete) ⇒ [<code>Delete</code>](#Delete)
-    * [.monitor(table, uniqueKeys)](#SQL+monitor) ⇒ [<code>Monitor</code>](#external_Monitor)
+    * [.liveQuery(collection)](#SQL+liveQuery) ⇒ [<code>LiveQuery</code>](#external_LiveQuery)
     * [.profile(id)](#SQL+profile) ⇒ <code>Promise</code>
     * [.editProfile(id, email, name, pass)](#SQL+editProfile) ⇒ <code>Promise</code>
     * [.profiles()](#SQL+profiles) ⇒ <code>Promise</code>
@@ -132,36 +132,32 @@ Returns a SQL Delete Object
 | --- | --- | --- |
 | table | <code>string</code> | The table to delete records. |
 
-<a name="SQL+monitor"></a>
+<a name="SQL+liveQuery"></a>
 
-### sqL.monitor(table, uniqueKeys) ⇒ [<code>Monitor</code>](#external_Monitor)
-Returns a Monitor Object
+### sqL.liveQuery(collection) ⇒ [<code>LiveQuery</code>](#external_LiveQuery)
+Returns a LiveQuery Object
 
 **Kind**: instance method of [<code>SQL</code>](#SQL)  
-**Returns**: [<code>Monitor</code>](#external_Monitor) - Monitor Object  
+**Returns**: [<code>LiveQuery</code>](#external_LiveQuery) - LiveQuery Object  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| table | <code>string</code> | The table to monitor. |
-| uniqueKeys | <code>Array</code> | Array of columns in table forming primary key |
+| collection | <code>string</code> | The collection to query documents. |
 
 **Example**  
 ```js
-const onSnapshot  = (snapshot, type, docs) => {
-  if (type === 'monitor') {
-     console.log('Monitored successfully ', snapshot)
-     return
-   }
+const onSnapshot = (snapshot, type, docs) => {   
    console.log(type, snapshot, docs)
- }
+}
 
- const onError = (err) => {
-   console.log('Monitor error', err)
- }
+const onError = (err) => {
+  console.log('Operation failed:', err)
+}
 
- let unsubscribe = db.monitor('posts', [author, title]).where().subscribe(onSnapshot, onError) 
+let unsubscribe = db.liveQuery('posts').where({}).subscribe(onSnapshot, onError) 
 
- unsubscribe()
+// Unsubscribe to clean up
+unsubscribe()
 ```
 <a name="SQL+profile"></a>
 
@@ -704,10 +700,10 @@ db.delete('posts').all().then(res => ...)
 | data.token | <code>string</code> | The signed token generated for the user. |
 | data.user | [<code>User</code>](#User) | Information of the user. |
 
-<a name="external_Monitor"></a>
+<a name="external_LiveQuery"></a>
 
-## Monitor
-The Monitor Interface.
+## LiveQuery
+The LiveQuery Interface.
 
 **Kind**: global external  
 **See**: [https://github.com/spaceuptech/space-api-js/wiki/Realtime](https://github.com/spaceuptech/space-api-js/wiki/Realtime)  

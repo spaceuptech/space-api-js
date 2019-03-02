@@ -1,8 +1,8 @@
 ## Classes
 
 <dl>
-<dt><a href="#Monitor">Monitor</a></dt>
-<dd><p>Class representing the Monitor Interface.</p>
+<dt><a href="#LiveQuery">LiveQuery</a></dt>
+<dd><p>Class representing the LiveQuery Interface.</p>
 </dd>
 </dl>
 
@@ -20,22 +20,22 @@
 </dd>
 </dl>
 
-<a name="Monitor"></a>
+<a name="LiveQuery"></a>
 
-## Monitor
-Class representing the Monitor Interface.
+## LiveQuery
+Class representing the LiveQuery Interface.
 
 **Kind**: global class  
 
-* [Monitor](#Monitor)
-    * [new Monitor(appId, db, collection, client, store, uniqueKeys)](#new_Monitor_new)
-    * [.where(...conditions)](#Monitor+where)
-    * [.subscribe(onSnapshot, onError)](#Monitor+subscribe) ⇒ [<code>Unsubscribe</code>](#Unsubscribe)
+* [LiveQuery](#LiveQuery)
+    * [new LiveQuery(appId, db, collection, client, store)](#new_LiveQuery_new)
+    * [.where(...conditions)](#LiveQuery+where)
+    * [.subscribe(onSnapshot, onError)](#LiveQuery+subscribe) ⇒ [<code>Unsubscribe</code>](#Unsubscribe)
 
-<a name="new_Monitor_new"></a>
+<a name="new_LiveQuery_new"></a>
 
-### new Monitor(appId, db, collection, client, store, uniqueKeys)
-Create an instance of the Monitor Interface.
+### new LiveQuery(appId, db, collection, client, store)
+Create an instance of the LiveQuery Interface.
 
 
 | Param | Type |
@@ -45,7 +45,6 @@ Create an instance of the Monitor Interface.
 | collection | <code>string</code> | 
 | client | <code>WebSocketClient</code> | 
 | store | <code>Object</code> | 
-| uniqueKeys | <code>Array</code> | 
 
 **Example**  
 ```js
@@ -56,38 +55,34 @@ const api = new API('my-project');
 const db = api.Mongo();
 
 const onSnapshot  = (snapshot, type, docs) => {
-  if (type === 'monitor') {
-     console.log('Monitored successfully ', snapshot)
-     return
-   }
    console.log(type, snapshot, docs)
  }
 
  const onError = (err) => {
-   console.log('Monitor error', err)
+   console.log('Live query error', err)
  }
 
- let unsubscribe = db.monitor('posts').where().subscribe(onSnapshot, onError) 
+ let unsubscribe = db.liveQuery('posts').where({}).subscribe(onSnapshot, onError) 
 
  unsubscribe()
 ```
-<a name="Monitor+where"></a>
+<a name="LiveQuery+where"></a>
 
-### monitor.where(...conditions)
+### liveQuery.where(...conditions)
 Prepares the find query
 
-**Kind**: instance method of [<code>Monitor</code>](#Monitor)  
+**Kind**: instance method of [<code>LiveQuery</code>](#LiveQuery)  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | ...conditions | <code>Object</code> | The condition logic. |
 
-<a name="Monitor+subscribe"></a>
+<a name="LiveQuery+subscribe"></a>
 
-### monitor.subscribe(onSnapshot, onError) ⇒ [<code>Unsubscribe</code>](#Unsubscribe)
+### liveQuery.subscribe(onSnapshot, onError) ⇒ [<code>Unsubscribe</code>](#Unsubscribe)
 Subcribes for real time updates
 
-**Kind**: instance method of [<code>Monitor</code>](#Monitor)  
+**Kind**: instance method of [<code>LiveQuery</code>](#LiveQuery)  
 **Returns**: [<code>Unsubscribe</code>](#Unsubscribe) - Returns a unsubscribe function  
 
 | Param | Type | Description |
@@ -117,7 +112,7 @@ Callback for error while subscribing
 
 | Param | Type | Description |
 | --- | --- | --- |
-| err | <code>string</code> | Error while monitoring |
+| err | <code>string</code> | Error during the liveSubscribe |
 
 <a name="Unsubscribe"></a>
 
