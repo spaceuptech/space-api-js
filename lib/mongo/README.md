@@ -33,8 +33,8 @@
 ## External
 
 <dl>
-<dt><a href="#external_Monitor">Monitor</a></dt>
-<dd><p>The Monitor Interface.</p>
+<dt><a href="#external_LiveQuery">LiveQuery</a></dt>
+<dd><p>The LiveQuery Interface.</p>
 </dd>
 </dl>
 
@@ -52,7 +52,7 @@ Class representing the MongoDB Client Interface.
     * [.update(collection)](#Mongo+update) ⇒ [<code>Update</code>](#Update)
     * [.delete(collection)](#Mongo+delete) ⇒ [<code>Delete</code>](#Delete)
     * [.aggr(collection)](#Mongo+aggr) ⇒ [<code>Delete</code>](#Delete)
-    * [.monitor(collection)](#Mongo+monitor) ⇒ [<code>Monitor</code>](#external_Monitor)
+    * [.liveQuery(collection)](#Mongo+liveQuery) ⇒ [<code>LiveQuery</code>](#external_LiveQuery)
     * [.profile(id)](#Mongo+profile) ⇒ <code>Promise</code>
     * [.editProfile(id, email, name, pass)](#Mongo+editProfile) ⇒ <code>Promise</code>
     * [.profiles()](#Mongo+profiles) ⇒ <code>Promise</code>
@@ -137,37 +137,34 @@ Returns a MongoDb Aggregate Object
 
 | Param | Type | Description |
 | --- | --- | --- |
-| collection | <code>string</code> | The collection to delete documents in. |
+| collection | <code>string</code> | The collection to aggregate documents in. |
 
-<a name="Mongo+monitor"></a>
+<a name="Mongo+liveQuery"></a>
 
-### mongo.monitor(collection) ⇒ [<code>Monitor</code>](#external_Monitor)
-Returns a Monitor Object
+### mongo.liveQuery(collection) ⇒ [<code>LiveQuery</code>](#external_LiveQuery)
+Returns a LiveQuery Object
 
 **Kind**: instance method of [<code>Mongo</code>](#Mongo)  
-**Returns**: [<code>Monitor</code>](#external_Monitor) - Monitor Object  
+**Returns**: [<code>LiveQuery</code>](#external_LiveQuery) - LiveQuery Object  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| collection | <code>string</code> | The collection to monitor. |
+| collection | <code>string</code> | The collection to query documents. |
 
 **Example**  
 ```js
-const onSnapshot  = (snapshot, type, docs) => {
-  if (type === 'monitor') {
-     console.log('Monitored successfully ', snapshot)
-     return
-   }
+const onSnapshot = (snapshot, type, docs) => {
    console.log(type, snapshot, docs)
- }
+}
 
- const onError = (err) => {
-   console.log('Monitor error', err)
- }
+const onError = (err) => {
+  console.log('Operation failed:', err)
+}
 
- let unsubscribe = db.monitor('posts').where().subscribe(onSnapshot, onError) 
+let unsubscribe = db.liveQuery('posts').where({}).subscribe(onSnapshot, onError) 
 
- unsubscribe()
+// Unsubscribe to clean up
+unsubscribe()
 ```
 <a name="Mongo+profile"></a>
 
@@ -964,10 +961,10 @@ db.aggr('posts').pipe([...]).all().then(res => ...)
 | data.token | <code>string</code> | The signed token generated for the user. |
 | data.user | [<code>User</code>](#User) | Information of the user. |
 
-<a name="external_Monitor"></a>
+<a name="external_LiveQuery"></a>
 
-## Monitor
-The Monitor Interface.
+## LiveQuery
+The LiveQuery Interface.
 
 **Kind**: global external  
 **See**: [https://github.com/spaceuptech/space-api-js/wiki/Realtime](https://github.com/spaceuptech/space-api-js/wiki/Realtime)  
