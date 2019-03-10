@@ -26,7 +26,8 @@ db.signIn('a@a.a', '123').then(res => {
 })
 
 setTimeout(() => {
-  db.insert('todos').one({_id: generateId(), todo: 'some todo11', userId: userId}).then(res => {
+  const id1 = generateId()
+  db.insert('todos').one({_id: id1, todo: 'some todo11', userId: userId}).then(res => {
     //console.log(res)
   })
   db.insert('todos').one({_id: generateId(), todo: 'some todo33', userId: userId}).then(res => {
@@ -35,4 +36,5 @@ setTimeout(() => {
   db.insert('todos').one({_id: generateId(), todo: 'some todo22', userId: 'userId'}).then(res => {
     //console.log(res)
   })
+  db.update('todos').where(cond('_id', '==', id1)).set({todo: 'some todo111'}).one().then(res => {})
 }, 3000)
