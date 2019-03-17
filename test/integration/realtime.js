@@ -4,8 +4,8 @@ const generateId = require('../../lib/utils').generateId;
 const api = new API('todo-app', 'http://localhost:8080/')
 const db = api.Mongo()
 
-const onSnapshot = (snapshot, type, docs) => {
-  console.log('Snapshot:', docs)
+const onSnapshot = (docs, type) => {
+  console.log('Snapshot:', docs, 'Type: ', type)
 }
 
 const onError = (err) => {
