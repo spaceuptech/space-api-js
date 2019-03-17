@@ -104,19 +104,19 @@ db.delete('COLLECTION_NAME').where(find)
 
 ### Get real time updates
 ```js
-const onSnapshot  = (snapshot, type, docs) => {
-  if (type === 'monitor') {
-    console.log('Monitored successfully ', snapshot)
+const onSnapshot  = (docs, type) => {
+  if (type === 'initial') {
+    console.log('Initial docs ', docs)
       return
     }
-    console.log(type, snapshot, docs)
+    console.log(docs, type)
    }
  
 const onError = (err) => {
   console.log('Monitor error', err)
 }
  
-let unsubscribe = db.monitor('posts').where().subscribe(onSnapshot, onError) 
+let unsubscribe = db.liveQuery('posts').where().subscribe(onSnapshot, onError) 
  
 unsubscribe()
 ```
