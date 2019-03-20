@@ -121,6 +121,19 @@ let unsubscribe = db.liveQuery('posts').where().subscribe(onSnapshot, onError)
 unsubscribe()
 ```
 
+### Upload file
+```js
+const fileInput = document.querySelector('#your-file-input');
+api.FileStore().uploadFile("/some-path", fileInput.files[0])
+  .then(res => {
+    if (res.status === 200) {
+        console.log("File uploaded successfully");
+    }
+  }).catch(ex => {
+    // Exception occured while uploading file
+  })
+```
+
 ### Call functions directly (Function as a Service) 
 ```js
 api.call('my-engine', 'my-func', { msg: 'Function as a Service is awesome!' }, 1000)
