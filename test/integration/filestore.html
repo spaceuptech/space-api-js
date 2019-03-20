@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script src="../../bundle/space-api.js"></script>
+  </head>
+
+  <body>
+    <!-- Upload File -->
+    <b>Upload File:</b><br />
+    <input type="file" id="myFile" />
+    <input id="path1" placeholder="Path" type="text" /><br />
+    <button onclick="uploadFile()">Upload</button>
+    <br /><br />
+
+    <!-- Create Folder -->
+    <b>Create Folder:</b><br />
+    <input id="name" placeholder="Name" type="text" /><br />
+    <input id="path2" placeholder="Path" type="text" /><br />
+    <button onclick="createFolder()">Create</button>
+    <br /><br />
+
+    <!-- List Directory -->
+    <b>List Directory:</b><br />
+    <input id="path3" placeholder="Path" type="text" /><br />
+    <button onclick="listDir()">List</button>
+    <br /><br />
+
+    <!-- Delete File/Folder -->
+    <b>Delete File/Folder:</b><br />
+    <input id="path4" placeholder="Path" type="text" /><br />
+    <button onclick="deleteFile()">Delete</button>
+    <br /><br />
+
+    <script>
+      // Initialise the API
+      var api = new Space.API("todo-app", "http://localhost:8080");
+
+      // Upload function
+      function uploadFile() {
+        // Get the input field values
+        var path = document.getElementById("path1").value;
+        var file = document.querySelector("#myFile").files[0];
+
+        api
+          .FileStore()
+          .uploadFile(path, file)
+          .then(res => {
+            if (res.status !== 200) {
+              alert("Error Uploading File: " + res.data.error);
+              return;
+            }
+            alert("File uploaded successfully");
+          });
+      }
+
+      // Create Folder function
+      function createFolder() {
+        // Get the input field values
+        var name = document.getElementById("name").value;
+        var path = document.getElementById("path2").value;
+
+        api
+          .FileStore()
+          .createFolder(path, name)
+          .then(res => {
+            if (res.status !== 200) {
+              alert("Error Creating Folder: " + res.data.error);
+              return;
+            }
+            alert("Folder created successfully");
+          });
+      }
+
+      // List Directory function
+      function listDir() {
+        // Get the input field values
+        var path = document.getElementById("path3").value;
+
+        api
+          .FileStore()
+          .listFiles(path)
+          .then(res => {
+            if (res.status !== 200) {
+              alert("Error Listing files: " + res.data.error);
+              return;
+            }
+            alert("Files: " + res.data.result.map(obj => obj.name).join(","));
+          });
+      }
+
+      // Delete function
+      function deleteFile() {
+        // Get the input field values
+        var path = document.getElementById("path4").value;
+
+        api
+          .FileStore()
+          .delete(path)
+          .then(res => {
+            if (res.status !== 200) {
+              alert("Error deleting: " + res.data.error);
+              return;
+            }
+            alert("Deleted successfully");
+          });
+      }
+    </script>
+  </body>
+</html>

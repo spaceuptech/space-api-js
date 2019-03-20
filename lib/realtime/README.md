@@ -9,7 +9,7 @@
 ## Functions
 
 <dl>
-<dt><a href="#OnSnapshot">OnSnapshot(snapshot, type, docs)</a></dt>
+<dt><a href="#OnSnapshot">OnSnapshot(docs, type)</a></dt>
 <dd><p>Callback for realtime updates to the subscribed data</p>
 </dd>
 <dt><a href="#OnError">OnError(err)</a></dt>
@@ -54,8 +54,8 @@ const api = new API('my-project');
 // For MongoDb Database
 const db = api.Mongo();
 
-const onSnapshot  = (snapshot, type, docs) => {
-   console.log(type, snapshot, docs)
+const onSnapshot  = (docs, type) => {
+   console.log(docs, snapshot)
  }
 
  const onError = (err) => {
@@ -80,7 +80,7 @@ Prepares the find query
 <a name="LiveQuery+subscribe"></a>
 
 ### liveQuery.subscribe(onSnapshot, onError) ⇒ [<code>Unsubscribe</code>](#Unsubscribe)
-Subcribes for real time updates
+Subscribes for real time updates
 
 **Kind**: instance method of [<code>LiveQuery</code>](#LiveQuery)  
 **Returns**: [<code>Unsubscribe</code>](#Unsubscribe) - Returns a unsubscribe function  
@@ -92,16 +92,15 @@ Subcribes for real time updates
 
 <a name="OnSnapshot"></a>
 
-## OnSnapshot(snapshot, type, docs)
+## OnSnapshot(docs, type)
 Callback for realtime updates to the subscribed data
 
 **Kind**: global function  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| snapshot | <code>Array</code> | The current snapshot |
+| docs | <code>Array</code> | The updated docs |
 | type | <code>string</code> | The type of operation performed |
-| docs | <code>Array</code> | Array of new / modified / deleted documents |
 
 <a name="OnError"></a>
 
