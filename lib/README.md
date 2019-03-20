@@ -15,6 +15,9 @@
 <dt><a href="#external_SQL">SQL</a></dt>
 <dd><p>The SQL Client Interface.</p>
 </dd>
+<dt><a href="#external_FileStore">FileStore</a></dt>
+<dd><p>The FileStore Client Interface.</p>
+</dd>
 </dl>
 
 <a name="Api"></a>
@@ -32,7 +35,7 @@ Class representing the client api.
     * [.Postgres()](#Api+Postgres) ⇒ [<code>SQL</code>](#external_SQL)
     * [.MySQL()](#Api+MySQL) ⇒ [<code>SQL</code>](#external_SQL)
     * [.call(engineName, funcName, params, [timeout])](#Api+call) ⇒ <code>Promise</code>
-    * [.FileStore()](#Api+FileStore) ⇒ <code>external:FileStore</code>
+    * [.FileStore()](#Api+FileStore) ⇒ [<code>FileStore</code>](#external_FileStore)
 
 <a name="new_Api_new"></a>
 
@@ -124,11 +127,11 @@ api.call('my-engine', 'my-func', { msg: 'Function as a Service is awesome!' }, 1
 ```
 <a name="Api+FileStore"></a>
 
-### api.FileStore() ⇒ <code>external:FileStore</code>
+### api.FileStore() ⇒ [<code>FileStore</code>](#external_FileStore)
 Returns a FileStore client instance
 
 **Kind**: instance method of [<code>Api</code>](#Api)  
-**Returns**: <code>external:FileStore</code> - SQL client instance  
+**Returns**: [<code>FileStore</code>](#external_FileStore) - SQL client instance  
 <a name="external_Mongo"></a>
 
 ## Mongo
@@ -143,3 +146,10 @@ The SQL Client Interface.
 
 **Kind**: global external  
 **See**: [https://github.com/spaceuptech/space-api-js/wiki/SQL](https://github.com/spaceuptech/space-api-js/wiki/SQL)  
+<a name="external_FileStore"></a>
+
+## FileStore
+The FileStore Client Interface.
+
+**Kind**: global external  
+**See**: [https://github.com/spaceuptech/space-api-js/wiki/FileStore](https://github.com/spaceuptech/space-api-js/wiki/FileStore)  
