@@ -13,7 +13,7 @@
     "build": "babel ./index.js -d ./dist --ignore test.js  && browserify ./index.js -s Space -o ./bundle/bundle.js && babel ./bundle -d ./bundle --ignore test.js  && uglifyjs bundle/bundle.js -o bundle/space-api.js && rm ./bundle/bundle.js && babel ./lib -d ./dist/lib --ignore test.js && npm run docs",
     "pretest": "npm run build",
     "pub": "npm run build && npm publish",
-    "docs": "jsdoc2md -f lib/mongo/mongo.js -f lib/mongo/insert.js -f lib/mongo/get.js -f lib/mongo/update.js -f lib/mongo/delete.js -f lib/mongo/aggregate.js > lib/mongo/README.md && jsdoc2md -f lib/sql/sql.js -f lib/sql/insert.js -f lib/sql/get.js -f lib/sql/update.js -f lib/sql/delete.js > lib/sql/README.md && jsdoc2md -f lib/realtime/liveQuery.js > lib/realtime/README.md && jsdoc2md -f lib/filestore/filestore.js > lib/filestore/README.md"
+    "docs": "jsdoc2md -f lib/api.js > lib/README.md && jsdoc2md -f lib/mongo/mongo.js -f lib/mongo/insert.js -f lib/mongo/get.js -f lib/mongo/update.js -f lib/mongo/delete.js -f lib/mongo/aggregate.js > lib/mongo/README.md && jsdoc2md -f lib/sql/sql.js -f lib/sql/insert.js -f lib/sql/get.js -f lib/sql/update.js -f lib/sql/delete.js > lib/sql/README.md && jsdoc2md -f lib/realtime/liveQuery.js > lib/realtime/README.md && jsdoc2md -f lib/filestore/filestore.js > lib/filestore/README.md"
   },
   "author": "Noorain Panjwani",
   "license": "Apache-2.0",

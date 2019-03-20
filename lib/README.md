@@ -32,6 +32,7 @@ Class representing the client api.
     * [.Postgres()](#Api+Postgres) ⇒ [<code>SQL</code>](#external_SQL)
     * [.MySQL()](#Api+MySQL) ⇒ [<code>SQL</code>](#external_SQL)
     * [.call(engineName, funcName, params, [timeout])](#Api+call) ⇒ <code>Promise</code>
+    * [.FileStore()](#Api+FileStore) ⇒ <code>external:FileStore</code>
 
 <a name="new_Api_new"></a>
 
@@ -121,6 +122,13 @@ api.call('my-engine', 'my-func', { msg: 'Function as a Service is awesome!' }, 1
   // Exception occured while processing request
 });
 ```
+<a name="Api+FileStore"></a>
+
+### api.FileStore() ⇒ <code>external:FileStore</code>
+Returns a FileStore client instance
+
+**Kind**: instance method of [<code>Api</code>](#Api)  
+**Returns**: <code>external:FileStore</code> - SQL client instance  
 <a name="external_Mongo"></a>
 
 ## Mongo
