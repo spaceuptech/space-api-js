@@ -561,8 +561,8 @@ Class representing the MongoDB Update Interface.
     * [.mul(obj)](#Update+mul)
     * [.max(obj)](#Update+max)
     * [.min(obj)](#Update+min)
-    * [.currentTimestamp(obj)](#Update+currentTimestamp)
-    * [.currentDate(obj)](#Update+currentDate)
+    * [.currentTimestamp(...values)](#Update+currentTimestamp)
+    * [.currentDate(...values)](#Update+currentDate)
     * [.one()](#Update+one) ⇒ <code>Promise</code>
     * [.all()](#Update+all) ⇒ <code>Promise</code>
     * [.upsert()](#Update+upsert)
@@ -731,14 +731,14 @@ db.update('posts').min({ lowestScore: 300 }).all().then(res => ...)
 ```
 <a name="Update+currentTimestamp"></a>
 
-### update.currentTimestamp(obj)
+### update.currentTimestamp(...values)
 Sets the value of a field to current timestamp.
 
 **Kind**: instance method of [<code>Update</code>](#Update)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| obj | <code>Object</code> | The object containing fields to set. |
+| ...values | <code>string</code> | The fields to set. |
 
 **Example**  
 ```js
@@ -746,14 +746,14 @@ db.update('posts').currentTimestamp('lastModified').all().then(res => ...)
 ```
 <a name="Update+currentDate"></a>
 
-### update.currentDate(obj)
+### update.currentDate(...values)
 Sets the value of a field to current date.
 
 **Kind**: instance method of [<code>Update</code>](#Update)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| obj | <code>Object</code> | The object containing fields to set. |
+| ...values | <code>string</code> | The fields to set. |
 
 **Example**  
 ```js
@@ -892,7 +892,7 @@ const pipe = [
   { $group: { _id: '$cust_id', total: { $sum: '$amount' } } }
 ]
 
-db.aggr('posts').pipe(pipe).many().then(res => {
+db.aggr('posts').pipe(pipe).all().then(res => {
   if (res.status === 200) {
     // res.data contains the documents returned by the database
     console.log('Response:', res.data);
