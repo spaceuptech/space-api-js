@@ -50,9 +50,10 @@ async function cleanUp(db) {
 
 
 async function startTest(dbType, projectId, url) {
-  let api = new API(projectId, url)
-
-  let db = null
+  let db
+  try {
+    let api = new API(projectId, url)
+  
   switch (dbType) {
     case MONGO:
       db = api.Mongo()
@@ -68,10 +69,9 @@ async function startTest(dbType, projectId, url) {
   }
 
 
-  // Clean any data before starting tests
-  await cleanUp(db)
-
-  try {
+  
+    // Clean any data before starting tests
+    await cleanUp(db)
     let res = {}
     /******************** Signup ********************/
     const user = { email: "user1@gmail.com", name: "User 1", pass: "123", role: "user" }
@@ -382,13 +382,17 @@ async function startTest(dbType, projectId, url) {
     
 
     console.log("\x1b[32m%s\x1b[0m", "All tests for " + dbType + " have passed!!");
-  } catch (errorObj) {
+  }catch (errorObj) {
     console.log(errorObj)
     console.log("\x1b[31m%s\x1b[0m", "Error in " + dbType.toUpperCase() + " (" + errorObj.section + ")")
     console.log("\x1b[31m%s\x1b[0m", "Description - " + errorObj.desc)
     console.log("\x1b[31m%s\x1b[0m", "Response - " + JSON.stringify(errorObj.params))
     
      // Clean up data
-     await cleanUp(db)
+     try {
+       await cleanUp(db)
+     } catch (e) {}
   }
 }
+
+//startTest().catch(err => console.log(err))
