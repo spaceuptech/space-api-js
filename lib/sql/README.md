@@ -300,8 +300,8 @@ Class representing the SQL Insert Interface.
 
 * [Insert](#Insert)
     * [new Insert(appId, table, url, options, db)](#new_Insert_new)
-    * [.one(record)](#Insert+one) ⇒ <code>Promise</code>
-    * [.all(records)](#Insert+all) ⇒ <code>Promise</code>
+    * ~~[.one(record)](#Insert+one) ⇒ <code>Promise</code>~~
+    * ~~[.all(records)](#Insert+all) ⇒ <code>Promise</code>~~
 
 <a name="new_Insert_new"></a>
 
@@ -341,7 +341,9 @@ db.insert('posts').one(record).then(res => {
 ```
 <a name="Insert+one"></a>
 
-### insert.one(record) ⇒ <code>Promise</code>
+### ~~insert.one(record) ⇒ <code>Promise</code>~~
+***Deprecated***
+
 Makes the query to insert a single record.
 
 **Kind**: instance method of [<code>Insert</code>](#Insert)  
@@ -358,7 +360,9 @@ db.insert('posts').one(record).then(res => ...)
 ```
 <a name="Insert+all"></a>
 
-### insert.all(records) ⇒ <code>Promise</code>
+### ~~insert.all(records) ⇒ <code>Promise</code>~~
+***Deprecated***
+
 Makes the query to insert multiple records.
 
 **Kind**: instance method of [<code>Insert</code>](#Insert)  
@@ -387,8 +391,8 @@ Class representing the SQL Get Interface.
     * [.sort(...array)](#Get+sort)
     * [.skip(offset)](#Get+skip)
     * [.limit(num)](#Get+limit)
-    * [.one()](#Get+one) ⇒ <code>Promise</code>
-    * [.all()](#Get+all) ⇒ <code>Promise</code>
+    * ~~[.one()](#Get+one) ⇒ <code>Promise</code>~~
+    * ~~[.all()](#Get+all) ⇒ <code>Promise</code>~~
 
 <a name="new_Get_new"></a>
 
@@ -504,7 +508,9 @@ db.get('posts').limit(10).all().then(res => ...)
 ```
 <a name="Get+one"></a>
 
-### get.one() ⇒ <code>Promise</code>
+### ~~get.one() ⇒ <code>Promise</code>~~
+***Deprecated***
+
 Makes the query to return a single record as an object. If no record are returned, the status code is 400.
 
 **Kind**: instance method of [<code>Get</code>](#Get)  
@@ -515,7 +521,9 @@ db.get('posts').one().then(res => ...)
 ```
 <a name="Get+all"></a>
 
-### get.all() ⇒ <code>Promise</code>
+### ~~get.all() ⇒ <code>Promise</code>~~
+***Deprecated***
+
 Makes the query to return a multiple records as an array. It is possible for an empty array to be returned.
 
 **Kind**: instance method of [<code>Get</code>](#Get)  
@@ -535,7 +543,7 @@ Class representing the SQL Update Interface.
     * [new Update(appId, table, url, options, db)](#new_Update_new)
     * [.where(...conditions)](#Update+where)
     * [.set(obj)](#Update+set)
-    * [.all()](#Update+all) ⇒ <code>Promise</code>
+    * ~~[.all()](#Update+all) ⇒ <code>Promise</code>~~
 
 <a name="new_Update_new"></a>
 
@@ -600,7 +608,9 @@ db.update('posts').set({ author: 'Drake' }).all().then(res => ...)
 ```
 <a name="Update+all"></a>
 
-### update.all() ⇒ <code>Promise</code>
+### ~~update.all() ⇒ <code>Promise</code>~~
+***Deprecated***
+
 Makes the query to update all records which matches.
 
 **Kind**: instance method of [<code>Update</code>](#Update)  
@@ -615,7 +625,7 @@ Class representing the SQL Delete Interface.
 * [Delete](#Delete)
     * [new Delete(appId, table, url, options, db)](#new_Delete_new)
     * [.where(...conditions)](#Delete+where)
-    * [.all()](#Delete+all) ⇒ <code>Promise</code>
+    * ~~[.all()](#Delete+all) ⇒ <code>Promise</code>~~
 
 <a name="new_Delete_new"></a>
 
@@ -665,7 +675,9 @@ Prepares the find query
 
 <a name="Delete+all"></a>
 
-### delete.all() ⇒ <code>Promise</code>
+### ~~delete.all() ⇒ <code>Promise</code>~~
+***Deprecated***
+
 Makes the query to delete all the records which match.
 
 **Kind**: instance method of [<code>Delete</code>](#Delete)  

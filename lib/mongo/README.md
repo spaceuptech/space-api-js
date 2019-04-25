@@ -307,8 +307,8 @@ Class representing the MongoDB Insert Interface.
 
 * [Insert](#Insert)
     * [new Insert(appId, collection, url, options)](#new_Insert_new)
-    * [.one(doc)](#Insert+one) ⇒ <code>Promise</code>
-    * [.all(docs)](#Insert+all) ⇒ <code>Promise</code>
+    * ~~[.one(doc)](#Insert+one) ⇒ <code>Promise</code>~~
+    * ~~[.all(docs)](#Insert+all) ⇒ <code>Promise</code>~~
 
 <a name="new_Insert_new"></a>
 
@@ -342,7 +342,9 @@ db.insert('posts').one(doc).then(res => {
 ```
 <a name="Insert+one"></a>
 
-### insert.one(doc) ⇒ <code>Promise</code>
+### ~~insert.one(doc) ⇒ <code>Promise</code>~~
+***Deprecated***
+
 Makes the query to insert a single document.
 
 **Kind**: instance method of [<code>Insert</code>](#Insert)  
@@ -359,7 +361,9 @@ db.insert('posts').one(doc).then(res => ...)
 ```
 <a name="Insert+all"></a>
 
-### insert.all(docs) ⇒ <code>Promise</code>
+### ~~insert.all(docs) ⇒ <code>Promise</code>~~
+***Deprecated***
+
 Makes the query to insert multiple documents.
 
 **Kind**: instance method of [<code>Insert</code>](#Insert)  
@@ -388,10 +392,10 @@ Class representing the MongoDB Get Interface.
     * [.sort(...array)](#Get+sort)
     * [.skip(num)](#Get+skip)
     * [.limit(num)](#Get+limit)
-    * [.one()](#Get+one) ⇒ <code>Promise</code>
-    * [.all()](#Get+all) ⇒ <code>Promise</code>
-    * [.distinct()](#Get+distinct) ⇒ <code>Promise</code>
-    * [.count()](#Get+count)
+    * ~~[.one()](#Get+one) ⇒ <code>Promise</code>~~
+    * ~~[.all()](#Get+all) ⇒ <code>Promise</code>~~
+    * ~~[.distinct()](#Get+distinct) ⇒ <code>Promise</code>~~
+    * ~~[.count()](#Get+count)~~
 
 <a name="new_Get_new"></a>
 
@@ -501,7 +505,9 @@ db.get('posts').limit(10).all().then(res => ...)
 ```
 <a name="Get+one"></a>
 
-### get.one() ⇒ <code>Promise</code>
+### ~~get.one() ⇒ <code>Promise</code>~~
+***Deprecated***
+
 Makes the query to return a single document as an object. If no documents are returned, the status code is 400.
 
 **Kind**: instance method of [<code>Get</code>](#Get)  
@@ -512,7 +518,9 @@ db.get('posts').one().then(res => ...)
 ```
 <a name="Get+all"></a>
 
-### get.all() ⇒ <code>Promise</code>
+### ~~get.all() ⇒ <code>Promise</code>~~
+***Deprecated***
+
 Makes the query to return a multiple documents as an array. It is possible for an empty array to be returned.
 
 **Kind**: instance method of [<code>Get</code>](#Get)  
@@ -523,7 +531,9 @@ db.get('posts').all().then(res => ...)
 ```
 <a name="Get+distinct"></a>
 
-### get.distinct() ⇒ <code>Promise</code>
+### ~~get.distinct() ⇒ <code>Promise</code>~~
+***Deprecated***
+
 Makes the query to return an array of all the distinct values for the given field. It is possible for an empty array to be returned.
 
 **Kind**: instance method of [<code>Get</code>](#Get)  
@@ -534,7 +544,9 @@ db.get('posts').distinct('category').then(res => ...)
 ```
 <a name="Get+count"></a>
 
-### get.count()
+### ~~get.count()~~
+***Deprecated***
+
 Makes the query to return the count of total number of documents that were queried.
 
 **Kind**: instance method of [<code>Get</code>](#Get)  
@@ -563,8 +575,8 @@ Class representing the MongoDB Update Interface.
     * [.min(obj)](#Update+min)
     * [.currentTimestamp(...values)](#Update+currentTimestamp)
     * [.currentDate(...values)](#Update+currentDate)
-    * [.one()](#Update+one) ⇒ <code>Promise</code>
-    * [.all()](#Update+all) ⇒ <code>Promise</code>
+    * ~~[.one()](#Update+one) ⇒ <code>Promise</code>~~
+    * ~~[.all()](#Update+all) ⇒ <code>Promise</code>~~
     * [.upsert()](#Update+upsert)
 
 <a name="new_Update_new"></a>
@@ -761,14 +773,18 @@ db.update('posts').currentDate('lastModified').all().then(res => ...)
 ```
 <a name="Update+one"></a>
 
-### update.one() ⇒ <code>Promise</code>
+### ~~update.one() ⇒ <code>Promise</code>~~
+***Deprecated***
+
 Makes the query to update a single document which matches first.
 
 **Kind**: instance method of [<code>Update</code>](#Update)  
 **Returns**: <code>Promise</code> - Returns a promise containing response from server  
 <a name="Update+all"></a>
 
-### update.all() ⇒ <code>Promise</code>
+### ~~update.all() ⇒ <code>Promise</code>~~
+***Deprecated***
+
 Makes the query to update all documents which matches.
 
 **Kind**: instance method of [<code>Update</code>](#Update)  
@@ -789,8 +805,8 @@ Class representing the MongoDB Delete Interface.
 * [Delete](#Delete)
     * [new Delete(appId, collection, url, options)](#new_Delete_new)
     * [.where(...conditions)](#Delete+where)
-    * [.one()](#Delete+one) ⇒ <code>Promise</code>
-    * [.all()](#Delete+all) ⇒ <code>Promise</code>
+    * ~~[.one()](#Delete+one) ⇒ <code>Promise</code>~~
+    * ~~[.all()](#Delete+all) ⇒ <code>Promise</code>~~
 
 <a name="new_Delete_new"></a>
 
@@ -834,7 +850,9 @@ Prepares the find query
 
 <a name="Delete+one"></a>
 
-### delete.one() ⇒ <code>Promise</code>
+### ~~delete.one() ⇒ <code>Promise</code>~~
+***Deprecated***
+
 Makes the query to delete a single document which matches first.
 
 **Kind**: instance method of [<code>Delete</code>](#Delete)  
@@ -845,7 +863,9 @@ db.delete('posts').one().then(res => ...)
 ```
 <a name="Delete+all"></a>
 
-### delete.all() ⇒ <code>Promise</code>
+### ~~delete.all() ⇒ <code>Promise</code>~~
+***Deprecated***
+
 Makes the query to delete all the documents which match.
 
 **Kind**: instance method of [<code>Delete</code>](#Delete)  
@@ -864,8 +884,8 @@ Class representing the MongoDB Delete Interface.
 * [Aggregate](#Aggregate)
     * [new Aggregate(appId, collection, url, options)](#new_Aggregate_new)
     * [.pipe(pipeObj)](#Aggregate+pipe)
-    * [.one()](#Aggregate+one) ⇒ <code>Promise</code>
-    * [.all()](#Aggregate+all) ⇒ <code>Promise</code>
+    * ~~[.one()](#Aggregate+one) ⇒ <code>Promise</code>~~
+    * ~~[.all()](#Aggregate+all) ⇒ <code>Promise</code>~~
 
 <a name="new_Aggregate_new"></a>
 
@@ -915,7 +935,9 @@ Prepares the Pipe query
 
 <a name="Aggregate+one"></a>
 
-### aggregate.one() ⇒ <code>Promise</code>
+### ~~aggregate.one() ⇒ <code>Promise</code>~~
+***Deprecated***
+
 Makes the query to return single object.
 
 **Kind**: instance method of [<code>Aggregate</code>](#Aggregate)  
@@ -926,7 +948,9 @@ db.aggr('posts').pipe([...]).one().then(res => ...)
 ```
 <a name="Aggregate+all"></a>
 
-### aggregate.all() ⇒ <code>Promise</code>
+### ~~aggregate.all() ⇒ <code>Promise</code>~~
+***Deprecated***
+
 Makes the query to return all objects.
 
 **Kind**: instance method of [<code>Aggregate</code>](#Aggregate)  
