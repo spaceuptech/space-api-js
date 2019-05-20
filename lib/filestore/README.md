@@ -5,7 +5,7 @@
 
 * [FileStore](#FileStore)
     * [new FileStore(appId, url, options)](#new_FileStore_new)
-    * [.uploadFile(path, file)](#FileStore+uploadFile) ⇒ <code>Promise</code>
+    * [.uploadFile(path, file, name)](#FileStore+uploadFile) ⇒ <code>Promise</code>
     * [.createFolder(path, name)](#FileStore+createFolder) ⇒ <code>Promise</code>
     * [.listFiles(path)](#FileStore+listFiles) ⇒ <code>Promise</code>
     * [.delete(path)](#FileStore+delete) ⇒ <code>Promise</code>
@@ -24,7 +24,7 @@ Create an instance of the FileStore Interface.
 
 <a name="FileStore+uploadFile"></a>
 
-### fileStore.uploadFile(path, file) ⇒ <code>Promise</code>
+### fileStore.uploadFile(path, file, name) ⇒ <code>Promise</code>
 Uploads the given file at given path.
 
 **Kind**: instance method of [<code>FileStore</code>](#FileStore)  
@@ -34,6 +34,7 @@ Uploads the given file at given path.
 | --- | --- |
 | path | <code>string</code> | 
 | file | <code>file</code> | 
+| name | <code>string</code> | 
 
 **Example**  
 ```js
