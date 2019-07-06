@@ -146,8 +146,8 @@ Returns a LiveQuery Object
 
 **Example**  
 ```js
-const onSnapshot = (snapshot, type, docs) => {   
-   console.log(type, snapshot, docs)
+const onSnapshot = (snapshot, type, changedDoc) => {   
+   console.log(type, snapshot, changedDoc)
 }
 
 const onError = (err) => {
