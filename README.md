@@ -104,12 +104,12 @@ db.delete('COLLECTION_NAME').where(find)
 
 ### Get real time updates
 ```js
-const onSnapshot  = (docs, type) => {
+const onSnapshot  = (docs, type, changedDoc) => {
   if (type === 'initial') {
     console.log('Initial docs ', docs)
       return
     }
-    console.log(docs, type)
+    console.log(docs, type, changedDoc)
    }
  
 const onError = (err) => {

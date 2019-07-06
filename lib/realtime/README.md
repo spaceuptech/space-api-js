@@ -9,7 +9,7 @@
 ## Functions
 
 <dl>
-<dt><a href="#OnSnapshot">OnSnapshot(docs, type)</a></dt>
+<dt><a href="#OnSnapshot">OnSnapshot(docs, type, changedDoc)</a></dt>
 <dd><p>Callback for realtime updates to the subscribed data</p>
 </dd>
 <dt><a href="#OnError">OnError(err)</a></dt>
@@ -30,6 +30,7 @@ Class representing the LiveQuery Interface.
 * [LiveQuery](#LiveQuery)
     * [new LiveQuery(appId, db, collection, client, store)](#new_LiveQuery_new)
     * [.where(...conditions)](#LiveQuery+where)
+    * [.options(opts)](#LiveQuery+options)
     * [.subscribe(onSnapshot, onError)](#LiveQuery+subscribe) ⇒ [<code>Unsubscribe</code>](#Unsubscribe)
 
 <a name="new_LiveQuery_new"></a>
@@ -54,8 +55,8 @@ const api = new API('my-project');
 // For MongoDb Database
 const db = api.Mongo();
 
-const onSnapshot  = (docs, type) => {
-   console.log(docs, snapshot)
+const onSnapshot  = (docs, type, changedDoc) => {
+   console.log(docs, snapshot, changedDoc)
  }
 
  const onError = (err) => {
@@ -63,6 +64,7 @@ const onSnapshot  = (docs, type) => {
  }
 
  let unsubscribe = db.liveQuery('posts').where({}).subscribe(onSnapshot, onError) 
+ // let unsubscribe = db.liveQuery('posts').where({}).options({ changesOnly: true }).subscribe(onSnapshot, onError) 
 
  unsubscribe()
 ```
@@ -76,6 +78,17 @@ Prepares the find query
 | Param | Type | Description |
 | --- | --- | --- |
 | ...conditions | <code>Object</code> | The condition logic. |
+
+<a name="LiveQuery+options"></a>
+
+### liveQuery.options(opts)
+Sets the options for the live query
+
+**Kind**: instance method of [<code>LiveQuery</code>](#LiveQuery)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| opts | <code>Object</code> | The options. (Of the form { changesOnly: true/false }) |
 
 <a name="LiveQuery+subscribe"></a>
 
@@ -92,7 +105,7 @@ Subscribes for real time updates
 
 <a name="OnSnapshot"></a>
 
-## OnSnapshot(docs, type)
+## OnSnapshot(docs, type, changedDoc)
 Callback for realtime updates to the subscribed data
 
 **Kind**: global function  
@@ -101,6 +114,7 @@ Callback for realtime updates to the subscribed data
 | --- | --- | --- |
 | docs | <code>Array</code> | The updated docs |
 | type | <code>string</code> | The type of operation performed |
+| changedDoc | <code>Object</code> | The doc that changed |
 
 <a name="OnError"></a>
 
