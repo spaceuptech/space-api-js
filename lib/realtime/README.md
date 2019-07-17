@@ -56,7 +56,7 @@ const api = new API('my-project');
 const db = api.Mongo();
 
 const onSnapshot  = (docs, type, changedDoc) => {
-   console.log(docs, snapshot, changedDoc)
+   console.log(docs, type, changedDoc)
  }
 
  const onError = (err) => {
@@ -64,7 +64,6 @@ const onSnapshot  = (docs, type, changedDoc) => {
  }
 
  let unsubscribe = db.liveQuery('posts').where({}).subscribe(onSnapshot, onError) 
- // let unsubscribe = db.liveQuery('posts').where({}).options({ changesOnly: true }).subscribe(onSnapshot, onError) 
 
  unsubscribe()
 ```
@@ -88,7 +87,7 @@ Sets the options for the live query
 
 | Param | Type | Description |
 | --- | --- | --- |
-| opts | <code>Object</code> | The options. (Of the form { changesOnly: true/false }) |
+| opts | <code>Object</code> | The options. (Of the form { changesOnly: true|false }) |
 
 <a name="LiveQuery+subscribe"></a>
 
