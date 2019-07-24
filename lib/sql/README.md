@@ -75,7 +75,7 @@ CREATE TABLE users (id VARCHAR(50), account VARCHAR(50), email VARCHAR(100), nam
 
 import { API } from 'space-api';
 
-const api = new API('my-project', 'http://localhost:8080');
+const api = new API('my-project', 'http://localhost:4122');
 
 // For MySQL Database
 const db = api.MySQL();
@@ -321,7 +321,7 @@ Create an instance of the MongoDB Insert Interface.
 ```js
 import { API, cond, or, and } from 'space-api';
 
-const api = new API('my-project', 'http://localhost:8080');
+const api = new API('my-project', 'http://localhost:4122');
 
 // For MySQL Database
 const db = api.MySQL();
@@ -412,7 +412,7 @@ Create an instance of the SQL Get Interface.
 ```js
 import { API, cond, or, and } from 'space-api';
 
-const api = new API('my-project', 'http://localhost:8080');
+const api = new API('my-project', 'http://localhost:4122');
 
 // For MySQL Database
 const db = api.MySQL();
@@ -563,7 +563,7 @@ Create an instance of the MongoDB Update Interface.
 ```js
 import { API, cond, or, and } from 'space-api';
 
-const api = new API('my-project', 'http://localhost:8080');
+const api = new API('my-project', 'http://localhost:4122');
 
 // For MySQL Database
 const db = api.MySQL();
@@ -645,7 +645,7 @@ Create an instance of the SQL Delete Interface.
 ```js
 import { API, cond, or, and } from 'space-api';
 
-const api = new API('my-project', 'http://localhost:8080');
+const api = new API('my-project', 'http://localhost:4122');
 
 // For MySQL Database
 const db = api.MySQL();
