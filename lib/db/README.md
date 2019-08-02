@@ -162,10 +162,10 @@ const onError = (err) => {
   console.log('Operation failed:', err)
 }
 
-let unsubscribe = db.liveQuery('posts').where({}).subscribe(onSnapshot, onError) 
+let subscription = db.liveQuery('posts').where({}).subscribe(onSnapshot, onError) 
 
 // Unsubscribe to clean up
-unsubscribe()
+subscription.unsubscribe()
 ```
 <a name="DB+profile"></a>
 

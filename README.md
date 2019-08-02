@@ -116,9 +116,9 @@ const onError = (err) => {
   console.log('Monitor error', err)
 }
  
-let unsubscribe = db.liveQuery('posts').where().subscribe(onSnapshot, onError) 
+let subscription = db.liveQuery('posts').where().subscribe(onSnapshot, onError) 
  
-unsubscribe()
+subscription.unsubscribe()
 ```
 
 ### Upload file
