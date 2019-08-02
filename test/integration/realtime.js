@@ -1,7 +1,7 @@
 var { API, cond, and, or } = require("../../index")
 const generateId = require('../../lib/utils').generateId;
 
-const api = new API('todo-app', 'http://localhost:8080/')
+const api = new API('todo-app', 'http://localhost:4122/')
 const db = api.Mongo()
 
 const onSnapshot = (docs, type, changedDoc) => {

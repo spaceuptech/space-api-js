@@ -76,7 +76,7 @@ Create an instance of the MongoDB Client Interface.
 ```js
 import { API } from 'space-api';
 
-const api = new API('my-project', 'http://localhost:8080');
+const api = new API('my-project', 'http://localhost:4122');
 const db = api.Mongo();
 ```
 <a name="Mongo+get"></a>
@@ -327,7 +327,7 @@ Create an instance of the MongoDB Insert Interface.
 ```js
 import { API, cond, or, and } from 'space-api';
 
-const api = new API('my-project', 'http://localhost:8080');
+const api = new API('my-project', 'http://localhost:4122');
 const db = api.Mongo();
 
 const doc = { author: 'John', title: 'Title1', _id: 1 };
@@ -414,7 +414,7 @@ Create an instance of the MongoDB Get Interface.
 ```js
 import { API, cond, or, and } from 'space-api';
 
-const api = new API('my-project', 'http://localhost:8080');
+const api = new API('my-project', 'http://localhost:4122');
 const db = api.Mongo();
 
 db.get('posts').where(and(cond('title', '==', 'Title1'))).all().then(res => {
@@ -596,7 +596,7 @@ Create an instance of the MongoDB Update Interface.
 ```js
 import { API, cond, or, and } from 'space-api';
 
-const api = new API('my-project', 'http://localhost:8080');
+const api = new API('my-project', 'http://localhost:4122');
 const db = api.Mongo();
 
 db.update('posts').where(and(cond('title', '==', 'Title1'))).set({ title: 'Title2' }).all().then(res => {
@@ -825,7 +825,7 @@ Create an instance of the MongoDB Delete Interface.
 ```js
 import { API, cond, or, and } from 'space-api';
 
-const api = new API('my-project', 'localhost:8080');
+const api = new API('my-project', 'localhost:4122');
 const db = api.Mongo();
 
 db.delete('posts').where(and(cond('title', '==', 'Title1'))).all().then(res => {
@@ -904,7 +904,7 @@ Create an instance of the MongoDB Delete Interface.
 ```js
 import { API, cond, or, and } from 'space-api';
 
-const api = new API('my-project', 'http://localhost:8080');
+const api = new API('my-project', 'http://localhost:4122');
 const db = api.Mongo();
 
 const pipe = [
