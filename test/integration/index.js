@@ -22,8 +22,8 @@ const formatError = (section, desc, params) => {
 }
 
 startTest(MONGO, "test", "http://localhost:4122")
-startTest(SQL_MYSQL, "test", "http://localhost:4123")
-startTest(SQL_POSTGRES, "test", "http://localhost:4125")
+startTest(SQL_MYSQL, "test", "http://localhost:4122")
+startTest(SQL_POSTGRES, "test", "http://localhost:4122")
 
 async function cleanUp(db) {
   let res = await db.delete("posts").all()
