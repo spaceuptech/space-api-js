@@ -4,6 +4,9 @@
 <dt><a href="#LiveQuery">LiveQuery</a></dt>
 <dd><p>Class representing the LiveQuery Interface.</p>
 </dd>
+<dt><a href="#LiveQuerySubscription">LiveQuerySubscription</a></dt>
+<dd><p>Class representing the LiveQuerySubscription Interface.</p>
+</dd>
 </dl>
 
 ## Functions
@@ -14,9 +17,6 @@
 </dd>
 <dt><a href="#OnError">OnError(err)</a></dt>
 <dd><p>Callback for error while subscribing</p>
-</dd>
-<dt><a href="#Unsubscribe">Unsubscribe()</a></dt>
-<dd><p>The function to unsubscribe the subscription</p>
 </dd>
 </dl>
 
@@ -31,7 +31,7 @@ Class representing the LiveQuery Interface.
     * [new LiveQuery(appId, db, collection, client, store)](#new_LiveQuery_new)
     * [.where(...conditions)](#LiveQuery+where)
     * [.options(opts)](#LiveQuery+options)
-    * [.subscribe(onSnapshot, onError)](#LiveQuery+subscribe) ⇒ [<code>Unsubscribe</code>](#Unsubscribe)
+    * [.subscribe(onSnapshot, onError)](#LiveQuery+subscribe) ⇒ [<code>LiveQuerySubscription</code>](#LiveQuerySubscription)
 
 <a name="new_LiveQuery_new"></a>
 
@@ -63,9 +63,9 @@ const onSnapshot  = (docs, type, changedDoc) => {
    console.log('Live query error', err)
  }
 
- let unsubscribe = db.liveQuery('posts').where({}).subscribe(onSnapshot, onError) 
+ let subscription = db.liveQuery('posts').where({}).subscribe(onSnapshot, onError) 
 
- unsubscribe()
+ subscription.unsubscribe()
 ```
 <a name="LiveQuery+where"></a>
 
@@ -91,16 +91,44 @@ Sets the options for the live query
 
 <a name="LiveQuery+subscribe"></a>
 
-### liveQuery.subscribe(onSnapshot, onError) ⇒ [<code>Unsubscribe</code>](#Unsubscribe)
+### liveQuery.subscribe(onSnapshot, onError) ⇒ [<code>LiveQuerySubscription</code>](#LiveQuerySubscription)
 Subscribes for real time updates
 
 **Kind**: instance method of [<code>LiveQuery</code>](#LiveQuery)  
-**Returns**: [<code>Unsubscribe</code>](#Unsubscribe) - Returns a unsubscribe function  
+**Returns**: [<code>LiveQuerySubscription</code>](#LiveQuerySubscription) - Returns a LiveQuerySubscription object  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | onSnapshot | [<code>OnSnapshot</code>](#OnSnapshot) | OnSnapshot callback |
 | onError | [<code>OnError</code>](#OnError) | OnError callback |
+
+
+<a name="LiveQuerySubscription"></a>
+
+## LiveQuerySubscription
+Class representing the LiveQuerySubscription Interface.
+
+**Kind**: global class  
+
+* [LiveQuerySubscription](#LiveQuerySubscription)
+    * [.getSnapshot())](#LiveQuerySubscription+getSnapshot)
+    * [.unsubscribe()](#LiveQuerySubscription+unsubscribe)
+
+<a name="LiveQuerySubscription+getSnapshot"></a>
+
+### liveQuerySubscription.getSnapshot()
+Gets the current snapshot
+
+**Kind**: instance method of [<code>LiveQuerySubscription</code>](#LiveQuerySubscription)  
+
+**Returns**: <code>Array</code> - The current snapshot
+
+<a name="LiveQuerySubscription+unsubscribe"></a>
+
+## Unsubscribe()
+The function to unsubscribe the subscription
+
+**Kind**: instance method of [<code>LiveQuerySubscription</code>](#LiveQuerySubscription)  
 
 <a name="OnSnapshot"></a>
 
@@ -126,9 +154,3 @@ Callback for error while subscribing
 | --- | --- | --- |
 | err | <code>string</code> | Error during the liveSubscribe |
 
-<a name="Unsubscribe"></a>
-
-## Unsubscribe()
-The function to unsubscribe the subscription
-
-**Kind**: global function  
