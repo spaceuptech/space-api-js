@@ -1,23 +1,23 @@
 ## Classes
 
 <dl>
-<dt><a href="#Mongo">Mongo</a></dt>
-<dd><p>Class representing the MongoDB Client Interface.</p>
+<dt><a href="#DB">DB</a></dt>
+<dd><p>Class representing the DB Client Interface.</p>
 </dd>
 <dt><a href="#Insert">Insert</a></dt>
-<dd><p>Class representing the MongoDB Insert Interface.</p>
+<dd><p>Class representing the DB Insert Interface.</p>
 </dd>
 <dt><a href="#Get">Get</a></dt>
-<dd><p>Class representing the MongoDB Get Interface.</p>
+<dd><p>Class representing the DB Get Interface.</p>
 </dd>
 <dt><a href="#Update">Update</a></dt>
-<dd><p>Class representing the MongoDB Update Interface.</p>
+<dd><p>Class representing the DB Update Interface.</p>
 </dd>
 <dt><a href="#Delete">Delete</a></dt>
-<dd><p>Class representing the MongoDB Delete Interface.</p>
+<dd><p>Class representing the DB Delete Interface.</p>
 </dd>
 <dt><a href="#Aggregate">Aggregate</a></dt>
-<dd><p>Class representing the MongoDB Delete Interface.</p>
+<dd><p>Class representing the DB Delete Interface.</p>
 </dd>
 </dl>
 
@@ -38,31 +38,31 @@
 </dd>
 </dl>
 
-<a name="Mongo"></a>
+<a name="DB"></a>
 
-## Mongo
-Class representing the MongoDB Client Interface.
+## DB
+Class representing the DB Client Interface.
 
 **Kind**: global class  
 
-* [Mongo](#Mongo)
-    * [new Mongo(appId, url, options, realTime)](#new_Mongo_new)
-    * [.get(collection)](#Mongo+get) ⇒ [<code>Get</code>](#Get)
-    * [.insert(collection)](#Mongo+insert) ⇒ [<code>Insert</code>](#Insert)
-    * [.update(collection)](#Mongo+update) ⇒ [<code>Update</code>](#Update)
-    * [.delete(collection)](#Mongo+delete) ⇒ [<code>Delete</code>](#Delete)
-    * [.aggr(collection)](#Mongo+aggr) ⇒ [<code>Delete</code>](#Delete)
-    * [.liveQuery(collection)](#Mongo+liveQuery) ⇒ [<code>LiveQuery</code>](#external_LiveQuery)
-    * [.profile(id)](#Mongo+profile) ⇒ <code>Promise</code>
-    * [.editProfile(id, email, name, pass)](#Mongo+editProfile) ⇒ <code>Promise</code>
-    * [.profiles()](#Mongo+profiles) ⇒ <code>Promise</code>
-    * [.signIn(email, pass)](#Mongo+signIn) ⇒ [<code>Promise.&lt;AuthResponse&gt;</code>](#AuthResponse)
-    * [.signUp(email, name, pass, role)](#Mongo+signUp) ⇒ [<code>Promise.&lt;AuthResponse&gt;</code>](#AuthResponse)
+* [DB](#DB)
+    * [new DB(appId, url, options, db, realTime)](#new_DB_new)
+    * [.get(collection)](#DB+get) ⇒ [<code>Get</code>](#Get)
+    * [.insert(collection)](#DB+insert) ⇒ [<code>Insert</code>](#Insert)
+    * [.update(collection)](#DB+update) ⇒ [<code>Update</code>](#Update)
+    * [.delete(collection)](#DB+delete) ⇒ [<code>Delete</code>](#Delete)
+    * [.aggr(collection)](#DB+aggr) ⇒ [<code>Delete</code>](#Delete)
+    * [.liveQuery(collection)](#DB+liveQuery) ⇒ [<code>LiveQuery</code>](#external_LiveQuery)
+    * [.profile(id)](#DB+profile) ⇒ <code>Promise</code>
+    * [.editProfile(id, email, name, pass)](#DB+editProfile) ⇒ <code>Promise</code>
+    * [.profiles()](#DB+profiles) ⇒ <code>Promise</code>
+    * [.signIn(email, pass)](#DB+signIn) ⇒ [<code>Promise.&lt;AuthResponse&gt;</code>](#AuthResponse)
+    * [.signUp(email, name, pass, role)](#DB+signUp) ⇒ [<code>Promise.&lt;AuthResponse&gt;</code>](#AuthResponse)
 
-<a name="new_Mongo_new"></a>
+<a name="new_DB_new"></a>
 
-### new Mongo(appId, url, options, realTime)
-Create an instance of the MongoDB Client Interface.
+### new DB(appId, url, options, db, realTime)
+Create an instance of the DB Client Interface.
 
 
 | Param | Type |
@@ -70,81 +70,82 @@ Create an instance of the MongoDB Client Interface.
 | appId | <code>string</code> | 
 | url | <code>string</code> | 
 | options | <code>Object</code> | 
+| db | <code>string</code> | 
 | realTime | <code>Object</code> | 
 
 **Example**  
 ```js
 import { API } from 'space-api';
 
-const api = new API('my-project', 'http://localhost:8080');
+const api = new API('my-project', 'http://localhost:4122');
 const db = api.Mongo();
 ```
-<a name="Mongo+get"></a>
+<a name="DB+get"></a>
 
-### mongo.get(collection) ⇒ [<code>Get</code>](#Get)
-Returns a MongoDB Get Object
+### db.get(collection) ⇒ [<code>Get</code>](#Get)
+Returns a DB Get Object
 
-**Kind**: instance method of [<code>Mongo</code>](#Mongo)  
-**Returns**: [<code>Get</code>](#Get) - MongoDB Get Object  
+**Kind**: instance method of [<code>DB</code>](#DB)  
+**Returns**: [<code>Get</code>](#Get) - DB Get Object  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | collection | <code>string</code> | The collection to query documents. |
 
-<a name="Mongo+insert"></a>
+<a name="DB+insert"></a>
 
-### mongo.insert(collection) ⇒ [<code>Insert</code>](#Insert)
-Returns a MongoDb Insert Object
+### db.insert(collection) ⇒ [<code>Insert</code>](#Insert)
+Returns a DB Insert Object
 
-**Kind**: instance method of [<code>Mongo</code>](#Mongo)  
-**Returns**: [<code>Insert</code>](#Insert) - MongoDB Insert Object  
+**Kind**: instance method of [<code>DB</code>](#DB)  
+**Returns**: [<code>Insert</code>](#Insert) - DB Insert Object  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | collection | <code>string</code> | The collection to insert documents. |
 
-<a name="Mongo+update"></a>
+<a name="DB+update"></a>
 
-### mongo.update(collection) ⇒ [<code>Update</code>](#Update)
-Returns a MongoDb Update Object
+### db.update(collection) ⇒ [<code>Update</code>](#Update)
+Returns a DB Update Object
 
-**Kind**: instance method of [<code>Mongo</code>](#Mongo)  
-**Returns**: [<code>Update</code>](#Update) - MongoDB Update Object  
+**Kind**: instance method of [<code>DB</code>](#DB)  
+**Returns**: [<code>Update</code>](#Update) - DB Update Object  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | collection | <code>string</code> | The collection to update documents. |
 
-<a name="Mongo+delete"></a>
+<a name="DB+delete"></a>
 
-### mongo.delete(collection) ⇒ [<code>Delete</code>](#Delete)
-Returns a MongoDb Delete Object
+### db.delete(collection) ⇒ [<code>Delete</code>](#Delete)
+Returns a DB Delete Object
 
-**Kind**: instance method of [<code>Mongo</code>](#Mongo)  
-**Returns**: [<code>Delete</code>](#Delete) - MongoDB Insert Object  
+**Kind**: instance method of [<code>DB</code>](#DB)  
+**Returns**: [<code>Delete</code>](#Delete) - DB Insert Object  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | collection | <code>string</code> | The collection to delete documents in. |
 
-<a name="Mongo+aggr"></a>
+<a name="DB+aggr"></a>
 
-### mongo.aggr(collection) ⇒ [<code>Delete</code>](#Delete)
-Returns a MongoDb Aggregate Object
+### db.aggr(collection) ⇒ [<code>Delete</code>](#Delete)
+Returns a DB Aggregate Object
 
-**Kind**: instance method of [<code>Mongo</code>](#Mongo)  
-**Returns**: [<code>Delete</code>](#Delete) - MongoDB Insert Object  
+**Kind**: instance method of [<code>DB</code>](#DB)  
+**Returns**: [<code>Delete</code>](#Delete) - DB Insert Object  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | collection | <code>string</code> | The collection to aggregate documents in. |
 
-<a name="Mongo+liveQuery"></a>
+<a name="DB+liveQuery"></a>
 
-### mongo.liveQuery(collection) ⇒ [<code>LiveQuery</code>](#external_LiveQuery)
+### db.liveQuery(collection) ⇒ [<code>LiveQuery</code>](#external_LiveQuery)
 Returns a LiveQuery Object
 
-**Kind**: instance method of [<code>Mongo</code>](#Mongo)  
+**Kind**: instance method of [<code>DB</code>](#DB)  
 **Returns**: [<code>LiveQuery</code>](#external_LiveQuery) - LiveQuery Object  
 
 | Param | Type | Description |
@@ -166,12 +167,12 @@ let unsubscribe = db.liveQuery('posts').where({}).subscribe(onSnapshot, onError)
 // Unsubscribe to clean up
 unsubscribe()
 ```
-<a name="Mongo+profile"></a>
+<a name="DB+profile"></a>
 
-### mongo.profile(id) ⇒ <code>Promise</code>
+### db.profile(id) ⇒ <code>Promise</code>
 Fetches the user profile
 
-**Kind**: instance method of [<code>Mongo</code>](#Mongo)  
+**Kind**: instance method of [<code>DB</code>](#DB)  
 **Returns**: <code>Promise</code> - Returns a promise containing response from server  
 
 | Param | Type | Description |
@@ -191,12 +192,12 @@ db.profile(id).then(res => {
   // Exception occured while processing request
 });
 ```
-<a name="Mongo+editProfile"></a>
+<a name="DB+editProfile"></a>
 
-### mongo.editProfile(id, email, name, pass) ⇒ <code>Promise</code>
+### db.editProfile(id, email, name, pass) ⇒ <code>Promise</code>
 Updates the user profile
 
-**Kind**: instance method of [<code>Mongo</code>](#Mongo)  
+**Kind**: instance method of [<code>DB</code>](#DB)  
 **Returns**: <code>Promise</code> - Return a promise containing response from server  
 
 | Param | Type | Description |
@@ -218,12 +219,12 @@ db.editProfile(id, email, name, pass).then(res => {
   // Exception occured while processing request
 });
 ```
-<a name="Mongo+profiles"></a>
+<a name="DB+profiles"></a>
 
-### mongo.profiles() ⇒ <code>Promise</code>
+### db.profiles() ⇒ <code>Promise</code>
 Fetches all the user profiles
 
-**Kind**: instance method of [<code>Mongo</code>](#Mongo)  
+**Kind**: instance method of [<code>DB</code>](#DB)  
 **Returns**: <code>Promise</code> - Returns a promise containing response from server  
 **Example**  
 ```js
@@ -238,12 +239,12 @@ db.profiles().then(res => {
   // Exception occured while processing request
 });
 ```
-<a name="Mongo+signIn"></a>
+<a name="DB+signIn"></a>
 
-### mongo.signIn(email, pass) ⇒ [<code>Promise.&lt;AuthResponse&gt;</code>](#AuthResponse)
+### db.signIn(email, pass) ⇒ [<code>Promise.&lt;AuthResponse&gt;</code>](#AuthResponse)
 Sends a sign in query to the server
 
-**Kind**: instance method of [<code>Mongo</code>](#Mongo)  
+**Kind**: instance method of [<code>DB</code>](#DB)  
 **Returns**: [<code>Promise.&lt;AuthResponse&gt;</code>](#AuthResponse) - Returns a promise containing response from server  
 
 | Param | Type | Description |
@@ -267,12 +268,12 @@ db.signIn('demo@example.com', '1234').then(res => {
   // Exception occured while processing request
 });
 ```
-<a name="Mongo+signUp"></a>
+<a name="DB+signUp"></a>
 
-### mongo.signUp(email, name, pass, role) ⇒ [<code>Promise.&lt;AuthResponse&gt;</code>](#AuthResponse)
+### db.signUp(email, name, pass, role) ⇒ [<code>Promise.&lt;AuthResponse&gt;</code>](#AuthResponse)
 Sends a sign up query to the server
 
-**Kind**: instance method of [<code>Mongo</code>](#Mongo)  
+**Kind**: instance method of [<code>DB</code>](#DB)  
 **Returns**: [<code>Promise.&lt;AuthResponse&gt;</code>](#AuthResponse) - Returns a promise containing response from server  
 
 | Param | Type | Description |
@@ -301,19 +302,20 @@ db.signUp('demo@example.com', 'UserName', '1234', 'default').then(res => {
 <a name="Insert"></a>
 
 ## Insert
-Class representing the MongoDB Insert Interface.
+Class representing the DB Insert Interface.
 
 **Kind**: global class  
 
 * [Insert](#Insert)
-    * [new Insert(appId, collection, url, options)](#new_Insert_new)
+    * [new Insert(appId, collection, url, options, db)](#new_Insert_new)
     * ~~[.one(doc)](#Insert+one) ⇒ <code>Promise</code>~~
     * ~~[.all(docs)](#Insert+all) ⇒ <code>Promise</code>~~
+    * ~~[.apply()](#Insert+apply) ⇒ <code>Promise</code>~~
 
 <a name="new_Insert_new"></a>
 
-### new Insert(appId, collection, url, options)
-Create an instance of the MongoDB Insert Interface.
+### new Insert(appId, collection, url, options, db)
+Create an instance of the DB Insert Interface.
 
 
 | Param | Type |
@@ -322,12 +324,13 @@ Create an instance of the MongoDB Insert Interface.
 | collection | <code>string</code> | 
 | url | <code>string</code> | 
 | options | <code>Object</code> | 
+| db | <code>string</code> | 
 
 **Example**  
 ```js
 import { API, cond, or, and } from 'space-api';
 
-const api = new API('my-project', 'http://localhost:8080');
+const api = new API('my-project', 'http://localhost:4122');
 const db = api.Mongo();
 
 const doc = { author: 'John', title: 'Title1', _id: 1 };
@@ -359,7 +362,7 @@ Makes the query to insert a single document.
 const doc = { author: 'John', title: 'Title1', _id: 1 };
 db.insert('posts').one(doc).then(res => ...)
 ```
-<a name="Insert+all"></a>
+<a name="Insert+apply"></a>
 
 ### ~~insert.all(docs) ⇒ <code>Promise</code>~~
 ***Deprecated***
@@ -378,15 +381,33 @@ Makes the query to insert multiple documents.
 const docs = [{ author: 'John', title: 'Title1', _id: 1 }];
 db.insert('posts').all(docs).then(res => ...)
 ```
+
 <a name="Get"></a>
 
+### ~~insert.apply() ⇒ <code>Promise</code>~~
+***Deprecated***
+
+Makes the query to insert multiple documents.
+
+**Kind**: instance method of [<code>Insert</code>](#Insert)  
+**Returns**: <code>Promise</code> - Returns a promise containing response from server.  
+
+
+**Example**  
+```js
+const docs = [{ author: 'John', title: 'Title1', _id: 1 }];
+db.insert('posts').doc(docs).apply().then(res => ...)
+```
+
+<a name="Insert+all"></a>
+
 ## Get
-Class representing the MongoDB Get Interface.
+Class representing the DB Get Interface.
 
 **Kind**: global class  
 
 * [Get](#Get)
-    * [new Get(appId, collection, url, options)](#new_Get_new)
+    * [new Get(appId, collection, url, options, db, op)](#new_Get_new)
     * [.where(...conditions)](#Get+where)
     * [.select(select)](#Get+select)
     * [.sort(...array)](#Get+sort)
@@ -399,8 +420,8 @@ Class representing the MongoDB Get Interface.
 
 <a name="new_Get_new"></a>
 
-### new Get(appId, collection, url, options)
-Create an instance of the MongoDB Get Interface.
+### new Get(appId, collection, url, options, db, op)
+Create an instance of the DB Get Interface.
 
 
 | Param | Type |
@@ -409,12 +430,14 @@ Create an instance of the MongoDB Get Interface.
 | collection | <code>string</code> | 
 | url | <code>string</code> | 
 | options | <code>Object</code> | 
+| db | <code>string</code> | 
+| op | <code>string</code> | 
 
 **Example**  
 ```js
 import { API, cond, or, and } from 'space-api';
 
-const api = new API('my-project', 'http://localhost:8080');
+const api = new API('my-project', 'http://localhost:4122');
 const db = api.Mongo();
 
 db.get('posts').where(and(cond('title', '==', 'Title1'))).all().then(res => {
@@ -558,12 +581,12 @@ db.get('posts').count().then(res => ...)
 <a name="Update"></a>
 
 ## Update
-Class representing the MongoDB Update Interface.
+Class representing the DB Update Interface.
 
 **Kind**: global class  
 
 * [Update](#Update)
-    * [new Update(appId, collection, url, options)](#new_Update_new)
+    * [new Update(appId, collection, url, options, db, op)](#new_Update_new)
     * [.where(...conditions)](#Update+where)
     * [.set(obj)](#Update+set)
     * [.push(obj)](#Update+push)
@@ -581,8 +604,8 @@ Class representing the MongoDB Update Interface.
 
 <a name="new_Update_new"></a>
 
-### new Update(appId, collection, url, options)
-Create an instance of the MongoDB Update Interface.
+### new Update(appId, collection, url, options, db, op)
+Create an instance of the DB Update Interface.
 
 
 | Param | Type |
@@ -591,12 +614,14 @@ Create an instance of the MongoDB Update Interface.
 | collection | <code>string</code> | 
 | url | <code>string</code> | 
 | options | <code>Object</code> | 
+| db | <code>string</code> | 
+| op | <code>string</code> | 
 
 **Example**  
 ```js
 import { API, cond, or, and } from 'space-api';
 
-const api = new API('my-project', 'http://localhost:8080');
+const api = new API('my-project', 'http://localhost:4122');
 const db = api.Mongo();
 
 db.update('posts').where(and(cond('title', '==', 'Title1'))).set({ title: 'Title2' }).all().then(res => {
@@ -798,20 +823,20 @@ Makes the query to update all, else insert a document.
 <a name="Delete"></a>
 
 ## Delete
-Class representing the MongoDB Delete Interface.
+Class representing the DB Delete Interface.
 
 **Kind**: global class  
 
 * [Delete](#Delete)
-    * [new Delete(appId, collection, url, options)](#new_Delete_new)
+    * [new Delete(appId, collection, url, options, db, op)](#new_Delete_new)
     * [.where(...conditions)](#Delete+where)
     * ~~[.one()](#Delete+one) ⇒ <code>Promise</code>~~
     * ~~[.all()](#Delete+all) ⇒ <code>Promise</code>~~
 
 <a name="new_Delete_new"></a>
 
-### new Delete(appId, collection, url, options)
-Create an instance of the MongoDB Delete Interface.
+### new Delete(appId, collection, url, options, db, op)
+Create an instance of the DB Delete Interface.
 
 
 | Param | Type |
@@ -820,12 +845,14 @@ Create an instance of the MongoDB Delete Interface.
 | collection | <code>string</code> | 
 | url | <code>string</code> | 
 | options | <code>Object</code> | 
+| db | <code>string</code> | 
+| op | <code>string</code> | 
 
 **Example**  
 ```js
 import { API, cond, or, and } from 'space-api';
 
-const api = new API('my-project', 'localhost:8080');
+const api = new API('my-project', 'localhost:4122');
 const db = api.Mongo();
 
 db.delete('posts').where(and(cond('title', '==', 'Title1'))).all().then(res => {
@@ -877,12 +904,12 @@ db.delete('posts').all().then(res => ...)
 <a name="Aggregate"></a>
 
 ## Aggregate
-Class representing the MongoDB Delete Interface.
+Class representing the DB Delete Interface.
 
 **Kind**: global class  
 
 * [Aggregate](#Aggregate)
-    * [new Aggregate(appId, collection, url, options)](#new_Aggregate_new)
+    * [new Aggregate(appId, collection, url, options, db, op)](#new_Aggregate_new)
     * [.pipe(pipeObj)](#Aggregate+pipe)
     * ~~[.one()](#Aggregate+one) ⇒ <code>Promise</code>~~
     * ~~[.all()](#Aggregate+all) ⇒ <code>Promise</code>~~
@@ -890,7 +917,7 @@ Class representing the MongoDB Delete Interface.
 <a name="new_Aggregate_new"></a>
 
 ### new Aggregate(appId, collection, url, options)
-Create an instance of the MongoDB Delete Interface.
+Create an instance of the DB Delete Interface.
 
 
 | Param | Type |
@@ -899,12 +926,14 @@ Create an instance of the MongoDB Delete Interface.
 | collection | <code>string</code> | 
 | url | <code>string</code> | 
 | options | <code>Object</code> | 
+| db | <code>string</code> | 
+| op | <code>string</code> | 
 
 **Example**  
 ```js
 import { API, cond, or, and } from 'space-api';
 
-const api = new API('my-project', 'http://localhost:8080');
+const api = new API('my-project', 'http://localhost:4122');
 const db = api.Mongo();
 
 const pipe = [
