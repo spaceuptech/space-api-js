@@ -9,11 +9,8 @@
 ## External
 
 <dl>
-<dt><a href="#external_Mongo">Mongo</a></dt>
-<dd><p>The MongoDB Client Interface.</p>
-</dd>
-<dt><a href="#external_SQL">SQL</a></dt>
-<dd><p>The SQL Client Interface.</p>
+<dt><a href="#external_DB">DB</a></dt>
+<dd><p>The DB Client Interface.</p>
 </dd>
 <dt><a href="#external_FileStore">FileStore</a></dt>
 <dd><p>The FileStore Client Interface.</p>
@@ -31,9 +28,9 @@ Class representing the client api.
     * [new Api(projectId, url)](#new_Api_new)
     * [.setToken(token)](#Api+setToken)
     * [.setProjectId(projectId)](#Api+setProjectId)
-    * [.Mongo()](#Api+Mongo) ⇒ [<code>Mongo</code>](#external_Mongo)
-    * [.Postgres()](#Api+Postgres) ⇒ [<code>SQL</code>](#external_SQL)
-    * [.MySQL()](#Api+MySQL) ⇒ [<code>SQL</code>](#external_SQL)
+    * [.Mongo()](#Api+Mongo) ⇒ [<code>DB</code>](#external_DB)
+    * [.Postgres()](#Api+Postgres) ⇒ [<code>DB</code>](#external_DB)
+    * [.MySQL()](#Api+MySQL) ⇒ <code>external:Db</code>
     * [.call(engineName, funcName, params, [timeout])](#Api+call) ⇒ <code>Promise</code>
     * [.FileStore()](#Api+FileStore) ⇒ [<code>FileStore</code>](#external_FileStore)
 
@@ -78,25 +75,25 @@ Set the new Project Id
 
 <a name="Api+Mongo"></a>
 
-### api.Mongo() ⇒ [<code>Mongo</code>](#external_Mongo)
-Returns a MongoDB client instance
+### api.Mongo() ⇒ [<code>DB</code>](#external_DB)
+Returns a DB client instance
 
 **Kind**: instance method of [<code>Api</code>](#Api)  
-**Returns**: [<code>Mongo</code>](#external_Mongo) - MongoDB client instance  
+**Returns**: [<code>DB</code>](#external_DB) - DB client instance  
 <a name="Api+Postgres"></a>
 
-### api.Postgres() ⇒ [<code>SQL</code>](#external_SQL)
-Returns a SQL client instance
+### api.Postgres() ⇒ [<code>DB</code>](#external_DB)
+Returns a DB client instance
 
 **Kind**: instance method of [<code>Api</code>](#Api)  
-**Returns**: [<code>SQL</code>](#external_SQL) - SQL client instance  
+**Returns**: [<code>DB</code>](#external_DB) - DB client instance  
 <a name="Api+MySQL"></a>
 
-### api.MySQL() ⇒ [<code>SQL</code>](#external_SQL)
-Returns a SQL client instance
+### api.MySQL() ⇒ <code>external:Db</code>
+Returns a Db client instance
 
 **Kind**: instance method of [<code>Api</code>](#Api)  
-**Returns**: [<code>SQL</code>](#external_SQL) - SQL client instance  
+**Returns**: <code>external:Db</code> - Db client instance  
 <a name="Api+call"></a>
 
 ### api.call(engineName, funcName, params, [timeout]) ⇒ <code>Promise</code>
@@ -131,21 +128,14 @@ api.call('my-engine', 'my-func', { msg: 'Function as a Service is awesome!' }, 1
 Returns a FileStore client instance
 
 **Kind**: instance method of [<code>Api</code>](#Api)  
-**Returns**: [<code>FileStore</code>](#external_FileStore) - SQL client instance  
-<a name="external_Mongo"></a>
+**Returns**: [<code>FileStore</code>](#external_FileStore) - FileStore client instance  
+<a name="external_DB"></a>
 
-## Mongo
-The MongoDB Client Interface.
-
-**Kind**: global external  
-**See**: [https://github.com/spaceuptech/space-api-js/wiki/Mongo](https://github.com/spaceuptech/space-api-js/wiki/Mongo)  
-<a name="external_SQL"></a>
-
-## SQL
-The SQL Client Interface.
+## DB
+The DB Client Interface.
 
 **Kind**: global external  
-**See**: [https://github.com/spaceuptech/space-api-js/wiki/SQL](https://github.com/spaceuptech/space-api-js/wiki/SQL)  
+**See**: [https://github.com/spaceuptech/space-api-js/wiki/DB](https://github.com/spaceuptech/space-api-js/wiki/DB)  
 <a name="external_FileStore"></a>
 
 ## FileStore

@@ -17,7 +17,7 @@
 <dd><p>Class representing the DB Delete Interface.</p>
 </dd>
 <dt><a href="#Aggregate">Aggregate</a></dt>
-<dd><p>Class representing the DB Delete Interface.</p>
+<dd><p>Class representing the DB Aggregate Interface.</p>
 </dd>
 </dl>
 
@@ -82,7 +82,7 @@ const db = api.Mongo();
 ```
 <a name="DB+get"></a>
 
-### db.get(collection) ⇒ [<code>Get</code>](#Get)
+### dB.get(collection) ⇒ [<code>Get</code>](#Get)
 Returns a DB Get Object
 
 **Kind**: instance method of [<code>DB</code>](#DB)  
@@ -94,7 +94,7 @@ Returns a DB Get Object
 
 <a name="DB+insert"></a>
 
-### db.insert(collection) ⇒ [<code>Insert</code>](#Insert)
+### dB.insert(collection) ⇒ [<code>Insert</code>](#Insert)
 Returns a DB Insert Object
 
 **Kind**: instance method of [<code>DB</code>](#DB)  
@@ -106,7 +106,7 @@ Returns a DB Insert Object
 
 <a name="DB+update"></a>
 
-### db.update(collection) ⇒ [<code>Update</code>](#Update)
+### dB.update(collection) ⇒ [<code>Update</code>](#Update)
 Returns a DB Update Object
 
 **Kind**: instance method of [<code>DB</code>](#DB)  
@@ -118,7 +118,7 @@ Returns a DB Update Object
 
 <a name="DB+delete"></a>
 
-### db.delete(collection) ⇒ [<code>Delete</code>](#Delete)
+### dB.delete(collection) ⇒ [<code>Delete</code>](#Delete)
 Returns a DB Delete Object
 
 **Kind**: instance method of [<code>DB</code>](#DB)  
@@ -130,7 +130,7 @@ Returns a DB Delete Object
 
 <a name="DB+aggr"></a>
 
-### db.aggr(collection) ⇒ [<code>Delete</code>](#Delete)
+### dB.aggr(collection) ⇒ [<code>Delete</code>](#Delete)
 Returns a DB Aggregate Object
 
 **Kind**: instance method of [<code>DB</code>](#DB)  
@@ -142,7 +142,7 @@ Returns a DB Aggregate Object
 
 <a name="DB+liveQuery"></a>
 
-### db.liveQuery(collection) ⇒ [<code>LiveQuery</code>](#external_LiveQuery)
+### dB.liveQuery(collection) ⇒ [<code>LiveQuery</code>](#external_LiveQuery)
 Returns a LiveQuery Object
 
 **Kind**: instance method of [<code>DB</code>](#DB)  
@@ -169,7 +169,7 @@ subscription.unsubscribe()
 ```
 <a name="DB+profile"></a>
 
-### db.profile(id) ⇒ <code>Promise</code>
+### dB.profile(id) ⇒ <code>Promise</code>
 Fetches the user profile
 
 **Kind**: instance method of [<code>DB</code>](#DB)  
@@ -194,7 +194,7 @@ db.profile(id).then(res => {
 ```
 <a name="DB+editProfile"></a>
 
-### db.editProfile(id, email, name, pass) ⇒ <code>Promise</code>
+### dB.editProfile(id, email, name, pass) ⇒ <code>Promise</code>
 Updates the user profile
 
 **Kind**: instance method of [<code>DB</code>](#DB)  
@@ -221,7 +221,7 @@ db.editProfile(id, email, name, pass).then(res => {
 ```
 <a name="DB+profiles"></a>
 
-### db.profiles() ⇒ <code>Promise</code>
+### dB.profiles() ⇒ <code>Promise</code>
 Fetches all the user profiles
 
 **Kind**: instance method of [<code>DB</code>](#DB)  
@@ -241,7 +241,7 @@ db.profiles().then(res => {
 ```
 <a name="DB+signIn"></a>
 
-### db.signIn(email, pass) ⇒ [<code>Promise.&lt;AuthResponse&gt;</code>](#AuthResponse)
+### dB.signIn(email, pass) ⇒ [<code>Promise.&lt;AuthResponse&gt;</code>](#AuthResponse)
 Sends a sign in query to the server
 
 **Kind**: instance method of [<code>DB</code>](#DB)  
@@ -270,7 +270,7 @@ db.signIn('demo@example.com', '1234').then(res => {
 ```
 <a name="DB+signUp"></a>
 
-### db.signUp(email, name, pass, role) ⇒ [<code>Promise.&lt;AuthResponse&gt;</code>](#AuthResponse)
+### dB.signUp(email, name, pass, role) ⇒ [<code>Promise.&lt;AuthResponse&gt;</code>](#AuthResponse)
 Sends a sign up query to the server
 
 **Kind**: instance method of [<code>DB</code>](#DB)  
@@ -310,7 +310,6 @@ Class representing the DB Insert Interface.
     * [new Insert(appId, collection, url, options, db)](#new_Insert_new)
     * ~~[.one(doc)](#Insert+one) ⇒ <code>Promise</code>~~
     * ~~[.all(docs)](#Insert+all) ⇒ <code>Promise</code>~~
-    * ~~[.apply()](#Insert+apply) ⇒ <code>Promise</code>~~
 
 <a name="new_Insert_new"></a>
 
@@ -362,7 +361,7 @@ Makes the query to insert a single document.
 const doc = { author: 'John', title: 'Title1', _id: 1 };
 db.insert('posts').one(doc).then(res => ...)
 ```
-<a name="Insert+apply"></a>
+<a name="Insert+all"></a>
 
 ### ~~insert.all(docs) ⇒ <code>Promise</code>~~
 ***Deprecated***
@@ -381,25 +380,7 @@ Makes the query to insert multiple documents.
 const docs = [{ author: 'John', title: 'Title1', _id: 1 }];
 db.insert('posts').all(docs).then(res => ...)
 ```
-
 <a name="Get"></a>
-
-### ~~insert.apply() ⇒ <code>Promise</code>~~
-***Deprecated***
-
-Makes the query to insert multiple documents.
-
-**Kind**: instance method of [<code>Insert</code>](#Insert)  
-**Returns**: <code>Promise</code> - Returns a promise containing response from server.  
-
-
-**Example**  
-```js
-const docs = [{ author: 'John', title: 'Title1', _id: 1 }];
-db.insert('posts').doc(docs).apply().then(res => ...)
-```
-
-<a name="Insert+all"></a>
 
 ## Get
 Class representing the DB Get Interface.
@@ -904,7 +885,7 @@ db.delete('posts').all().then(res => ...)
 <a name="Aggregate"></a>
 
 ## Aggregate
-Class representing the DB Delete Interface.
+Class representing the DB Aggregate Interface.
 
 **Kind**: global class  
 
@@ -916,8 +897,8 @@ Class representing the DB Delete Interface.
 
 <a name="new_Aggregate_new"></a>
 
-### new Aggregate(appId, collection, url, options)
-Create an instance of the DB Delete Interface.
+### new Aggregate(appId, collection, url, options, db, op)
+Create an instance of the DB Aggregate Interface.
 
 
 | Param | Type |
@@ -941,7 +922,7 @@ const pipe = [
   { $group: { _id: '$cust_id', total: { $sum: '$amount' } } }
 ]
 
-db.aggr('posts').pipe(pipe).all().then(res => {
+db.aggr('posts').pipe(pipe).apply().then(res => {
   if (res.status === 200) {
     // res.data contains the documents returned by the database
     console.log('Response:', res.data);
