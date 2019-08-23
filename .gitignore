@@ -69,4 +69,6 @@ bundle
 # misc test files
 test/misc
 
+test.js
+
 publish.sh
