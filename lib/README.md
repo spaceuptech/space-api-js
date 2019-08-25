@@ -33,6 +33,7 @@ Class representing the client api.
     * [.MySQL()](#Api+MySQL) ⇒ <code>external:Db</code>
     * [.call(engineName, funcName, params, [timeout])](#Api+call) ⇒ <code>Promise</code>
     * [.FileStore()](#Api+FileStore) ⇒ [<code>FileStore</code>](#external_FileStore)
+    * [.Pubsub()](#Api+Pubsub) ⇒ <code>external:Pubsub</code>
 
 <a name="new_Api_new"></a>
 
@@ -129,6 +130,13 @@ Returns a FileStore client instance
 
 **Kind**: instance method of [<code>Api</code>](#Api)  
 **Returns**: [<code>FileStore</code>](#external_FileStore) - FileStore client instance  
+<a name="Api+Pubsub"></a>
+
+### api.Pubsub() ⇒ <code>external:Pubsub</code>
+Returns a Pubsub client instance
+
+**Kind**: instance method of [<code>Api</code>](#Api)  
+**Returns**: <code>external:Pubsub</code> - Pubsub client instance  
 <a name="external_DB"></a>
 
 ## DB
