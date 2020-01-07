@@ -1,40 +1,47 @@
 var { API, cond, and, or } = require("../../index")
 const generateId = require('../../lib/utils').generateId;
 
-const api = new API('todo-app', 'http://localhost:4122/')
-const db = api.Mongo()
+const api = new API('todo_app', 'http://localhost:4122/')
+const db = api.DB("db")
 
-const onSnapshot = (docs, type, changedDoc) => {
-  console.log('Snapshot:', docs, 'Type: ', type, 'ChangedDoc: ', changedDoc)
-}
+const userId = 'user1'
+const otherUserId = 'user2'
 
-const onError = (err) => {
-  console.log('Operation failed:', err)
-}
-var userId = ''
-db.signIn('a@a.a', '123').then(res => {
-  if (res.status !== 200) {
-    throw new Error('Could not log in')
-  }
-  userId = res.data.user._id
-  // Get todos from the database
-  db.liveQuery("todos")
-    .where(cond("userId", "==", userId))
-    .subscribe(onSnapshot, onError)
-}).catch(e => {
-  console.log("eror", e)
-})
+// db.liveQuery("todos")
+//   .where(cond("user_id", "==", userId))
+//   .subscribe(
+//     (docs, type, find, changedDoc) => {
+//       console.log('Snapshot:', docs, '\nType: ', type, '\nFind: ', find, '\nChangedDoc', changedDoc, '\n\n')
+//     },
+//     (err) => console.log('Operation failed:', err)
+//   )
+
+db.liveQuery("todos")
+  .where(cond("userId", "==", userId))
+  .options({ changesOnly: false })
+  .subscribe(
+    (docs, type, find, changedDoc) => {
+      // console.log('Snapshot:', docs, '\nType: ', type, '\nFind: ', find, '\nChangedDoc', changedDoc, '\n\n')
+    },
+    (err) => console.log('Operation failed:', err)
+  )
+
+const id1 = generateId()
 
 setTimeout(() => {
-  const id1 = generateId()
-  db.insert('todos').one({_id: id1, todo: 'some todo11', userId: userId}).then(res => {
-    //console.log(res)
-  })
-  db.insert('todos').one({_id: generateId(), todo: 'some todo33', userId: userId}).then(res => {
-    //console.log(res)
-  })
-  db.insert('todos').one({_id: generateId(), todo: 'some todo22', userId: 'userId'}).then(res => {
-    //console.log(res)
-  })
-  db.update('todos').where(cond('_id', '==', id1)).set({todo: 'some todo111'}).one().then(res => {})
+  db.insert('todos').doc({ _id: id1, todo: 'some todo 1', user_id: userId }).apply()
+  db.insert('todos').doc({ _id: generateId(), todo: 'some todo 2', user_id: otherUserId }).apply()
+  db.insert('todos').doc({ _id: generateId(), todo: 'some todo 3', user_id: userId }).apply()
+}, 1000)
+
+setTimeout(() => {
+  db.update('todos').where(cond('_id', '==', id1)).set({ todo: 'some todo111' }).apply()
+}, 2000)
+
+setTimeout(() => {
+  db.delete('todos').where(cond('_id', '==', id1)).apply()
 }, 3000)
+
+setTimeout(() => {
+  db.delete('todos').apply()
+}, 4000)

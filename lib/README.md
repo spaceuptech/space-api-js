@@ -12,6 +12,9 @@
 <dt><a href="#external_DB">DB</a></dt>
 <dd><p>The DB Client Interface.</p>
 </dd>
+<dt><a href="#external_Realtime">Realtime</a></dt>
+<dd><p>The Realtime Client Interface.</p>
+</dd>
 <dt><a href="#external_FileStore">FileStore</a></dt>
 <dd><p>The FileStore Client Interface.</p>
 </dd>
@@ -28,12 +31,12 @@ Class representing the client api.
     * [new Api(projectId, url)](#new_Api_new)
     * [.setToken(token)](#Api+setToken)
     * [.setProjectId(projectId)](#Api+setProjectId)
-    * [.Mongo()](#Api+Mongo) ⇒ [<code>DB</code>](#external_DB)
-    * [.Postgres()](#Api+Postgres) ⇒ [<code>DB</code>](#external_DB)
-    * [.MySQL()](#Api+MySQL) ⇒ <code>external:Db</code>
-    * [.call(engineName, funcName, params, [timeout])](#Api+call) ⇒ <code>Promise</code>
+    * ~~[.Mongo()](#Api+Mongo) ⇒ [<code>DB</code>](#external_DB)~~
+    * ~~[.Postgres()](#Api+Postgres) ⇒ [<code>DB</code>](#external_DB)~~
+    * ~~[.MySQL()](#Api+MySQL) ⇒ [<code>DB</code>](#external_DB)~~
+    * [.DB(db)](#Api+DB) ⇒ [<code>DB</code>](#external_DB)
+    * [.call(service, endpoint, params, [timeout])](#Api+call) ⇒ <code>Promise</code>
     * [.FileStore()](#Api+FileStore) ⇒ [<code>FileStore</code>](#external_FileStore)
-    * [.Pubsub()](#Api+Pubsub) ⇒ <code>external:Pubsub</code>
 
 <a name="new_Api_new"></a>
 
@@ -76,43 +79,61 @@ Set the new Project Id
 
 <a name="Api+Mongo"></a>
 
-### api.Mongo() ⇒ [<code>DB</code>](#external_DB)
-Returns a DB client instance
+### ~~api.Mongo() ⇒ [<code>DB</code>](#external_DB)~~
+***Deprecated***
+
+Returns a Mongo DB client instance
 
 **Kind**: instance method of [<code>Api</code>](#Api)  
 **Returns**: [<code>DB</code>](#external_DB) - DB client instance  
 <a name="Api+Postgres"></a>
 
-### api.Postgres() ⇒ [<code>DB</code>](#external_DB)
-Returns a DB client instance
+### ~~api.Postgres() ⇒ [<code>DB</code>](#external_DB)~~
+***Deprecated***
+
+Returns a Postgres DB client instance
 
 **Kind**: instance method of [<code>Api</code>](#Api)  
 **Returns**: [<code>DB</code>](#external_DB) - DB client instance  
 <a name="Api+MySQL"></a>
 
-### api.MySQL() ⇒ <code>external:Db</code>
-Returns a Db client instance
+### ~~api.MySQL() ⇒ [<code>DB</code>](#external_DB)~~
+***Deprecated***
+
+Returns a MySQL Db client instance
 
 **Kind**: instance method of [<code>Api</code>](#Api)  
-**Returns**: <code>external:Db</code> - Db client instance  
+**Returns**: [<code>DB</code>](#external_DB) - Db client instance  
+<a name="Api+DB"></a>
+
+### api.DB(db) ⇒ [<code>DB</code>](#external_DB)
+Returns a DB client instance
+
+**Kind**: instance method of [<code>Api</code>](#Api)  
+**Returns**: [<code>DB</code>](#external_DB) - DB client instance  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| db | <code>string</code> | The alias name of the database |
+
 <a name="Api+call"></a>
 
-### api.call(engineName, funcName, params, [timeout]) ⇒ <code>Promise</code>
-Calls a function from Function as a Service Engine
+### api.call(service, endpoint, params, [timeout]) ⇒ <code>Promise</code>
+Calls an endpoint from the remote service
 
 **Kind**: instance method of [<code>Api</code>](#Api)  
 **Returns**: <code>Promise</code> - Returns a promise  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
-| engineName | <code>string</code> |  | The name of engine with which the function is registered |
-| funcName | <code>string</code> |  | The name of function to be called |
-| params | <code>Object</code> |  | The params for the function |
+| service | <code>string</code> |  | The name of service |
+| endpoint | <code>string</code> |  | The name of endpoint to be called |
+| params | <code>Object</code> |  | The params to be sent to the remote service |
 | [timeout] | <code>string</code> | <code>5000</code> | Timeout in milliseconds |
 
 **Example**  
 ```js
-api.call('my-engine', 'my-func', { msg: 'Function as a Service is awesome!' }, 1000)
+api.call('my_service', 'my_endpoint', { msg: 'Remote services are awesome!' }, 1000)
 .then(res => {
   if (res.status === 200) {
     // res.data contains the response given by the function
@@ -130,13 +151,6 @@ Returns a FileStore client instance
 
 **Kind**: instance method of [<code>Api</code>](#Api)  
 **Returns**: [<code>FileStore</code>](#external_FileStore) - FileStore client instance  
-<a name="Api+Pubsub"></a>
-
-### api.Pubsub() ⇒ <code>external:Pubsub</code>
-Returns a Pubsub client instance
-
-**Kind**: instance method of [<code>Api</code>](#Api)  
-**Returns**: <code>external:Pubsub</code> - Pubsub client instance  
 <a name="external_DB"></a>
 
 ## DB
@@ -144,6 +158,13 @@ The DB Client Interface.
 
 **Kind**: global external  
 **See**: [https://github.com/spaceuptech/space-api-js/wiki/DB](https://github.com/spaceuptech/space-api-js/wiki/DB)  
+<a name="external_Realtime"></a>
+
+## Realtime
+The Realtime Client Interface.
+
+**Kind**: global external  
+**See**: [https://github.com/spaceuptech/space-api-js/wiki/Realtime](https://github.com/spaceuptech/space-api-js/wiki/Realtime)  
 <a name="external_FileStore"></a>
 
 ## FileStore

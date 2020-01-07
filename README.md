@@ -28,22 +28,14 @@ Documentation for real time feature is given below:
 import { API, and, or, cond } from 'space-api';
 
 const api = new API('demo-project', 'http://localhost:4122');
-
-// For MongoDB
-const db = api.Mongo();
-
-// For PostgresQL
-const db = api.Postgres();
-
-// For MySQL
-const db = api.MySQL();
+const db = api.DB("mongo") // Put your database alias name here to create DB instance
 ```
 **Note: Multiple databases may be used simultaneously.**
 
 ### Insert a document into the database
 ```js
 const doc = {_id: 1, title: "Title 1", content: "My first record"};
-db.insert('COLLECTION_NAME').one(doc).then(res => {
+db.insert('COLLECTION_NAME').doc(doc).apply().then(res => {
   if (res.status === 200) {
     // Document inserted successfully
     return;
@@ -59,7 +51,7 @@ db.insert('COLLECTION_NAME').one(doc).then(res => {
 const find = and(cond('title', '==', 'Title1'), cond('author', '==', 'Jon'));
 db.get('COLLECTION_NAME').where(find)
   .skip(10).limit(10)
-  .all()
+  .apply()
   .then(res => {
     if (res.status === 200) {
       // res.data contains the documents returned by the database
@@ -76,7 +68,7 @@ db.get('COLLECTION_NAME').where(find)
 const find = and(cond('author', '==', 'Jon'));
 db.update('COLLECTION_NAME').where(find)
   .set({ author: 'John' })
-  .all()
+  .apply()
   .then(res => {
     if (res.status === 200) {
       // Document updated successfully
@@ -91,7 +83,7 @@ db.update('COLLECTION_NAME').where(find)
 ```js
 const find = and(cond('author', '==', 'John'));
 db.delete('COLLECTION_NAME').where(find)
-  .many()
+  .apply()
   .then(res => {
     if (res.status === 200) {
       // Document deleted successfully
@@ -104,13 +96,13 @@ db.delete('COLLECTION_NAME').where(find)
 
 ### Get real time updates
 ```js
-const onSnapshot  = (docs, type, changedDoc) => {
+const onSnapshot  = (docs, type, find, changedDoc) => {
   if (type === 'initial') {
     console.log('Initial docs ', docs)
-      return
-    }
-    console.log(docs, type, changedDoc)
-   }
+    return
+  }
+  console.log(docs, type, find, changedDoc)
+}
  
 const onError = (err) => {
   console.log('Monitor error', err)

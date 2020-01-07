@@ -9,7 +9,7 @@
 ## Functions
 
 <dl>
-<dt><a href="#OnSnapshot">OnSnapshot(docs, type, changedDoc)</a></dt>
+<dt><a href="#OnSnapshot">OnSnapshot(docs, type, find, changedDoc)</a></dt>
 <dd><p>Callback for realtime updates to the subscribed data</p>
 </dd>
 <dt><a href="#OnError">OnError(err)</a></dt>
@@ -52,11 +52,11 @@ Create an instance of the LiveQuery Interface.
 import { API, cond, or, and } from 'space-api';
 const api = new API('my-project');
 
-// For MongoDb Database
-const db = api.Mongo();
+// Create database instance
+const db = api.DB("mongo");
 
-const onSnapshot  = (docs, type, changedDoc) => {
-   console.log(docs, type, changedDoc)
+const onSnapshot  = (docs, type, find, changedDoc) => {
+   console.log(docs, type, find, changedDoc)
  }
 
  const onError = (err) => {
@@ -104,7 +104,7 @@ Subscribes for real time updates
 
 <a name="OnSnapshot"></a>
 
-## OnSnapshot(docs, type, changedDoc)
+## OnSnapshot(docs, type, find, changedDoc)
 Callback for realtime updates to the subscribed data
 
 **Kind**: global function  
@@ -113,6 +113,7 @@ Callback for realtime updates to the subscribed data
 | --- | --- | --- |
 | docs | <code>Array</code> | The updated docs |
 | type | <code>string</code> | The type of operation performed |
+| find | <code>Object</code> | The object containing those fields of the concerned doc that form it's unique identity (i.e the primary field or the fields in a unique index) |
 | changedDoc | <code>Object</code> | The doc that changed |
 
 <a name="OnError"></a>

@@ -48,9 +48,13 @@ Class representing the DB Client Interface.
 * [DB](#DB)
     * [new DB(appId, url, options, db, realTime)](#new_DB_new)
     * [.get(collection)](#DB+get) ⇒ [<code>Get</code>](#Get)
+    * [.getOne(collection)](#DB+getOne) ⇒ [<code>Get</code>](#Get)
     * [.insert(collection)](#DB+insert) ⇒ [<code>Insert</code>](#Insert)
     * [.update(collection)](#DB+update) ⇒ [<code>Update</code>](#Update)
+    * [.updateOne(collection)](#DB+updateOne) ⇒ [<code>Update</code>](#Update)
+    * [.upsert(collection)](#DB+upsert) ⇒ [<code>Update</code>](#Update)
     * [.delete(collection)](#DB+delete) ⇒ [<code>Delete</code>](#Delete)
+    * [.deleteOne(collection)](#DB+deleteOne) ⇒ [<code>Delete</code>](#Delete)
     * [.aggr(collection)](#DB+aggr) ⇒ [<code>Delete</code>](#Delete)
     * [.liveQuery(collection)](#DB+liveQuery) ⇒ [<code>LiveQuery</code>](#external_LiveQuery)
     * [.profile(id)](#DB+profile) ⇒ <code>Promise</code>
@@ -92,6 +96,18 @@ Returns a DB Get Object
 | --- | --- | --- |
 | collection | <code>string</code> | The collection to query documents. |
 
+<a name="DB+getOne"></a>
+
+### dB.getOne(collection) ⇒ [<code>Get</code>](#Get)
+Returns a DB Get Object to get one particular object
+
+**Kind**: instance method of [<code>DB</code>](#DB)  
+**Returns**: [<code>Get</code>](#Get) - DB Get Object  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| collection | <code>string</code> | The collection to query documents. |
+
 <a name="DB+insert"></a>
 
 ### dB.insert(collection) ⇒ [<code>Insert</code>](#Insert)
@@ -107,7 +123,7 @@ Returns a DB Insert Object
 <a name="DB+update"></a>
 
 ### dB.update(collection) ⇒ [<code>Update</code>](#Update)
-Returns a DB Update Object
+Returns a DB Update Object to update all matching documents
 
 **Kind**: instance method of [<code>DB</code>](#DB)  
 **Returns**: [<code>Update</code>](#Update) - DB Update Object  
@@ -115,6 +131,30 @@ Returns a DB Update Object
 | Param | Type | Description |
 | --- | --- | --- |
 | collection | <code>string</code> | The collection to update documents. |
+
+<a name="DB+updateOne"></a>
+
+### dB.updateOne(collection) ⇒ [<code>Update</code>](#Update)
+Returns a DB Update Object to update a particular document
+
+**Kind**: instance method of [<code>DB</code>](#DB)  
+**Returns**: [<code>Update</code>](#Update) - DB Update Object  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| collection | <code>string</code> | The collection to update document. |
+
+<a name="DB+upsert"></a>
+
+### dB.upsert(collection) ⇒ [<code>Update</code>](#Update)
+Returns a DB Update Object to upsert a particular document
+
+**Kind**: instance method of [<code>DB</code>](#DB)  
+**Returns**: [<code>Update</code>](#Update) - DB Update Object  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| collection | <code>string</code> | The collection to update document. |
 
 <a name="DB+delete"></a>
 
@@ -127,6 +167,18 @@ Returns a DB Delete Object
 | Param | Type | Description |
 | --- | --- | --- |
 | collection | <code>string</code> | The collection to delete documents in. |
+
+<a name="DB+deleteOne"></a>
+
+### dB.deleteOne(collection) ⇒ [<code>Delete</code>](#Delete)
+Returns a DB Delete Object to delete a particular document
+
+**Kind**: instance method of [<code>DB</code>](#DB)  
+**Returns**: [<code>Delete</code>](#Delete) - DB Delete Object  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| collection | <code>string</code> | The collection to delete document. |
 
 <a name="DB+aggr"></a>
 
@@ -310,6 +362,9 @@ Class representing the DB Insert Interface.
     * [new Insert(appId, collection, url, options, db)](#new_Insert_new)
     * ~~[.one(doc)](#Insert+one) ⇒ <code>Promise</code>~~
     * ~~[.all(docs)](#Insert+all) ⇒ <code>Promise</code>~~
+    * [.apply(docs)](#Insert+apply) ⇒ <code>Promise</code>
+    * [.docs(docs)](#Insert+docs)
+    * [.doc(doc)](#Insert+doc)
 
 <a name="new_Insert_new"></a>
 
@@ -380,6 +435,45 @@ Makes the query to insert multiple documents.
 const docs = [{ author: 'John', title: 'Title1', _id: 1 }];
 db.insert('posts').all(docs).then(res => ...)
 ```
+<a name="Insert+apply"></a>
+
+### insert.apply(docs) ⇒ <code>Promise</code>
+Makes the query to insert multiple documents.
+
+**Kind**: instance method of [<code>Insert</code>](#Insert)  
+**Returns**: <code>Promise</code> - Returns a promise containing response from server.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| docs | <code>Array.&lt;Object&gt;</code> | The documents to be inserted. |
+
+**Example**  
+```js
+const docs = [{ author: 'John', title: 'Title1', _id: 1 }];
+db.insert('posts').docs(docs).apply().then(res => ...)
+```
+<a name="Insert+docs"></a>
+
+### insert.docs(docs)
+Accepts the documents to be inserted.
+
+**Kind**: instance method of [<code>Insert</code>](#Insert)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| docs | <code>Array.&lt;Object&gt;</code> | The documents to be inserted. |
+
+<a name="Insert+doc"></a>
+
+### insert.doc(doc)
+Accepts the document to be inserted.
+
+**Kind**: instance method of [<code>Insert</code>](#Insert)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| doc | <code>Array.&lt;Object&gt;</code> | The document to be inserted. |
+
 <a name="Get"></a>
 
 ## Get
@@ -396,6 +490,7 @@ Class representing the DB Get Interface.
     * [.limit(num)](#Get+limit)
     * ~~[.one()](#Get+one) ⇒ <code>Promise</code>~~
     * ~~[.all()](#Get+all) ⇒ <code>Promise</code>~~
+    * [.apply()](#Get+apply) ⇒ <code>Promise</code>
     * ~~[.distinct()](#Get+distinct) ⇒ <code>Promise</code>~~
     * ~~[.count()](#Get+count)~~
 
@@ -525,13 +620,24 @@ db.get('posts').one().then(res => ...)
 ### ~~get.all() ⇒ <code>Promise</code>~~
 ***Deprecated***
 
-Makes the query to return a multiple documents as an array. It is possible for an empty array to be returned.
+Makes the query to return multiple documents as an array. It is possible for an empty array to be returned.
 
 **Kind**: instance method of [<code>Get</code>](#Get)  
 **Returns**: <code>Promise</code> - Returns a promise containing response from server.  
 **Example**  
 ```js
 db.get('posts').all().then(res => ...)
+```
+<a name="Get+apply"></a>
+
+### get.apply() ⇒ <code>Promise</code>
+Makes the query to return multiple documents as an array. It is possible for an empty array to be returned.
+
+**Kind**: instance method of [<code>Get</code>](#Get)  
+**Returns**: <code>Promise</code> - Returns a promise containing response from server.  
+**Example**  
+```js
+db.get('posts').apply().then(res => ...)
 ```
 <a name="Get+distinct"></a>
 
@@ -581,7 +687,8 @@ Class representing the DB Update Interface.
     * [.currentDate(...values)](#Update+currentDate)
     * ~~[.one()](#Update+one) ⇒ <code>Promise</code>~~
     * ~~[.all()](#Update+all) ⇒ <code>Promise</code>~~
-    * [.upsert()](#Update+upsert)
+    * [.apply()](#Update+apply) ⇒ <code>Promise</code>
+    * [.upsert()](#Update+upsert) ⇒ <code>Promise</code>
 
 <a name="new_Update_new"></a>
 
@@ -795,12 +902,20 @@ Makes the query to update all documents which matches.
 
 **Kind**: instance method of [<code>Update</code>](#Update)  
 **Returns**: <code>Promise</code> - Returns a promise containing response from server  
+<a name="Update+apply"></a>
+
+### update.apply() ⇒ <code>Promise</code>
+Makes the query to update all documents which matches.
+
+**Kind**: instance method of [<code>Update</code>](#Update)  
+**Returns**: <code>Promise</code> - Returns a promise containing response from server  
 <a name="Update+upsert"></a>
 
-### update.upsert()
+### update.upsert() ⇒ <code>Promise</code>
 Makes the query to update all, else insert a document.
 
 **Kind**: instance method of [<code>Update</code>](#Update)  
+**Returns**: <code>Promise</code> - Returns a promise containing response from server  
 <a name="Delete"></a>
 
 ## Delete
@@ -813,6 +928,7 @@ Class representing the DB Delete Interface.
     * [.where(...conditions)](#Delete+where)
     * ~~[.one()](#Delete+one) ⇒ <code>Promise</code>~~
     * ~~[.all()](#Delete+all) ⇒ <code>Promise</code>~~
+    * [.apply()](#Delete+apply) ⇒ <code>Promise</code>
 
 <a name="new_Delete_new"></a>
 
@@ -882,6 +998,17 @@ Makes the query to delete all the documents which match.
 ```js
 db.delete('posts').all().then(res => ...)
 ```
+<a name="Delete+apply"></a>
+
+### delete.apply() ⇒ <code>Promise</code>
+Makes the query to delete all the documents which match.
+
+**Kind**: instance method of [<code>Delete</code>](#Delete)  
+**Returns**: <code>Promise</code> - Returns a promise containing response from server.  
+**Example**  
+```js
+db.delete('posts').apply().then(res => ...)
+```
 <a name="Aggregate"></a>
 
 ## Aggregate
@@ -894,6 +1021,7 @@ Class representing the DB Aggregate Interface.
     * [.pipe(pipeObj)](#Aggregate+pipe)
     * ~~[.one()](#Aggregate+one) ⇒ <code>Promise</code>~~
     * ~~[.all()](#Aggregate+all) ⇒ <code>Promise</code>~~
+    * [.apply()](#Aggregate+apply) ⇒ <code>Promise</code>
 
 <a name="new_Aggregate_new"></a>
 
@@ -968,6 +1096,17 @@ Makes the query to return all objects.
 **Example**  
 ```js
 db.aggr('posts').pipe([...]).all().then(res => ...)
+```
+<a name="Aggregate+apply"></a>
+
+### aggregate.apply() ⇒ <code>Promise</code>
+Makes the query to return all objects.
+
+**Kind**: instance method of [<code>Aggregate</code>](#Aggregate)  
+**Returns**: <code>Promise</code> - Returns a promise containing response from server.  
+**Example**  
+```js
+db.aggr('posts').pipe([...]).apply().then(res => ...)
 ```
 <a name="User"></a>
 
