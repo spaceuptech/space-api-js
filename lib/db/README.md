@@ -82,7 +82,7 @@ Create an instance of the DB Client Interface.
 import { API } from 'space-api';
 
 const api = new API('my-project', 'http://localhost:4122');
-const db = api.Mongo();
+const db = api.DB("mongo");
 ```
 <a name="DB+get"></a>
 
@@ -385,7 +385,7 @@ Create an instance of the DB Insert Interface.
 import { API, cond, or, and } from 'space-api';
 
 const api = new API('my-project', 'http://localhost:4122');
-const db = api.Mongo();
+const db = api.DB("mongo");
 
 const doc = { author: 'John', title: 'Title1', _id: 1 };
 db.insert('posts').one(doc).then(res => {
@@ -514,7 +514,7 @@ Create an instance of the DB Get Interface.
 import { API, cond, or, and } from 'space-api';
 
 const api = new API('my-project', 'http://localhost:4122');
-const db = api.Mongo();
+const db = api.DB("mongo");
 
 db.get('posts').where(and(cond('title', '==', 'Title1'))).all().then(res => {
   if (res.status === 200) {
@@ -710,7 +710,7 @@ Create an instance of the DB Update Interface.
 import { API, cond, or, and } from 'space-api';
 
 const api = new API('my-project', 'http://localhost:4122');
-const db = api.Mongo();
+const db = api.DB("mongo");
 
 db.update('posts').where(and(cond('title', '==', 'Title1'))).set({ title: 'Title2' }).all().then(res => {
   if (res.status === 200) {
@@ -950,7 +950,7 @@ Create an instance of the DB Delete Interface.
 import { API, cond, or, and } from 'space-api';
 
 const api = new API('my-project', 'localhost:4122');
-const db = api.Mongo();
+const db = api.DB("mongo");
 
 db.delete('posts').where(and(cond('title', '==', 'Title1'))).all().then(res => {
   if (res.status === 200) {
@@ -1043,7 +1043,7 @@ Create an instance of the DB Aggregate Interface.
 import { API, cond, or, and } from 'space-api';
 
 const api = new API('my-project', 'http://localhost:4122');
-const db = api.Mongo();
+const db = api.DB("mongo");
 
 const pipe = [
   { $match: { status: 'A' } },
