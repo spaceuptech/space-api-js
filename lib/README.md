@@ -4,6 +4,9 @@
 <dt><a href="#Api">Api</a></dt>
 <dd><p>Class representing the client api.</p>
 </dd>
+<dt><a href="#QueueEvent">QueueEvent</a></dt>
+<dd><p>Class representing the Queue Event Interface.</p>
+</dd>
 </dl>
 
 ## External
@@ -36,6 +39,7 @@ Class representing the client api.
     * ~~[.MySQL()](#Api+MySQL) ⇒ [<code>DB</code>](#external_DB)~~
     * [.DB(db)](#Api+DB) ⇒ [<code>DB</code>](#external_DB)
     * [.call(service, endpoint, params, [timeout])](#Api+call) ⇒ <code>Promise</code>
+    * [.queueEvent(type, payload)](#Api+queueEvent) ⇒ <code>Promise</code>
     * [.FileStore()](#Api+FileStore) ⇒ [<code>FileStore</code>](#external_FileStore)
 
 <a name="new_Api_new"></a>
@@ -144,6 +148,27 @@ api.call('my_service', 'my_endpoint', { msg: 'Remote services are awesome!' }, 1
   // Exception occured while processing request
 });
 ```
+<a name="Api+queueEvent"></a>
+
+### api.queueEvent(type, payload) ⇒ <code>Promise</code>
+Queues an event
+
+**Kind**: instance method of [<code>Api</code>](#Api)  
+**Returns**: <code>Promise</code> - Returns a promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| type | <code>string</code> | The type of event |
+| payload | <code>string</code> | Event payload |
+
+**Example**  
+```js
+const res = await api.queueEvent("event-type", {"foo": "bar"})
+ .delay(0)
+ .date(new Date("2025-06-25"))
+ .options({})
+ .apply()
+```
 <a name="Api+FileStore"></a>
 
 ### api.FileStore() ⇒ [<code>FileStore</code>](#external_FileStore)
@@ -151,6 +176,92 @@ Returns a FileStore client instance
 
 **Kind**: instance method of [<code>Api</code>](#Api)  
 **Returns**: [<code>FileStore</code>](#external_FileStore) - FileStore client instance  
+<a name="QueueEvent"></a>
+
+## QueueEvent
+Class representing the Queue Event Interface.
+
+**Kind**: global class  
+
+* [QueueEvent](#QueueEvent)
+    * [new QueueEvent(appId, url, options, eventType, eventPayload)](#new_QueueEvent_new)
+    * [.synchronous()](#QueueEvent+synchronous)
+    * [.options(options)](#QueueEvent+options)
+    * [.delay(delay)](#QueueEvent+delay)
+    * [.date(date)](#QueueEvent+date)
+    * [.apply()](#QueueEvent+apply) ⇒ <code>Promise</code>
+
+<a name="new_QueueEvent_new"></a>
+
+### new QueueEvent(appId, url, options, eventType, eventPayload)
+Create an instance of the DB Get Interface.
+
+
+| Param | Type |
+| --- | --- |
+| appId | <code>string</code> | 
+| url | <code>string</code> | 
+| options | <code>Object</code> | 
+| eventType | <code>string</code> | 
+| eventPayload | <code>Object</code> | 
+
+**Example**  
+```js
+import { API, cond, or, and } from 'space-api';
+
+const api = new API('my-project', 'http://localhost:4122');
+const res = await api.queueEvent("event-type", {"foo": "bar"})
+ .delay(0)
+ .date(new Date("2025-06-25"))
+ .options({})
+ .apply()
+```
+<a name="QueueEvent+synchronous"></a>
+
+### queueEvent.synchronous()
+Queues the event synchronously
+
+**Kind**: instance method of [<code>QueueEvent</code>](#QueueEvent)  
+<a name="QueueEvent+options"></a>
+
+### queueEvent.options(options)
+Extra options object that will be sent to the event trigger webhook
+
+**Kind**: instance method of [<code>QueueEvent</code>](#QueueEvent)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| options | <code>Object</code> | The options object. |
+
+<a name="QueueEvent+delay"></a>
+
+### queueEvent.delay(delay)
+Seconds to delay the webhook trigger by
+
+**Kind**: instance method of [<code>QueueEvent</code>](#QueueEvent)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| delay | <code>Number</code> | delay in seconds. |
+
+<a name="QueueEvent+date"></a>
+
+### queueEvent.date(date)
+Date to schedule the event for
+
+**Kind**: instance method of [<code>QueueEvent</code>](#QueueEvent)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| date | <code>Object</code> | Date object. |
+
+<a name="QueueEvent+apply"></a>
+
+### queueEvent.apply() ⇒ <code>Promise</code>
+Makes the query to queue the event. In case of synchronous events it will resolve to the response object from the webhook.
+
+**Kind**: instance method of [<code>QueueEvent</code>](#QueueEvent)  
+**Returns**: <code>Promise</code> - Returns a promise containing response from server.  
 <a name="external_DB"></a>
 
 ## DB
