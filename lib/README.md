@@ -186,7 +186,6 @@ Class representing the Queue Event Interface.
 * [QueueEvent](#QueueEvent)
     * [new QueueEvent(appId, url, options, eventType, eventPayload)](#new_QueueEvent_new)
     * [.synchronous()](#QueueEvent+synchronous)
-    * [.options(options)](#QueueEvent+options)
     * [.delay(delay)](#QueueEvent+delay)
     * [.date(date)](#QueueEvent+date)
     * [.apply()](#QueueEvent+apply) ⇒ <code>Promise</code>
@@ -222,17 +221,6 @@ const res = await api.queueEvent("event-type", {"foo": "bar"})
 Queues the event synchronously
 
 **Kind**: instance method of [<code>QueueEvent</code>](#QueueEvent)  
-<a name="QueueEvent+options"></a>
-
-### queueEvent.options(options)
-Extra options object that will be sent to the event trigger webhook
-
-**Kind**: instance method of [<code>QueueEvent</code>](#QueueEvent)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| options | <code>Object</code> | The options object. |
-
 <a name="QueueEvent+delay"></a>
 
 ### queueEvent.delay(delay)
