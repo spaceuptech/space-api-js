@@ -485,6 +485,12 @@ Class representing the DB Get Interface.
     * [new Get(appId, collection, url, options, db, op)](#new_Get_new)
     * [.where(...conditions)](#Get+where)
     * [.select(select)](#Get+select)
+    * [.groupBy(...array)](#Get+groupBy)
+    * [.aggregateCount(...array)](#Get+aggregateCount)
+    * [.aggregateMax(...array)](#Get+aggregateMax)
+    * [.aggregateMin(...array)](#Get+aggregateMin)
+    * [.aggregateAverage(...array)](#Get+aggregateAverage)
+    * [.aggregateSum(...array)](#Get+aggregateSum)
     * [.sort(...array)](#Get+sort)
     * [.skip(num)](#Get+skip)
     * [.limit(num)](#Get+limit)
@@ -553,6 +559,96 @@ Sets the fields to be selected
 // Given query will only select author and title fields
 const select = { author: 1, title: 1 }
 db.get('posts').select(select).all().then(res => ...)
+```
+<a name="Get+groupBy"></a>
+
+### get.groupBy(...array)
+Sets the fields to groupBy
+
+**Kind**: instance method of [<code>Get</code>](#Get)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ...array | <code>string</code> | The fields to perform group by operation. |
+
+**Example**  
+```js
+db.get('expenditures').groupBy('category', 'userId').aggregateCount('amount').apply().then(res => ...)
+```
+<a name="Get+aggregateCount"></a>
+
+### get.aggregateCount(...array)
+Sets the fields to perform count aggregation on
+
+**Kind**: instance method of [<code>Get</code>](#Get)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ...array | <code>string</code> | The fields to perform count aggregation on. |
+
+**Example**  
+```js
+db.get('expenditures').groupBy('category').aggregateCount('amount').apply().then(res => ...)
+```
+<a name="Get+aggregateMax"></a>
+
+### get.aggregateMax(...array)
+Sets the fields to perform max aggregation on
+
+**Kind**: instance method of [<code>Get</code>](#Get)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ...array | <code>string</code> | The fields to perform max aggregation on. |
+
+**Example**  
+```js
+db.get('expenditures').groupBy('category').aggregateMax('amount').apply().then(res => ...)
+```
+<a name="Get+aggregateMin"></a>
+
+### get.aggregateMin(...array)
+Sets the fields to perform min aggregation on
+
+**Kind**: instance method of [<code>Get</code>](#Get)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ...array | <code>string</code> | The fields to perform min aggregation on. |
+
+**Example**  
+```js
+db.get('expenditures').groupBy('category').aggregateMin('amount').apply().then(res => ...)
+```
+<a name="Get+aggregateAverage"></a>
+
+### get.aggregateAverage(...array)
+Sets the fields to perform average aggregation on
+
+**Kind**: instance method of [<code>Get</code>](#Get)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ...array | <code>string</code> | The fields to perform average aggregation on. |
+
+**Example**  
+```js
+db.get('expenditures').groupBy('category').aggregateAverage('amount').apply().then(res => ...)
+```
+<a name="Get+aggregateSum"></a>
+
+### get.aggregateSum(...array)
+Sets the fields to perform sum aggregation on
+
+**Kind**: instance method of [<code>Get</code>](#Get)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ...array | <code>string</code> | The fields to perform sum aggregation on. |
+
+**Example**  
+```js
+db.get('expenditures').groupBy('category').aggregateSum('amount').apply().then(res => ...)
 ```
 <a name="Get+sort"></a>
 
