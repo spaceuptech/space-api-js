@@ -55,6 +55,7 @@ Class representing the DB Client Interface.
     * [.upsert(collection)](#DB+upsert) ⇒ [<code>Update</code>](#Update)
     * [.delete(collection)](#DB+delete) ⇒ [<code>Delete</code>](#Delete)
     * [.deleteOne(collection)](#DB+deleteOne) ⇒ [<code>Delete</code>](#Delete)
+    * [.preparedQuery(id)](#DB+preparedQuery) ⇒ <code>PreparedQuery</code>
     * [.aggr(collection)](#DB+aggr) ⇒ [<code>Delete</code>](#Delete)
     * [.liveQuery(collection)](#DB+liveQuery) ⇒ [<code>LiveQuery</code>](#external_LiveQuery)
     * [.profile(id)](#DB+profile) ⇒ <code>Promise</code>
@@ -179,6 +180,18 @@ Returns a DB Delete Object to delete a particular document
 | Param | Type | Description |
 | --- | --- | --- |
 | collection | <code>string</code> | The collection to delete document. |
+
+<a name="DB+preparedQuery"></a>
+
+### dB.preparedQuery(id) ⇒ <code>PreparedQuery</code>
+Returns a Prepared Query Object to execute a database prepared query
+
+**Kind**: instance method of [<code>DB</code>](#DB)  
+**Returns**: <code>PreparedQuery</code> - Prepared Query Object  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| id | <code>string</code> | The id of prepared query. |
 
 <a name="DB+aggr"></a>
 
